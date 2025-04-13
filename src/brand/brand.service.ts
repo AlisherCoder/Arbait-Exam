@@ -5,27 +5,25 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateRegionDto } from './dto/create-region.dto';
-import { UpdateRegionDto } from './dto/update-region.dto';
+import { CreateBrandDto } from './dto/create-brand.dto';
+import { UpdateBrandDto } from './dto/update-brand.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
-export class RegionService {
+export class BrandService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createRegionDto: CreateRegionDto) {
+  async create(createBrandDto: CreateBrandDto) {
     try {
-      const region = await this.prisma.region.findFirst({
-        where: { name_uz: createRegionDto.name_uz },
+      const brand = await this.prisma.brand.findFirst({
+        where: { name_uz: createBrandDto.name_uz },
       });
 
-      if (region) {
-        throw new ConflictException('Region already exists');
+      if (brand) {
+        throw new ConflictException('Brand already exists with name');
       }
 
-      const data = await this.prisma.region.create({
-        data: createRegionDto,
-      });
+      const data = await this.prisma.brand.create({ data: createBrandDto });
 
       return { data };
     } catch (error) {
@@ -38,10 +36,10 @@ export class RegionService {
 
   async findAll() {
     try {
-      const data = await this.prisma.region.findMany();
+      const data = await this.prisma.brand.findMany();
 
       if (!data.length) {
-        throw new NotFoundException('No regions found');
+        throw new NotFoundException('Not found brands');
       }
 
       return { data };
@@ -55,13 +53,10 @@ export class RegionService {
 
   async findOne(id: string) {
     try {
-      const data = await this.prisma.region.findUnique({
-        where: { id },
-        include: { Users: true },
-      });
+      const data = await this.prisma.brand.findUnique({ where: { id } });
 
       if (!data) {
-        throw new NotFoundException('No region found');
+        throw new NotFoundException('Not found brand');
       }
 
       return { data };
@@ -73,22 +68,20 @@ export class RegionService {
     }
   }
 
-  async update(id: string, updateRegionDto: UpdateRegionDto) {
+  async update(id: string, updateBrandDto: UpdateBrandDto) {
     try {
-      const region = await this.prisma.region.findFirst({
-        where: { name_uz: updateRegionDto.name_uz },
-      });
+      const data = await this.prisma.brand.findUnique({ where: { id } });
 
-      if (region) {
-        throw new ConflictException('Region already exists');
+      if (!data) {
+        throw new NotFoundException('Not found brand');
       }
 
-      const data = await this.prisma.region.update({
+      const updated = await this.prisma.brand.update({
         where: { id },
-        data: updateRegionDto,
+        data: updateBrandDto,
       });
 
-      return { data };
+      return { data: updated };
     } catch (error) {
       if (error instanceof HttpException) {
         throw error;
@@ -99,13 +92,17 @@ export class RegionService {
 
   async remove(id: string) {
     try {
-      const data = await this.prisma.region.delete({ where: { id } });
+      const data = await this.prisma.brand.findUnique({ where: { id } });
 
       if (!data) {
-        throw new NotFoundException('No region found');
+        throw new NotFoundException('Not found brand');
       }
 
-      return { data };
+      const deleted = await this.prisma.brand.delete({
+        where: { id },
+      });
+
+      return { data: deleted };
     } catch (error) {
       if (error instanceof HttpException) {
         throw error;

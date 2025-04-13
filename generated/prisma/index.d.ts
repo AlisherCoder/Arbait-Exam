@@ -118,6 +118,11 @@ export type FAQ = $Result.DefaultSelection<Prisma.$FAQPayload>
  * 
  */
 export type Showcase = $Result.DefaultSelection<Prisma.$ShowcasePayload>
+/**
+ * Model Partners
+ * 
+ */
+export type Partners = $Result.DefaultSelection<Prisma.$PartnersPayload>
 
 /**
  * Enums
@@ -512,6 +517,16 @@ export class PrismaClient<
     * ```
     */
   get showcase(): Prisma.ShowcaseDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.partners`: Exposes CRUD operations for the **Partners** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Partners
+    * const partners = await prisma.partners.findMany()
+    * ```
+    */
+  get partners(): Prisma.PartnersDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -972,7 +987,8 @@ export namespace Prisma {
     Info: 'Info',
     Contact: 'Contact',
     FAQ: 'FAQ',
-    Showcase: 'Showcase'
+    Showcase: 'Showcase',
+    Partners: 'Partners'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -991,7 +1007,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "region" | "user" | "company" | "session" | "brand" | "size" | "capacity" | "tool" | "level" | "profession" | "master" | "masterSkills" | "order" | "orderTools" | "ordersProfession" | "comment" | "masterRatings" | "info" | "contact" | "fAQ" | "showcase"
+      modelProps: "region" | "user" | "company" | "session" | "brand" | "size" | "capacity" | "tool" | "level" | "profession" | "master" | "masterSkills" | "order" | "orderTools" | "ordersProfession" | "comment" | "masterRatings" | "info" | "contact" | "fAQ" | "showcase" | "partners"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2549,6 +2565,80 @@ export namespace Prisma {
           }
         }
       }
+      Partners: {
+        payload: Prisma.$PartnersPayload<ExtArgs>
+        fields: Prisma.PartnersFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PartnersFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnersPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PartnersFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnersPayload>
+          }
+          findFirst: {
+            args: Prisma.PartnersFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnersPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PartnersFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnersPayload>
+          }
+          findMany: {
+            args: Prisma.PartnersFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnersPayload>[]
+          }
+          create: {
+            args: Prisma.PartnersCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnersPayload>
+          }
+          createMany: {
+            args: Prisma.PartnersCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PartnersCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnersPayload>[]
+          }
+          delete: {
+            args: Prisma.PartnersDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnersPayload>
+          }
+          update: {
+            args: Prisma.PartnersUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnersPayload>
+          }
+          deleteMany: {
+            args: Prisma.PartnersDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PartnersUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PartnersUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnersPayload>[]
+          }
+          upsert: {
+            args: Prisma.PartnersUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PartnersPayload>
+          }
+          aggregate: {
+            args: Prisma.PartnersAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePartners>
+          }
+          groupBy: {
+            args: Prisma.PartnersGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PartnersGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PartnersCountArgs<ExtArgs>
+            result: $Utils.Optional<PartnersCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2654,6 +2744,7 @@ export namespace Prisma {
     contact?: ContactOmit
     fAQ?: FAQOmit
     showcase?: ShowcaseOmit
+    partners?: PartnersOmit
   }
 
   /* Types for Logging */
@@ -2954,11 +3045,13 @@ export namespace Prisma {
   export type LevelCountOutputType = {
     Professions: number
     MasterSkills: number
+    OrdersProfession: number
   }
 
   export type LevelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Professions?: boolean | LevelCountOutputTypeCountProfessionsArgs
     MasterSkills?: boolean | LevelCountOutputTypeCountMasterSkillsArgs
+    OrdersProfession?: boolean | LevelCountOutputTypeCountOrdersProfessionArgs
   }
 
   // Custom InputTypes
@@ -2984,6 +3077,13 @@ export namespace Prisma {
    */
   export type LevelCountOutputTypeCountMasterSkillsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MasterSkillsWhereInput
+  }
+
+  /**
+   * LevelCountOutputType without action
+   */
+  export type LevelCountOutputTypeCountOrdersProfessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrdersProfessionWhereInput
   }
 
 
@@ -3100,14 +3200,14 @@ export namespace Prisma {
 
   export type OrderCountOutputType = {
     OrdersProfessions: number
-    Masters: number
     OrderTools: number
+    Masters: number
   }
 
   export type OrderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     OrdersProfessions?: boolean | OrderCountOutputTypeCountOrdersProfessionsArgs
-    Masters?: boolean | OrderCountOutputTypeCountMastersArgs
     OrderTools?: boolean | OrderCountOutputTypeCountOrderToolsArgs
+    Masters?: boolean | OrderCountOutputTypeCountMastersArgs
   }
 
   // Custom InputTypes
@@ -3131,15 +3231,15 @@ export namespace Prisma {
   /**
    * OrderCountOutputType without action
    */
-  export type OrderCountOutputTypeCountMastersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: MasterWhereInput
+  export type OrderCountOutputTypeCountOrderToolsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderToolsWhereInput
   }
 
   /**
    * OrderCountOutputType without action
    */
-  export type OrderCountOutputTypeCountOrderToolsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OrderToolsWhereInput
+  export type OrderCountOutputTypeCountMastersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MasterWhereInput
   }
 
 
@@ -5459,10 +5559,10 @@ export namespace Prisma {
     id: string | null
     user_id: string | null
     name: string | null
-    tax_id: string | null
-    bank_code: string | null
-    bank_acc: string | null
-    bank_name: string | null
+    inn: string | null
+    mfo: string | null
+    rs: string | null
+    bank: string | null
     oked: string | null
     address: string | null
     createdAt: Date | null
@@ -5473,10 +5573,10 @@ export namespace Prisma {
     id: string | null
     user_id: string | null
     name: string | null
-    tax_id: string | null
-    bank_code: string | null
-    bank_acc: string | null
-    bank_name: string | null
+    inn: string | null
+    mfo: string | null
+    rs: string | null
+    bank: string | null
     oked: string | null
     address: string | null
     createdAt: Date | null
@@ -5487,10 +5587,10 @@ export namespace Prisma {
     id: number
     user_id: number
     name: number
-    tax_id: number
-    bank_code: number
-    bank_acc: number
-    bank_name: number
+    inn: number
+    mfo: number
+    rs: number
+    bank: number
     oked: number
     address: number
     createdAt: number
@@ -5503,10 +5603,10 @@ export namespace Prisma {
     id?: true
     user_id?: true
     name?: true
-    tax_id?: true
-    bank_code?: true
-    bank_acc?: true
-    bank_name?: true
+    inn?: true
+    mfo?: true
+    rs?: true
+    bank?: true
     oked?: true
     address?: true
     createdAt?: true
@@ -5517,10 +5617,10 @@ export namespace Prisma {
     id?: true
     user_id?: true
     name?: true
-    tax_id?: true
-    bank_code?: true
-    bank_acc?: true
-    bank_name?: true
+    inn?: true
+    mfo?: true
+    rs?: true
+    bank?: true
     oked?: true
     address?: true
     createdAt?: true
@@ -5531,10 +5631,10 @@ export namespace Prisma {
     id?: true
     user_id?: true
     name?: true
-    tax_id?: true
-    bank_code?: true
-    bank_acc?: true
-    bank_name?: true
+    inn?: true
+    mfo?: true
+    rs?: true
+    bank?: true
     oked?: true
     address?: true
     createdAt?: true
@@ -5618,10 +5718,10 @@ export namespace Prisma {
     id: string
     user_id: string | null
     name: string
-    tax_id: string
-    bank_code: string
-    bank_acc: string
-    bank_name: string
+    inn: string
+    mfo: string
+    rs: string
+    bank: string
     oked: string
     address: string
     createdAt: Date
@@ -5649,10 +5749,10 @@ export namespace Prisma {
     id?: boolean
     user_id?: boolean
     name?: boolean
-    tax_id?: boolean
-    bank_code?: boolean
-    bank_acc?: boolean
-    bank_name?: boolean
+    inn?: boolean
+    mfo?: boolean
+    rs?: boolean
+    bank?: boolean
     oked?: boolean
     address?: boolean
     createdAt?: boolean
@@ -5664,10 +5764,10 @@ export namespace Prisma {
     id?: boolean
     user_id?: boolean
     name?: boolean
-    tax_id?: boolean
-    bank_code?: boolean
-    bank_acc?: boolean
-    bank_name?: boolean
+    inn?: boolean
+    mfo?: boolean
+    rs?: boolean
+    bank?: boolean
     oked?: boolean
     address?: boolean
     createdAt?: boolean
@@ -5679,10 +5779,10 @@ export namespace Prisma {
     id?: boolean
     user_id?: boolean
     name?: boolean
-    tax_id?: boolean
-    bank_code?: boolean
-    bank_acc?: boolean
-    bank_name?: boolean
+    inn?: boolean
+    mfo?: boolean
+    rs?: boolean
+    bank?: boolean
     oked?: boolean
     address?: boolean
     createdAt?: boolean
@@ -5694,17 +5794,17 @@ export namespace Prisma {
     id?: boolean
     user_id?: boolean
     name?: boolean
-    tax_id?: boolean
-    bank_code?: boolean
-    bank_acc?: boolean
-    bank_name?: boolean
+    inn?: boolean
+    mfo?: boolean
+    rs?: boolean
+    bank?: boolean
     oked?: boolean
     address?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "name" | "tax_id" | "bank_code" | "bank_acc" | "bank_name" | "oked" | "address" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
+  export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "name" | "inn" | "mfo" | "rs" | "bank" | "oked" | "address" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
   export type CompanyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | Company$UserArgs<ExtArgs>
   }
@@ -5724,10 +5824,10 @@ export namespace Prisma {
       id: string
       user_id: string | null
       name: string
-      tax_id: string
-      bank_code: string
-      bank_acc: string
-      bank_name: string
+      inn: string
+      mfo: string
+      rs: string
+      bank: string
       oked: string
       address: string
       createdAt: Date
@@ -6159,10 +6259,10 @@ export namespace Prisma {
     readonly id: FieldRef<"Company", 'String'>
     readonly user_id: FieldRef<"Company", 'String'>
     readonly name: FieldRef<"Company", 'String'>
-    readonly tax_id: FieldRef<"Company", 'String'>
-    readonly bank_code: FieldRef<"Company", 'String'>
-    readonly bank_acc: FieldRef<"Company", 'String'>
-    readonly bank_name: FieldRef<"Company", 'String'>
+    readonly inn: FieldRef<"Company", 'String'>
+    readonly mfo: FieldRef<"Company", 'String'>
+    readonly rs: FieldRef<"Company", 'String'>
+    readonly bank: FieldRef<"Company", 'String'>
     readonly oked: FieldRef<"Company", 'String'>
     readonly address: FieldRef<"Company", 'String'>
     readonly createdAt: FieldRef<"Company", 'DateTime'>
@@ -12366,6 +12466,7 @@ export namespace Prisma {
     name_en?: boolean
     Professions?: boolean | Level$ProfessionsArgs<ExtArgs>
     MasterSkills?: boolean | Level$MasterSkillsArgs<ExtArgs>
+    OrdersProfession?: boolean | Level$OrdersProfessionArgs<ExtArgs>
     _count?: boolean | LevelCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["level"]>
 
@@ -12394,6 +12495,7 @@ export namespace Prisma {
   export type LevelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Professions?: boolean | Level$ProfessionsArgs<ExtArgs>
     MasterSkills?: boolean | Level$MasterSkillsArgs<ExtArgs>
+    OrdersProfession?: boolean | Level$OrdersProfessionArgs<ExtArgs>
     _count?: boolean | LevelCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type LevelIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -12404,6 +12506,7 @@ export namespace Prisma {
     objects: {
       Professions: Prisma.$ProfessionPayload<ExtArgs>[]
       MasterSkills: Prisma.$MasterSkillsPayload<ExtArgs>[]
+      OrdersProfession: Prisma.$OrdersProfessionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -12806,6 +12909,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Professions<T extends Level$ProfessionsArgs<ExtArgs> = {}>(args?: Subset<T, Level$ProfessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProfessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     MasterSkills<T extends Level$MasterSkillsArgs<ExtArgs> = {}>(args?: Subset<T, Level$MasterSkillsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MasterSkillsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    OrdersProfession<T extends Level$OrdersProfessionArgs<ExtArgs> = {}>(args?: Subset<T, Level$OrdersProfessionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrdersProfessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13272,6 +13376,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: MasterSkillsScalarFieldEnum | MasterSkillsScalarFieldEnum[]
+  }
+
+  /**
+   * Level.OrdersProfession
+   */
+  export type Level$OrdersProfessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrdersProfession
+     */
+    select?: OrdersProfessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrdersProfession
+     */
+    omit?: OrdersProfessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrdersProfessionInclude<ExtArgs> | null
+    where?: OrdersProfessionWhereInput
+    orderBy?: OrdersProfessionOrderByWithRelationInput | OrdersProfessionOrderByWithRelationInput[]
+    cursor?: OrdersProfessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrdersProfessionScalarFieldEnum | OrdersProfessionScalarFieldEnum[]
   }
 
   /**
@@ -16920,6 +17048,7 @@ export namespace Prisma {
     address: string | null
     dete: Date | null
     payment_type: $Enums.PaymentType | null
+    paid: boolean | null
     status: $Enums.StatusOrder | null
     with_delivery: boolean | null
     comment_delivery: string | null
@@ -16935,6 +17064,7 @@ export namespace Prisma {
     address: string | null
     dete: Date | null
     payment_type: $Enums.PaymentType | null
+    paid: boolean | null
     status: $Enums.StatusOrder | null
     with_delivery: boolean | null
     comment_delivery: string | null
@@ -16951,6 +17081,7 @@ export namespace Prisma {
     address: number
     dete: number
     payment_type: number
+    paid: number
     status: number
     with_delivery: number
     comment_delivery: number
@@ -16978,6 +17109,7 @@ export namespace Prisma {
     address?: true
     dete?: true
     payment_type?: true
+    paid?: true
     status?: true
     with_delivery?: true
     comment_delivery?: true
@@ -16993,6 +17125,7 @@ export namespace Prisma {
     address?: true
     dete?: true
     payment_type?: true
+    paid?: true
     status?: true
     with_delivery?: true
     comment_delivery?: true
@@ -17009,6 +17142,7 @@ export namespace Prisma {
     address?: true
     dete?: true
     payment_type?: true
+    paid?: true
     status?: true
     with_delivery?: true
     comment_delivery?: true
@@ -17112,6 +17246,7 @@ export namespace Prisma {
     address: string
     dete: Date
     payment_type: $Enums.PaymentType
+    paid: boolean
     status: $Enums.StatusOrder
     with_delivery: boolean
     comment_delivery: string
@@ -17147,6 +17282,7 @@ export namespace Prisma {
     address?: boolean
     dete?: boolean
     payment_type?: boolean
+    paid?: boolean
     status?: boolean
     with_delivery?: boolean
     comment_delivery?: boolean
@@ -17155,8 +17291,8 @@ export namespace Prisma {
     updatedAt?: boolean
     User?: boolean | UserDefaultArgs<ExtArgs>
     OrdersProfessions?: boolean | Order$OrdersProfessionsArgs<ExtArgs>
-    Masters?: boolean | Order$MastersArgs<ExtArgs>
     OrderTools?: boolean | Order$OrderToolsArgs<ExtArgs>
+    Masters?: boolean | Order$MastersArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
@@ -17168,6 +17304,7 @@ export namespace Prisma {
     address?: boolean
     dete?: boolean
     payment_type?: boolean
+    paid?: boolean
     status?: boolean
     with_delivery?: boolean
     comment_delivery?: boolean
@@ -17185,6 +17322,7 @@ export namespace Prisma {
     address?: boolean
     dete?: boolean
     payment_type?: boolean
+    paid?: boolean
     status?: boolean
     with_delivery?: boolean
     comment_delivery?: boolean
@@ -17202,6 +17340,7 @@ export namespace Prisma {
     address?: boolean
     dete?: boolean
     payment_type?: boolean
+    paid?: boolean
     status?: boolean
     with_delivery?: boolean
     comment_delivery?: boolean
@@ -17210,12 +17349,12 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "total_sum" | "location" | "address" | "dete" | "payment_type" | "status" | "with_delivery" | "comment_delivery" | "tools_count" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "total_sum" | "location" | "address" | "dete" | "payment_type" | "paid" | "status" | "with_delivery" | "comment_delivery" | "tools_count" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | UserDefaultArgs<ExtArgs>
     OrdersProfessions?: boolean | Order$OrdersProfessionsArgs<ExtArgs>
-    Masters?: boolean | Order$MastersArgs<ExtArgs>
     OrderTools?: boolean | Order$OrderToolsArgs<ExtArgs>
+    Masters?: boolean | Order$MastersArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -17230,8 +17369,8 @@ export namespace Prisma {
     objects: {
       User: Prisma.$UserPayload<ExtArgs>
       OrdersProfessions: Prisma.$OrdersProfessionPayload<ExtArgs>[]
-      Masters: Prisma.$MasterPayload<ExtArgs>[]
       OrderTools: Prisma.$OrderToolsPayload<ExtArgs>[]
+      Masters: Prisma.$MasterPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -17241,6 +17380,7 @@ export namespace Prisma {
       address: string
       dete: Date
       payment_type: $Enums.PaymentType
+      paid: boolean
       status: $Enums.StatusOrder
       with_delivery: boolean
       comment_delivery: string
@@ -17643,8 +17783,8 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     OrdersProfessions<T extends Order$OrdersProfessionsArgs<ExtArgs> = {}>(args?: Subset<T, Order$OrdersProfessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrdersProfessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Masters<T extends Order$MastersArgs<ExtArgs> = {}>(args?: Subset<T, Order$MastersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     OrderTools<T extends Order$OrderToolsArgs<ExtArgs> = {}>(args?: Subset<T, Order$OrderToolsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderToolsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Masters<T extends Order$MastersArgs<ExtArgs> = {}>(args?: Subset<T, Order$MastersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -17681,6 +17821,7 @@ export namespace Prisma {
     readonly address: FieldRef<"Order", 'String'>
     readonly dete: FieldRef<"Order", 'DateTime'>
     readonly payment_type: FieldRef<"Order", 'PaymentType'>
+    readonly paid: FieldRef<"Order", 'Boolean'>
     readonly status: FieldRef<"Order", 'StatusOrder'>
     readonly with_delivery: FieldRef<"Order", 'Boolean'>
     readonly comment_delivery: FieldRef<"Order", 'String'>
@@ -18107,30 +18248,6 @@ export namespace Prisma {
   }
 
   /**
-   * Order.Masters
-   */
-  export type Order$MastersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Master
-     */
-    select?: MasterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Master
-     */
-    omit?: MasterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: MasterInclude<ExtArgs> | null
-    where?: MasterWhereInput
-    orderBy?: MasterOrderByWithRelationInput | MasterOrderByWithRelationInput[]
-    cursor?: MasterWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: MasterScalarFieldEnum | MasterScalarFieldEnum[]
-  }
-
-  /**
    * Order.OrderTools
    */
   export type Order$OrderToolsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18152,6 +18269,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OrderToolsScalarFieldEnum | OrderToolsScalarFieldEnum[]
+  }
+
+  /**
+   * Order.Masters
+   */
+  export type Order$MastersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Master
+     */
+    select?: MasterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Master
+     */
+    omit?: MasterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MasterInclude<ExtArgs> | null
+    where?: MasterWhereInput
+    orderBy?: MasterOrderByWithRelationInput | MasterOrderByWithRelationInput[]
+    cursor?: MasterWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: MasterScalarFieldEnum | MasterScalarFieldEnum[]
   }
 
   /**
@@ -18187,11 +18328,13 @@ export namespace Prisma {
 
   export type OrderToolsAvgAggregateOutputType = {
     count: number | null
+    time: number | null
     total_sum: number | null
   }
 
   export type OrderToolsSumAggregateOutputType = {
     count: number | null
+    time: number | null
     total_sum: number | null
   }
 
@@ -18200,6 +18343,8 @@ export namespace Prisma {
     order_id: string | null
     tool_id: string | null
     count: number | null
+    measure: $Enums.Measure | null
+    time: number | null
     total_sum: number | null
   }
 
@@ -18208,6 +18353,8 @@ export namespace Prisma {
     order_id: string | null
     tool_id: string | null
     count: number | null
+    measure: $Enums.Measure | null
+    time: number | null
     total_sum: number | null
   }
 
@@ -18216,6 +18363,8 @@ export namespace Prisma {
     order_id: number
     tool_id: number
     count: number
+    measure: number
+    time: number
     total_sum: number
     _all: number
   }
@@ -18223,11 +18372,13 @@ export namespace Prisma {
 
   export type OrderToolsAvgAggregateInputType = {
     count?: true
+    time?: true
     total_sum?: true
   }
 
   export type OrderToolsSumAggregateInputType = {
     count?: true
+    time?: true
     total_sum?: true
   }
 
@@ -18236,6 +18387,8 @@ export namespace Prisma {
     order_id?: true
     tool_id?: true
     count?: true
+    measure?: true
+    time?: true
     total_sum?: true
   }
 
@@ -18244,6 +18397,8 @@ export namespace Prisma {
     order_id?: true
     tool_id?: true
     count?: true
+    measure?: true
+    time?: true
     total_sum?: true
   }
 
@@ -18252,6 +18407,8 @@ export namespace Prisma {
     order_id?: true
     tool_id?: true
     count?: true
+    measure?: true
+    time?: true
     total_sum?: true
     _all?: true
   }
@@ -18347,6 +18504,8 @@ export namespace Prisma {
     order_id: string | null
     tool_id: string | null
     count: number
+    measure: $Enums.Measure
+    time: number
     total_sum: number
     _count: OrderToolsCountAggregateOutputType | null
     _avg: OrderToolsAvgAggregateOutputType | null
@@ -18374,6 +18533,8 @@ export namespace Prisma {
     order_id?: boolean
     tool_id?: boolean
     count?: boolean
+    measure?: boolean
+    time?: boolean
     total_sum?: boolean
     Order?: boolean | OrderTools$OrderArgs<ExtArgs>
     Tool?: boolean | OrderTools$ToolArgs<ExtArgs>
@@ -18384,6 +18545,8 @@ export namespace Prisma {
     order_id?: boolean
     tool_id?: boolean
     count?: boolean
+    measure?: boolean
+    time?: boolean
     total_sum?: boolean
     Order?: boolean | OrderTools$OrderArgs<ExtArgs>
     Tool?: boolean | OrderTools$ToolArgs<ExtArgs>
@@ -18394,6 +18557,8 @@ export namespace Prisma {
     order_id?: boolean
     tool_id?: boolean
     count?: boolean
+    measure?: boolean
+    time?: boolean
     total_sum?: boolean
     Order?: boolean | OrderTools$OrderArgs<ExtArgs>
     Tool?: boolean | OrderTools$ToolArgs<ExtArgs>
@@ -18404,10 +18569,12 @@ export namespace Prisma {
     order_id?: boolean
     tool_id?: boolean
     count?: boolean
+    measure?: boolean
+    time?: boolean
     total_sum?: boolean
   }
 
-  export type OrderToolsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "order_id" | "tool_id" | "count" | "total_sum", ExtArgs["result"]["orderTools"]>
+  export type OrderToolsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "order_id" | "tool_id" | "count" | "measure" | "time" | "total_sum", ExtArgs["result"]["orderTools"]>
   export type OrderToolsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Order?: boolean | OrderTools$OrderArgs<ExtArgs>
     Tool?: boolean | OrderTools$ToolArgs<ExtArgs>
@@ -18432,6 +18599,8 @@ export namespace Prisma {
       order_id: string | null
       tool_id: string | null
       count: number
+      measure: $Enums.Measure
+      time: number
       total_sum: number
     }, ExtArgs["result"]["orderTools"]>
     composites: {}
@@ -18862,6 +19031,8 @@ export namespace Prisma {
     readonly order_id: FieldRef<"OrderTools", 'String'>
     readonly tool_id: FieldRef<"OrderTools", 'String'>
     readonly count: FieldRef<"OrderTools", 'Int'>
+    readonly measure: FieldRef<"OrderTools", 'Measure'>
+    readonly time: FieldRef<"OrderTools", 'Int'>
     readonly total_sum: FieldRef<"OrderTools", 'Float'>
   }
     
@@ -19330,38 +19501,46 @@ export namespace Prisma {
   export type OrdersProfessionAvgAggregateOutputType = {
     count: number | null
     time: number | null
+    total_sum: number | null
   }
 
   export type OrdersProfessionSumAggregateOutputType = {
     count: number | null
     time: number | null
+    total_sum: number | null
   }
 
   export type OrdersProfessionMinAggregateOutputType = {
     id: string | null
     order_id: string | null
     profession_id: string | null
+    level_id: string | null
     count: number | null
     measure: $Enums.Measure | null
     time: number | null
+    total_sum: number | null
   }
 
   export type OrdersProfessionMaxAggregateOutputType = {
     id: string | null
     order_id: string | null
     profession_id: string | null
+    level_id: string | null
     count: number | null
     measure: $Enums.Measure | null
     time: number | null
+    total_sum: number | null
   }
 
   export type OrdersProfessionCountAggregateOutputType = {
     id: number
     order_id: number
     profession_id: number
+    level_id: number
     count: number
     measure: number
     time: number
+    total_sum: number
     _all: number
   }
 
@@ -19369,38 +19548,46 @@ export namespace Prisma {
   export type OrdersProfessionAvgAggregateInputType = {
     count?: true
     time?: true
+    total_sum?: true
   }
 
   export type OrdersProfessionSumAggregateInputType = {
     count?: true
     time?: true
+    total_sum?: true
   }
 
   export type OrdersProfessionMinAggregateInputType = {
     id?: true
     order_id?: true
     profession_id?: true
+    level_id?: true
     count?: true
     measure?: true
     time?: true
+    total_sum?: true
   }
 
   export type OrdersProfessionMaxAggregateInputType = {
     id?: true
     order_id?: true
     profession_id?: true
+    level_id?: true
     count?: true
     measure?: true
     time?: true
+    total_sum?: true
   }
 
   export type OrdersProfessionCountAggregateInputType = {
     id?: true
     order_id?: true
     profession_id?: true
+    level_id?: true
     count?: true
     measure?: true
     time?: true
+    total_sum?: true
     _all?: true
   }
 
@@ -19494,9 +19681,11 @@ export namespace Prisma {
     id: string
     order_id: string
     profession_id: string
+    level_id: string | null
     count: number
     measure: $Enums.Measure
     time: number
+    total_sum: number
     _count: OrdersProfessionCountAggregateOutputType | null
     _avg: OrdersProfessionAvgAggregateOutputType | null
     _sum: OrdersProfessionSumAggregateOutputType | null
@@ -19522,56 +19711,70 @@ export namespace Prisma {
     id?: boolean
     order_id?: boolean
     profession_id?: boolean
+    level_id?: boolean
     count?: boolean
     measure?: boolean
     time?: boolean
+    total_sum?: boolean
     Order?: boolean | OrderDefaultArgs<ExtArgs>
     Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
+    Level?: boolean | OrdersProfession$LevelArgs<ExtArgs>
   }, ExtArgs["result"]["ordersProfession"]>
 
   export type OrdersProfessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     order_id?: boolean
     profession_id?: boolean
+    level_id?: boolean
     count?: boolean
     measure?: boolean
     time?: boolean
+    total_sum?: boolean
     Order?: boolean | OrderDefaultArgs<ExtArgs>
     Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
+    Level?: boolean | OrdersProfession$LevelArgs<ExtArgs>
   }, ExtArgs["result"]["ordersProfession"]>
 
   export type OrdersProfessionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     order_id?: boolean
     profession_id?: boolean
+    level_id?: boolean
     count?: boolean
     measure?: boolean
     time?: boolean
+    total_sum?: boolean
     Order?: boolean | OrderDefaultArgs<ExtArgs>
     Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
+    Level?: boolean | OrdersProfession$LevelArgs<ExtArgs>
   }, ExtArgs["result"]["ordersProfession"]>
 
   export type OrdersProfessionSelectScalar = {
     id?: boolean
     order_id?: boolean
     profession_id?: boolean
+    level_id?: boolean
     count?: boolean
     measure?: boolean
     time?: boolean
+    total_sum?: boolean
   }
 
-  export type OrdersProfessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "order_id" | "profession_id" | "count" | "measure" | "time", ExtArgs["result"]["ordersProfession"]>
+  export type OrdersProfessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "order_id" | "profession_id" | "level_id" | "count" | "measure" | "time" | "total_sum", ExtArgs["result"]["ordersProfession"]>
   export type OrdersProfessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Order?: boolean | OrderDefaultArgs<ExtArgs>
     Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
+    Level?: boolean | OrdersProfession$LevelArgs<ExtArgs>
   }
   export type OrdersProfessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Order?: boolean | OrderDefaultArgs<ExtArgs>
     Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
+    Level?: boolean | OrdersProfession$LevelArgs<ExtArgs>
   }
   export type OrdersProfessionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Order?: boolean | OrderDefaultArgs<ExtArgs>
     Profession?: boolean | ProfessionDefaultArgs<ExtArgs>
+    Level?: boolean | OrdersProfession$LevelArgs<ExtArgs>
   }
 
   export type $OrdersProfessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -19579,14 +19782,17 @@ export namespace Prisma {
     objects: {
       Order: Prisma.$OrderPayload<ExtArgs>
       Profession: Prisma.$ProfessionPayload<ExtArgs>
+      Level: Prisma.$LevelPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       order_id: string
       profession_id: string
+      level_id: string | null
       count: number
       measure: $Enums.Measure
       time: number
+      total_sum: number
     }, ExtArgs["result"]["ordersProfession"]>
     composites: {}
   }
@@ -19983,6 +20189,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Order<T extends OrderDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrderDefaultArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Profession<T extends ProfessionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProfessionDefaultArgs<ExtArgs>>): Prisma__ProfessionClient<$Result.GetResult<Prisma.$ProfessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Level<T extends OrdersProfession$LevelArgs<ExtArgs> = {}>(args?: Subset<T, OrdersProfession$LevelArgs<ExtArgs>>): Prisma__LevelClient<$Result.GetResult<Prisma.$LevelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -20015,9 +20222,11 @@ export namespace Prisma {
     readonly id: FieldRef<"OrdersProfession", 'String'>
     readonly order_id: FieldRef<"OrdersProfession", 'String'>
     readonly profession_id: FieldRef<"OrdersProfession", 'String'>
+    readonly level_id: FieldRef<"OrdersProfession", 'String'>
     readonly count: FieldRef<"OrdersProfession", 'Int'>
     readonly measure: FieldRef<"OrdersProfession", 'Measure'>
     readonly time: FieldRef<"OrdersProfession", 'Int'>
+    readonly total_sum: FieldRef<"OrdersProfession", 'Float'>
   }
     
 
@@ -20411,6 +20620,25 @@ export namespace Prisma {
      * Limit how many OrdersProfessions to delete.
      */
     limit?: number
+  }
+
+  /**
+   * OrdersProfession.Level
+   */
+  export type OrdersProfession$LevelArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Level
+     */
+    select?: LevelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Level
+     */
+    omit?: LevelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LevelInclude<ExtArgs> | null
+    where?: LevelWhereInput
   }
 
   /**
@@ -26614,6 +26842,1001 @@ export namespace Prisma {
 
 
   /**
+   * Model Partners
+   */
+
+  export type AggregatePartners = {
+    _count: PartnersCountAggregateOutputType | null
+    _min: PartnersMinAggregateOutputType | null
+    _max: PartnersMaxAggregateOutputType | null
+  }
+
+  export type PartnersMinAggregateOutputType = {
+    id: string | null
+    name_uz: string | null
+    name_ru: string | null
+    name_en: string | null
+    image: string | null
+  }
+
+  export type PartnersMaxAggregateOutputType = {
+    id: string | null
+    name_uz: string | null
+    name_ru: string | null
+    name_en: string | null
+    image: string | null
+  }
+
+  export type PartnersCountAggregateOutputType = {
+    id: number
+    name_uz: number
+    name_ru: number
+    name_en: number
+    image: number
+    _all: number
+  }
+
+
+  export type PartnersMinAggregateInputType = {
+    id?: true
+    name_uz?: true
+    name_ru?: true
+    name_en?: true
+    image?: true
+  }
+
+  export type PartnersMaxAggregateInputType = {
+    id?: true
+    name_uz?: true
+    name_ru?: true
+    name_en?: true
+    image?: true
+  }
+
+  export type PartnersCountAggregateInputType = {
+    id?: true
+    name_uz?: true
+    name_ru?: true
+    name_en?: true
+    image?: true
+    _all?: true
+  }
+
+  export type PartnersAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Partners to aggregate.
+     */
+    where?: PartnersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Partners to fetch.
+     */
+    orderBy?: PartnersOrderByWithRelationInput | PartnersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PartnersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Partners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Partners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Partners
+    **/
+    _count?: true | PartnersCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PartnersMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PartnersMaxAggregateInputType
+  }
+
+  export type GetPartnersAggregateType<T extends PartnersAggregateArgs> = {
+        [P in keyof T & keyof AggregatePartners]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePartners[P]>
+      : GetScalarType<T[P], AggregatePartners[P]>
+  }
+
+
+
+
+  export type PartnersGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PartnersWhereInput
+    orderBy?: PartnersOrderByWithAggregationInput | PartnersOrderByWithAggregationInput[]
+    by: PartnersScalarFieldEnum[] | PartnersScalarFieldEnum
+    having?: PartnersScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PartnersCountAggregateInputType | true
+    _min?: PartnersMinAggregateInputType
+    _max?: PartnersMaxAggregateInputType
+  }
+
+  export type PartnersGroupByOutputType = {
+    id: string
+    name_uz: string
+    name_ru: string
+    name_en: string
+    image: string
+    _count: PartnersCountAggregateOutputType | null
+    _min: PartnersMinAggregateOutputType | null
+    _max: PartnersMaxAggregateOutputType | null
+  }
+
+  type GetPartnersGroupByPayload<T extends PartnersGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PartnersGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PartnersGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PartnersGroupByOutputType[P]>
+            : GetScalarType<T[P], PartnersGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PartnersSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name_uz?: boolean
+    name_ru?: boolean
+    name_en?: boolean
+    image?: boolean
+  }, ExtArgs["result"]["partners"]>
+
+  export type PartnersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name_uz?: boolean
+    name_ru?: boolean
+    name_en?: boolean
+    image?: boolean
+  }, ExtArgs["result"]["partners"]>
+
+  export type PartnersSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name_uz?: boolean
+    name_ru?: boolean
+    name_en?: boolean
+    image?: boolean
+  }, ExtArgs["result"]["partners"]>
+
+  export type PartnersSelectScalar = {
+    id?: boolean
+    name_uz?: boolean
+    name_ru?: boolean
+    name_en?: boolean
+    image?: boolean
+  }
+
+  export type PartnersOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name_uz" | "name_ru" | "name_en" | "image", ExtArgs["result"]["partners"]>
+
+  export type $PartnersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Partners"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name_uz: string
+      name_ru: string
+      name_en: string
+      image: string
+    }, ExtArgs["result"]["partners"]>
+    composites: {}
+  }
+
+  type PartnersGetPayload<S extends boolean | null | undefined | PartnersDefaultArgs> = $Result.GetResult<Prisma.$PartnersPayload, S>
+
+  type PartnersCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PartnersFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PartnersCountAggregateInputType | true
+    }
+
+  export interface PartnersDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Partners'], meta: { name: 'Partners' } }
+    /**
+     * Find zero or one Partners that matches the filter.
+     * @param {PartnersFindUniqueArgs} args - Arguments to find a Partners
+     * @example
+     * // Get one Partners
+     * const partners = await prisma.partners.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PartnersFindUniqueArgs>(args: SelectSubset<T, PartnersFindUniqueArgs<ExtArgs>>): Prisma__PartnersClient<$Result.GetResult<Prisma.$PartnersPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Partners that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PartnersFindUniqueOrThrowArgs} args - Arguments to find a Partners
+     * @example
+     * // Get one Partners
+     * const partners = await prisma.partners.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PartnersFindUniqueOrThrowArgs>(args: SelectSubset<T, PartnersFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PartnersClient<$Result.GetResult<Prisma.$PartnersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Partners that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnersFindFirstArgs} args - Arguments to find a Partners
+     * @example
+     * // Get one Partners
+     * const partners = await prisma.partners.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PartnersFindFirstArgs>(args?: SelectSubset<T, PartnersFindFirstArgs<ExtArgs>>): Prisma__PartnersClient<$Result.GetResult<Prisma.$PartnersPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Partners that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnersFindFirstOrThrowArgs} args - Arguments to find a Partners
+     * @example
+     * // Get one Partners
+     * const partners = await prisma.partners.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PartnersFindFirstOrThrowArgs>(args?: SelectSubset<T, PartnersFindFirstOrThrowArgs<ExtArgs>>): Prisma__PartnersClient<$Result.GetResult<Prisma.$PartnersPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Partners that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnersFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Partners
+     * const partners = await prisma.partners.findMany()
+     * 
+     * // Get first 10 Partners
+     * const partners = await prisma.partners.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const partnersWithIdOnly = await prisma.partners.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PartnersFindManyArgs>(args?: SelectSubset<T, PartnersFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PartnersPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Partners.
+     * @param {PartnersCreateArgs} args - Arguments to create a Partners.
+     * @example
+     * // Create one Partners
+     * const Partners = await prisma.partners.create({
+     *   data: {
+     *     // ... data to create a Partners
+     *   }
+     * })
+     * 
+     */
+    create<T extends PartnersCreateArgs>(args: SelectSubset<T, PartnersCreateArgs<ExtArgs>>): Prisma__PartnersClient<$Result.GetResult<Prisma.$PartnersPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Partners.
+     * @param {PartnersCreateManyArgs} args - Arguments to create many Partners.
+     * @example
+     * // Create many Partners
+     * const partners = await prisma.partners.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PartnersCreateManyArgs>(args?: SelectSubset<T, PartnersCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Partners and returns the data saved in the database.
+     * @param {PartnersCreateManyAndReturnArgs} args - Arguments to create many Partners.
+     * @example
+     * // Create many Partners
+     * const partners = await prisma.partners.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Partners and only return the `id`
+     * const partnersWithIdOnly = await prisma.partners.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PartnersCreateManyAndReturnArgs>(args?: SelectSubset<T, PartnersCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PartnersPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Partners.
+     * @param {PartnersDeleteArgs} args - Arguments to delete one Partners.
+     * @example
+     * // Delete one Partners
+     * const Partners = await prisma.partners.delete({
+     *   where: {
+     *     // ... filter to delete one Partners
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PartnersDeleteArgs>(args: SelectSubset<T, PartnersDeleteArgs<ExtArgs>>): Prisma__PartnersClient<$Result.GetResult<Prisma.$PartnersPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Partners.
+     * @param {PartnersUpdateArgs} args - Arguments to update one Partners.
+     * @example
+     * // Update one Partners
+     * const partners = await prisma.partners.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PartnersUpdateArgs>(args: SelectSubset<T, PartnersUpdateArgs<ExtArgs>>): Prisma__PartnersClient<$Result.GetResult<Prisma.$PartnersPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Partners.
+     * @param {PartnersDeleteManyArgs} args - Arguments to filter Partners to delete.
+     * @example
+     * // Delete a few Partners
+     * const { count } = await prisma.partners.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PartnersDeleteManyArgs>(args?: SelectSubset<T, PartnersDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Partners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnersUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Partners
+     * const partners = await prisma.partners.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PartnersUpdateManyArgs>(args: SelectSubset<T, PartnersUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Partners and returns the data updated in the database.
+     * @param {PartnersUpdateManyAndReturnArgs} args - Arguments to update many Partners.
+     * @example
+     * // Update many Partners
+     * const partners = await prisma.partners.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Partners and only return the `id`
+     * const partnersWithIdOnly = await prisma.partners.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PartnersUpdateManyAndReturnArgs>(args: SelectSubset<T, PartnersUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PartnersPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Partners.
+     * @param {PartnersUpsertArgs} args - Arguments to update or create a Partners.
+     * @example
+     * // Update or create a Partners
+     * const partners = await prisma.partners.upsert({
+     *   create: {
+     *     // ... data to create a Partners
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Partners we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PartnersUpsertArgs>(args: SelectSubset<T, PartnersUpsertArgs<ExtArgs>>): Prisma__PartnersClient<$Result.GetResult<Prisma.$PartnersPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Partners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnersCountArgs} args - Arguments to filter Partners to count.
+     * @example
+     * // Count the number of Partners
+     * const count = await prisma.partners.count({
+     *   where: {
+     *     // ... the filter for the Partners we want to count
+     *   }
+     * })
+    **/
+    count<T extends PartnersCountArgs>(
+      args?: Subset<T, PartnersCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PartnersCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Partners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnersAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PartnersAggregateArgs>(args: Subset<T, PartnersAggregateArgs>): Prisma.PrismaPromise<GetPartnersAggregateType<T>>
+
+    /**
+     * Group by Partners.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PartnersGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PartnersGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PartnersGroupByArgs['orderBy'] }
+        : { orderBy?: PartnersGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PartnersGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPartnersGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Partners model
+   */
+  readonly fields: PartnersFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Partners.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PartnersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Partners model
+   */
+  interface PartnersFieldRefs {
+    readonly id: FieldRef<"Partners", 'String'>
+    readonly name_uz: FieldRef<"Partners", 'String'>
+    readonly name_ru: FieldRef<"Partners", 'String'>
+    readonly name_en: FieldRef<"Partners", 'String'>
+    readonly image: FieldRef<"Partners", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Partners findUnique
+   */
+  export type PartnersFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Partners
+     */
+    select?: PartnersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Partners
+     */
+    omit?: PartnersOmit<ExtArgs> | null
+    /**
+     * Filter, which Partners to fetch.
+     */
+    where: PartnersWhereUniqueInput
+  }
+
+  /**
+   * Partners findUniqueOrThrow
+   */
+  export type PartnersFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Partners
+     */
+    select?: PartnersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Partners
+     */
+    omit?: PartnersOmit<ExtArgs> | null
+    /**
+     * Filter, which Partners to fetch.
+     */
+    where: PartnersWhereUniqueInput
+  }
+
+  /**
+   * Partners findFirst
+   */
+  export type PartnersFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Partners
+     */
+    select?: PartnersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Partners
+     */
+    omit?: PartnersOmit<ExtArgs> | null
+    /**
+     * Filter, which Partners to fetch.
+     */
+    where?: PartnersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Partners to fetch.
+     */
+    orderBy?: PartnersOrderByWithRelationInput | PartnersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Partners.
+     */
+    cursor?: PartnersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Partners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Partners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Partners.
+     */
+    distinct?: PartnersScalarFieldEnum | PartnersScalarFieldEnum[]
+  }
+
+  /**
+   * Partners findFirstOrThrow
+   */
+  export type PartnersFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Partners
+     */
+    select?: PartnersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Partners
+     */
+    omit?: PartnersOmit<ExtArgs> | null
+    /**
+     * Filter, which Partners to fetch.
+     */
+    where?: PartnersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Partners to fetch.
+     */
+    orderBy?: PartnersOrderByWithRelationInput | PartnersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Partners.
+     */
+    cursor?: PartnersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Partners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Partners.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Partners.
+     */
+    distinct?: PartnersScalarFieldEnum | PartnersScalarFieldEnum[]
+  }
+
+  /**
+   * Partners findMany
+   */
+  export type PartnersFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Partners
+     */
+    select?: PartnersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Partners
+     */
+    omit?: PartnersOmit<ExtArgs> | null
+    /**
+     * Filter, which Partners to fetch.
+     */
+    where?: PartnersWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Partners to fetch.
+     */
+    orderBy?: PartnersOrderByWithRelationInput | PartnersOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Partners.
+     */
+    cursor?: PartnersWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Partners from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Partners.
+     */
+    skip?: number
+    distinct?: PartnersScalarFieldEnum | PartnersScalarFieldEnum[]
+  }
+
+  /**
+   * Partners create
+   */
+  export type PartnersCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Partners
+     */
+    select?: PartnersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Partners
+     */
+    omit?: PartnersOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Partners.
+     */
+    data: XOR<PartnersCreateInput, PartnersUncheckedCreateInput>
+  }
+
+  /**
+   * Partners createMany
+   */
+  export type PartnersCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Partners.
+     */
+    data: PartnersCreateManyInput | PartnersCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Partners createManyAndReturn
+   */
+  export type PartnersCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Partners
+     */
+    select?: PartnersSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Partners
+     */
+    omit?: PartnersOmit<ExtArgs> | null
+    /**
+     * The data used to create many Partners.
+     */
+    data: PartnersCreateManyInput | PartnersCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Partners update
+   */
+  export type PartnersUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Partners
+     */
+    select?: PartnersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Partners
+     */
+    omit?: PartnersOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Partners.
+     */
+    data: XOR<PartnersUpdateInput, PartnersUncheckedUpdateInput>
+    /**
+     * Choose, which Partners to update.
+     */
+    where: PartnersWhereUniqueInput
+  }
+
+  /**
+   * Partners updateMany
+   */
+  export type PartnersUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Partners.
+     */
+    data: XOR<PartnersUpdateManyMutationInput, PartnersUncheckedUpdateManyInput>
+    /**
+     * Filter which Partners to update
+     */
+    where?: PartnersWhereInput
+    /**
+     * Limit how many Partners to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Partners updateManyAndReturn
+   */
+  export type PartnersUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Partners
+     */
+    select?: PartnersSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Partners
+     */
+    omit?: PartnersOmit<ExtArgs> | null
+    /**
+     * The data used to update Partners.
+     */
+    data: XOR<PartnersUpdateManyMutationInput, PartnersUncheckedUpdateManyInput>
+    /**
+     * Filter which Partners to update
+     */
+    where?: PartnersWhereInput
+    /**
+     * Limit how many Partners to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Partners upsert
+   */
+  export type PartnersUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Partners
+     */
+    select?: PartnersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Partners
+     */
+    omit?: PartnersOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Partners to update in case it exists.
+     */
+    where: PartnersWhereUniqueInput
+    /**
+     * In case the Partners found by the `where` argument doesn't exist, create a new Partners with this data.
+     */
+    create: XOR<PartnersCreateInput, PartnersUncheckedCreateInput>
+    /**
+     * In case the Partners was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PartnersUpdateInput, PartnersUncheckedUpdateInput>
+  }
+
+  /**
+   * Partners delete
+   */
+  export type PartnersDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Partners
+     */
+    select?: PartnersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Partners
+     */
+    omit?: PartnersOmit<ExtArgs> | null
+    /**
+     * Filter which Partners to delete.
+     */
+    where: PartnersWhereUniqueInput
+  }
+
+  /**
+   * Partners deleteMany
+   */
+  export type PartnersDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Partners to delete
+     */
+    where?: PartnersWhereInput
+    /**
+     * Limit how many Partners to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Partners without action
+   */
+  export type PartnersDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Partners
+     */
+    select?: PartnersSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Partners
+     */
+    omit?: PartnersOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -26656,10 +27879,10 @@ export namespace Prisma {
     id: 'id',
     user_id: 'user_id',
     name: 'name',
-    tax_id: 'tax_id',
-    bank_code: 'bank_code',
-    bank_acc: 'bank_acc',
-    bank_name: 'bank_name',
+    inn: 'inn',
+    mfo: 'mfo',
+    rs: 'rs',
+    bank: 'bank',
     oked: 'oked',
     address: 'address',
     createdAt: 'createdAt',
@@ -26796,6 +28019,7 @@ export namespace Prisma {
     address: 'address',
     dete: 'dete',
     payment_type: 'payment_type',
+    paid: 'paid',
     status: 'status',
     with_delivery: 'with_delivery',
     comment_delivery: 'comment_delivery',
@@ -26812,6 +28036,8 @@ export namespace Prisma {
     order_id: 'order_id',
     tool_id: 'tool_id',
     count: 'count',
+    measure: 'measure',
+    time: 'time',
     total_sum: 'total_sum'
   };
 
@@ -26822,9 +28048,11 @@ export namespace Prisma {
     id: 'id',
     order_id: 'order_id',
     profession_id: 'profession_id',
+    level_id: 'level_id',
     count: 'count',
     measure: 'measure',
-    time: 'time'
+    time: 'time',
+    total_sum: 'total_sum'
   };
 
   export type OrdersProfessionScalarFieldEnum = (typeof OrdersProfessionScalarFieldEnum)[keyof typeof OrdersProfessionScalarFieldEnum]
@@ -26897,6 +28125,17 @@ export namespace Prisma {
   };
 
   export type ShowcaseScalarFieldEnum = (typeof ShowcaseScalarFieldEnum)[keyof typeof ShowcaseScalarFieldEnum]
+
+
+  export const PartnersScalarFieldEnum: {
+    id: 'id',
+    name_uz: 'name_uz',
+    name_ru: 'name_ru',
+    name_en: 'name_en',
+    image: 'image'
+  };
+
+  export type PartnersScalarFieldEnum = (typeof PartnersScalarFieldEnum)[keyof typeof PartnersScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -27221,10 +28460,10 @@ export namespace Prisma {
     id?: StringFilter<"Company"> | string
     user_id?: StringNullableFilter<"Company"> | string | null
     name?: StringFilter<"Company"> | string
-    tax_id?: StringFilter<"Company"> | string
-    bank_code?: StringFilter<"Company"> | string
-    bank_acc?: StringFilter<"Company"> | string
-    bank_name?: StringFilter<"Company"> | string
+    inn?: StringFilter<"Company"> | string
+    mfo?: StringFilter<"Company"> | string
+    rs?: StringFilter<"Company"> | string
+    bank?: StringFilter<"Company"> | string
     oked?: StringFilter<"Company"> | string
     address?: StringFilter<"Company"> | string
     createdAt?: DateTimeFilter<"Company"> | Date | string
@@ -27236,10 +28475,10 @@ export namespace Prisma {
     id?: SortOrder
     user_id?: SortOrderInput | SortOrder
     name?: SortOrder
-    tax_id?: SortOrder
-    bank_code?: SortOrder
-    bank_acc?: SortOrder
-    bank_name?: SortOrder
+    inn?: SortOrder
+    mfo?: SortOrder
+    rs?: SortOrder
+    bank?: SortOrder
     oked?: SortOrder
     address?: SortOrder
     createdAt?: SortOrder
@@ -27254,10 +28493,10 @@ export namespace Prisma {
     OR?: CompanyWhereInput[]
     NOT?: CompanyWhereInput | CompanyWhereInput[]
     name?: StringFilter<"Company"> | string
-    tax_id?: StringFilter<"Company"> | string
-    bank_code?: StringFilter<"Company"> | string
-    bank_acc?: StringFilter<"Company"> | string
-    bank_name?: StringFilter<"Company"> | string
+    inn?: StringFilter<"Company"> | string
+    mfo?: StringFilter<"Company"> | string
+    rs?: StringFilter<"Company"> | string
+    bank?: StringFilter<"Company"> | string
     oked?: StringFilter<"Company"> | string
     address?: StringFilter<"Company"> | string
     createdAt?: DateTimeFilter<"Company"> | Date | string
@@ -27269,10 +28508,10 @@ export namespace Prisma {
     id?: SortOrder
     user_id?: SortOrderInput | SortOrder
     name?: SortOrder
-    tax_id?: SortOrder
-    bank_code?: SortOrder
-    bank_acc?: SortOrder
-    bank_name?: SortOrder
+    inn?: SortOrder
+    mfo?: SortOrder
+    rs?: SortOrder
+    bank?: SortOrder
     oked?: SortOrder
     address?: SortOrder
     createdAt?: SortOrder
@@ -27289,10 +28528,10 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Company"> | string
     user_id?: StringNullableWithAggregatesFilter<"Company"> | string | null
     name?: StringWithAggregatesFilter<"Company"> | string
-    tax_id?: StringWithAggregatesFilter<"Company"> | string
-    bank_code?: StringWithAggregatesFilter<"Company"> | string
-    bank_acc?: StringWithAggregatesFilter<"Company"> | string
-    bank_name?: StringWithAggregatesFilter<"Company"> | string
+    inn?: StringWithAggregatesFilter<"Company"> | string
+    mfo?: StringWithAggregatesFilter<"Company"> | string
+    rs?: StringWithAggregatesFilter<"Company"> | string
+    bank?: StringWithAggregatesFilter<"Company"> | string
     oked?: StringWithAggregatesFilter<"Company"> | string
     address?: StringWithAggregatesFilter<"Company"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Company"> | Date | string
@@ -27643,6 +28882,7 @@ export namespace Prisma {
     name_en?: StringFilter<"Level"> | string
     Professions?: ProfessionListRelationFilter
     MasterSkills?: MasterSkillsListRelationFilter
+    OrdersProfession?: OrdersProfessionListRelationFilter
   }
 
   export type LevelOrderByWithRelationInput = {
@@ -27652,6 +28892,7 @@ export namespace Prisma {
     name_en?: SortOrder
     Professions?: ProfessionOrderByRelationAggregateInput
     MasterSkills?: MasterSkillsOrderByRelationAggregateInput
+    OrdersProfession?: OrdersProfessionOrderByRelationAggregateInput
   }
 
   export type LevelWhereUniqueInput = Prisma.AtLeast<{
@@ -27664,6 +28905,7 @@ export namespace Prisma {
     name_en?: StringFilter<"Level"> | string
     Professions?: ProfessionListRelationFilter
     MasterSkills?: MasterSkillsListRelationFilter
+    OrdersProfession?: OrdersProfessionListRelationFilter
   }, "id">
 
   export type LevelOrderByWithAggregationInput = {
@@ -27947,6 +29189,7 @@ export namespace Prisma {
     address?: StringFilter<"Order"> | string
     dete?: DateTimeFilter<"Order"> | Date | string
     payment_type?: EnumPaymentTypeFilter<"Order"> | $Enums.PaymentType
+    paid?: BoolFilter<"Order"> | boolean
     status?: EnumStatusOrderFilter<"Order"> | $Enums.StatusOrder
     with_delivery?: BoolFilter<"Order"> | boolean
     comment_delivery?: StringFilter<"Order"> | string
@@ -27955,8 +29198,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
     OrdersProfessions?: OrdersProfessionListRelationFilter
-    Masters?: MasterListRelationFilter
     OrderTools?: OrderToolsListRelationFilter
+    Masters?: MasterListRelationFilter
   }
 
   export type OrderOrderByWithRelationInput = {
@@ -27967,6 +29210,7 @@ export namespace Prisma {
     address?: SortOrder
     dete?: SortOrder
     payment_type?: SortOrder
+    paid?: SortOrder
     status?: SortOrder
     with_delivery?: SortOrder
     comment_delivery?: SortOrder
@@ -27975,8 +29219,8 @@ export namespace Prisma {
     updatedAt?: SortOrder
     User?: UserOrderByWithRelationInput
     OrdersProfessions?: OrdersProfessionOrderByRelationAggregateInput
-    Masters?: MasterOrderByRelationAggregateInput
     OrderTools?: OrderToolsOrderByRelationAggregateInput
+    Masters?: MasterOrderByRelationAggregateInput
   }
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<{
@@ -27990,6 +29234,7 @@ export namespace Prisma {
     address?: StringFilter<"Order"> | string
     dete?: DateTimeFilter<"Order"> | Date | string
     payment_type?: EnumPaymentTypeFilter<"Order"> | $Enums.PaymentType
+    paid?: BoolFilter<"Order"> | boolean
     status?: EnumStatusOrderFilter<"Order"> | $Enums.StatusOrder
     with_delivery?: BoolFilter<"Order"> | boolean
     comment_delivery?: StringFilter<"Order"> | string
@@ -27998,8 +29243,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
     OrdersProfessions?: OrdersProfessionListRelationFilter
-    Masters?: MasterListRelationFilter
     OrderTools?: OrderToolsListRelationFilter
+    Masters?: MasterListRelationFilter
   }, "id">
 
   export type OrderOrderByWithAggregationInput = {
@@ -28010,6 +29255,7 @@ export namespace Prisma {
     address?: SortOrder
     dete?: SortOrder
     payment_type?: SortOrder
+    paid?: SortOrder
     status?: SortOrder
     with_delivery?: SortOrder
     comment_delivery?: SortOrder
@@ -28034,6 +29280,7 @@ export namespace Prisma {
     address?: StringWithAggregatesFilter<"Order"> | string
     dete?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     payment_type?: EnumPaymentTypeWithAggregatesFilter<"Order"> | $Enums.PaymentType
+    paid?: BoolWithAggregatesFilter<"Order"> | boolean
     status?: EnumStatusOrderWithAggregatesFilter<"Order"> | $Enums.StatusOrder
     with_delivery?: BoolWithAggregatesFilter<"Order"> | boolean
     comment_delivery?: StringWithAggregatesFilter<"Order"> | string
@@ -28050,6 +29297,8 @@ export namespace Prisma {
     order_id?: StringNullableFilter<"OrderTools"> | string | null
     tool_id?: StringNullableFilter<"OrderTools"> | string | null
     count?: IntFilter<"OrderTools"> | number
+    measure?: EnumMeasureFilter<"OrderTools"> | $Enums.Measure
+    time?: IntFilter<"OrderTools"> | number
     total_sum?: FloatFilter<"OrderTools"> | number
     Order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
     Tool?: XOR<ToolNullableScalarRelationFilter, ToolWhereInput> | null
@@ -28060,6 +29309,8 @@ export namespace Prisma {
     order_id?: SortOrderInput | SortOrder
     tool_id?: SortOrderInput | SortOrder
     count?: SortOrder
+    measure?: SortOrder
+    time?: SortOrder
     total_sum?: SortOrder
     Order?: OrderOrderByWithRelationInput
     Tool?: ToolOrderByWithRelationInput
@@ -28073,6 +29324,8 @@ export namespace Prisma {
     order_id?: StringNullableFilter<"OrderTools"> | string | null
     tool_id?: StringNullableFilter<"OrderTools"> | string | null
     count?: IntFilter<"OrderTools"> | number
+    measure?: EnumMeasureFilter<"OrderTools"> | $Enums.Measure
+    time?: IntFilter<"OrderTools"> | number
     total_sum?: FloatFilter<"OrderTools"> | number
     Order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
     Tool?: XOR<ToolNullableScalarRelationFilter, ToolWhereInput> | null
@@ -28083,6 +29336,8 @@ export namespace Prisma {
     order_id?: SortOrderInput | SortOrder
     tool_id?: SortOrderInput | SortOrder
     count?: SortOrder
+    measure?: SortOrder
+    time?: SortOrder
     total_sum?: SortOrder
     _count?: OrderToolsCountOrderByAggregateInput
     _avg?: OrderToolsAvgOrderByAggregateInput
@@ -28099,6 +29354,8 @@ export namespace Prisma {
     order_id?: StringNullableWithAggregatesFilter<"OrderTools"> | string | null
     tool_id?: StringNullableWithAggregatesFilter<"OrderTools"> | string | null
     count?: IntWithAggregatesFilter<"OrderTools"> | number
+    measure?: EnumMeasureWithAggregatesFilter<"OrderTools"> | $Enums.Measure
+    time?: IntWithAggregatesFilter<"OrderTools"> | number
     total_sum?: FloatWithAggregatesFilter<"OrderTools"> | number
   }
 
@@ -28109,22 +29366,28 @@ export namespace Prisma {
     id?: StringFilter<"OrdersProfession"> | string
     order_id?: StringFilter<"OrdersProfession"> | string
     profession_id?: StringFilter<"OrdersProfession"> | string
+    level_id?: StringNullableFilter<"OrdersProfession"> | string | null
     count?: IntFilter<"OrdersProfession"> | number
     measure?: EnumMeasureFilter<"OrdersProfession"> | $Enums.Measure
     time?: IntFilter<"OrdersProfession"> | number
+    total_sum?: FloatFilter<"OrdersProfession"> | number
     Order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
     Profession?: XOR<ProfessionScalarRelationFilter, ProfessionWhereInput>
+    Level?: XOR<LevelNullableScalarRelationFilter, LevelWhereInput> | null
   }
 
   export type OrdersProfessionOrderByWithRelationInput = {
     id?: SortOrder
     order_id?: SortOrder
     profession_id?: SortOrder
+    level_id?: SortOrderInput | SortOrder
     count?: SortOrder
     measure?: SortOrder
     time?: SortOrder
+    total_sum?: SortOrder
     Order?: OrderOrderByWithRelationInput
     Profession?: ProfessionOrderByWithRelationInput
+    Level?: LevelOrderByWithRelationInput
   }
 
   export type OrdersProfessionWhereUniqueInput = Prisma.AtLeast<{
@@ -28134,20 +29397,25 @@ export namespace Prisma {
     NOT?: OrdersProfessionWhereInput | OrdersProfessionWhereInput[]
     order_id?: StringFilter<"OrdersProfession"> | string
     profession_id?: StringFilter<"OrdersProfession"> | string
+    level_id?: StringNullableFilter<"OrdersProfession"> | string | null
     count?: IntFilter<"OrdersProfession"> | number
     measure?: EnumMeasureFilter<"OrdersProfession"> | $Enums.Measure
     time?: IntFilter<"OrdersProfession"> | number
+    total_sum?: FloatFilter<"OrdersProfession"> | number
     Order?: XOR<OrderScalarRelationFilter, OrderWhereInput>
     Profession?: XOR<ProfessionScalarRelationFilter, ProfessionWhereInput>
+    Level?: XOR<LevelNullableScalarRelationFilter, LevelWhereInput> | null
   }, "id">
 
   export type OrdersProfessionOrderByWithAggregationInput = {
     id?: SortOrder
     order_id?: SortOrder
     profession_id?: SortOrder
+    level_id?: SortOrderInput | SortOrder
     count?: SortOrder
     measure?: SortOrder
     time?: SortOrder
+    total_sum?: SortOrder
     _count?: OrdersProfessionCountOrderByAggregateInput
     _avg?: OrdersProfessionAvgOrderByAggregateInput
     _max?: OrdersProfessionMaxOrderByAggregateInput
@@ -28162,9 +29430,11 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"OrdersProfession"> | string
     order_id?: StringWithAggregatesFilter<"OrdersProfession"> | string
     profession_id?: StringWithAggregatesFilter<"OrdersProfession"> | string
+    level_id?: StringNullableWithAggregatesFilter<"OrdersProfession"> | string | null
     count?: IntWithAggregatesFilter<"OrdersProfession"> | number
     measure?: EnumMeasureWithAggregatesFilter<"OrdersProfession"> | $Enums.Measure
     time?: IntWithAggregatesFilter<"OrdersProfession"> | number
+    total_sum?: FloatWithAggregatesFilter<"OrdersProfession"> | number
   }
 
   export type CommentWhereInput = {
@@ -28505,6 +29775,58 @@ export namespace Prisma {
     link?: StringWithAggregatesFilter<"Showcase"> | string
   }
 
+  export type PartnersWhereInput = {
+    AND?: PartnersWhereInput | PartnersWhereInput[]
+    OR?: PartnersWhereInput[]
+    NOT?: PartnersWhereInput | PartnersWhereInput[]
+    id?: StringFilter<"Partners"> | string
+    name_uz?: StringFilter<"Partners"> | string
+    name_ru?: StringFilter<"Partners"> | string
+    name_en?: StringFilter<"Partners"> | string
+    image?: StringFilter<"Partners"> | string
+  }
+
+  export type PartnersOrderByWithRelationInput = {
+    id?: SortOrder
+    name_uz?: SortOrder
+    name_ru?: SortOrder
+    name_en?: SortOrder
+    image?: SortOrder
+  }
+
+  export type PartnersWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PartnersWhereInput | PartnersWhereInput[]
+    OR?: PartnersWhereInput[]
+    NOT?: PartnersWhereInput | PartnersWhereInput[]
+    name_uz?: StringFilter<"Partners"> | string
+    name_ru?: StringFilter<"Partners"> | string
+    name_en?: StringFilter<"Partners"> | string
+    image?: StringFilter<"Partners"> | string
+  }, "id">
+
+  export type PartnersOrderByWithAggregationInput = {
+    id?: SortOrder
+    name_uz?: SortOrder
+    name_ru?: SortOrder
+    name_en?: SortOrder
+    image?: SortOrder
+    _count?: PartnersCountOrderByAggregateInput
+    _max?: PartnersMaxOrderByAggregateInput
+    _min?: PartnersMinOrderByAggregateInput
+  }
+
+  export type PartnersScalarWhereWithAggregatesInput = {
+    AND?: PartnersScalarWhereWithAggregatesInput | PartnersScalarWhereWithAggregatesInput[]
+    OR?: PartnersScalarWhereWithAggregatesInput[]
+    NOT?: PartnersScalarWhereWithAggregatesInput | PartnersScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Partners"> | string
+    name_uz?: StringWithAggregatesFilter<"Partners"> | string
+    name_ru?: StringWithAggregatesFilter<"Partners"> | string
+    name_en?: StringWithAggregatesFilter<"Partners"> | string
+    image?: StringWithAggregatesFilter<"Partners"> | string
+  }
+
   export type RegionCreateInput = {
     id?: string
     name_uz: string
@@ -28656,10 +29978,10 @@ export namespace Prisma {
   export type CompanyCreateInput = {
     id?: string
     name: string
-    tax_id: string
-    bank_code: string
-    bank_acc: string
-    bank_name: string
+    inn: string
+    mfo: string
+    rs: string
+    bank: string
     oked: string
     address: string
     createdAt?: Date | string
@@ -28671,10 +29993,10 @@ export namespace Prisma {
     id?: string
     user_id?: string | null
     name: string
-    tax_id: string
-    bank_code: string
-    bank_acc: string
-    bank_name: string
+    inn: string
+    mfo: string
+    rs: string
+    bank: string
     oked: string
     address: string
     createdAt?: Date | string
@@ -28684,10 +30006,10 @@ export namespace Prisma {
   export type CompanyUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    tax_id?: StringFieldUpdateOperationsInput | string
-    bank_code?: StringFieldUpdateOperationsInput | string
-    bank_acc?: StringFieldUpdateOperationsInput | string
-    bank_name?: StringFieldUpdateOperationsInput | string
+    inn?: StringFieldUpdateOperationsInput | string
+    mfo?: StringFieldUpdateOperationsInput | string
+    rs?: StringFieldUpdateOperationsInput | string
+    bank?: StringFieldUpdateOperationsInput | string
     oked?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28699,10 +30021,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    tax_id?: StringFieldUpdateOperationsInput | string
-    bank_code?: StringFieldUpdateOperationsInput | string
-    bank_acc?: StringFieldUpdateOperationsInput | string
-    bank_name?: StringFieldUpdateOperationsInput | string
+    inn?: StringFieldUpdateOperationsInput | string
+    mfo?: StringFieldUpdateOperationsInput | string
+    rs?: StringFieldUpdateOperationsInput | string
+    bank?: StringFieldUpdateOperationsInput | string
     oked?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28713,10 +30035,10 @@ export namespace Prisma {
     id?: string
     user_id?: string | null
     name: string
-    tax_id: string
-    bank_code: string
-    bank_acc: string
-    bank_name: string
+    inn: string
+    mfo: string
+    rs: string
+    bank: string
     oked: string
     address: string
     createdAt?: Date | string
@@ -28726,10 +30048,10 @@ export namespace Prisma {
   export type CompanyUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    tax_id?: StringFieldUpdateOperationsInput | string
-    bank_code?: StringFieldUpdateOperationsInput | string
-    bank_acc?: StringFieldUpdateOperationsInput | string
-    bank_name?: StringFieldUpdateOperationsInput | string
+    inn?: StringFieldUpdateOperationsInput | string
+    mfo?: StringFieldUpdateOperationsInput | string
+    rs?: StringFieldUpdateOperationsInput | string
+    bank?: StringFieldUpdateOperationsInput | string
     oked?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -28740,10 +30062,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
     name?: StringFieldUpdateOperationsInput | string
-    tax_id?: StringFieldUpdateOperationsInput | string
-    bank_code?: StringFieldUpdateOperationsInput | string
-    bank_acc?: StringFieldUpdateOperationsInput | string
-    bank_name?: StringFieldUpdateOperationsInput | string
+    inn?: StringFieldUpdateOperationsInput | string
+    mfo?: StringFieldUpdateOperationsInput | string
+    rs?: StringFieldUpdateOperationsInput | string
+    bank?: StringFieldUpdateOperationsInput | string
     oked?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -29116,6 +30438,7 @@ export namespace Prisma {
     name_en: string
     Professions?: ProfessionCreateNestedManyWithoutLevelsInput
     MasterSkills?: MasterSkillsCreateNestedManyWithoutLevelInput
+    OrdersProfession?: OrdersProfessionCreateNestedManyWithoutLevelInput
   }
 
   export type LevelUncheckedCreateInput = {
@@ -29125,6 +30448,7 @@ export namespace Prisma {
     name_en: string
     Professions?: ProfessionUncheckedCreateNestedManyWithoutLevelsInput
     MasterSkills?: MasterSkillsUncheckedCreateNestedManyWithoutLevelInput
+    OrdersProfession?: OrdersProfessionUncheckedCreateNestedManyWithoutLevelInput
   }
 
   export type LevelUpdateInput = {
@@ -29134,6 +30458,7 @@ export namespace Prisma {
     name_en?: StringFieldUpdateOperationsInput | string
     Professions?: ProfessionUpdateManyWithoutLevelsNestedInput
     MasterSkills?: MasterSkillsUpdateManyWithoutLevelNestedInput
+    OrdersProfession?: OrdersProfessionUpdateManyWithoutLevelNestedInput
   }
 
   export type LevelUncheckedUpdateInput = {
@@ -29143,6 +30468,7 @@ export namespace Prisma {
     name_en?: StringFieldUpdateOperationsInput | string
     Professions?: ProfessionUncheckedUpdateManyWithoutLevelsNestedInput
     MasterSkills?: MasterSkillsUncheckedUpdateManyWithoutLevelNestedInput
+    OrdersProfession?: OrdersProfessionUncheckedUpdateManyWithoutLevelNestedInput
   }
 
   export type LevelCreateManyInput = {
@@ -29450,6 +30776,7 @@ export namespace Prisma {
     address: string
     dete: Date | string
     payment_type?: $Enums.PaymentType
+    paid?: boolean
     status?: $Enums.StatusOrder
     with_delivery: boolean
     comment_delivery: string
@@ -29458,8 +30785,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     User: UserCreateNestedOneWithoutOrderInput
     OrdersProfessions?: OrdersProfessionCreateNestedManyWithoutOrderInput
-    Masters?: MasterCreateNestedManyWithoutOrdersInput
     OrderTools?: OrderToolsCreateNestedManyWithoutOrderInput
+    Masters?: MasterCreateNestedManyWithoutOrdersInput
   }
 
   export type OrderUncheckedCreateInput = {
@@ -29470,6 +30797,7 @@ export namespace Prisma {
     address: string
     dete: Date | string
     payment_type?: $Enums.PaymentType
+    paid?: boolean
     status?: $Enums.StatusOrder
     with_delivery: boolean
     comment_delivery: string
@@ -29477,8 +30805,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     OrdersProfessions?: OrdersProfessionUncheckedCreateNestedManyWithoutOrderInput
-    Masters?: MasterUncheckedCreateNestedManyWithoutOrdersInput
     OrderTools?: OrderToolsUncheckedCreateNestedManyWithoutOrderInput
+    Masters?: MasterUncheckedCreateNestedManyWithoutOrdersInput
   }
 
   export type OrderUpdateInput = {
@@ -29488,6 +30816,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
@@ -29496,8 +30825,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     User?: UserUpdateOneRequiredWithoutOrderNestedInput
     OrdersProfessions?: OrdersProfessionUpdateManyWithoutOrderNestedInput
-    Masters?: MasterUpdateManyWithoutOrdersNestedInput
     OrderTools?: OrderToolsUpdateManyWithoutOrderNestedInput
+    Masters?: MasterUpdateManyWithoutOrdersNestedInput
   }
 
   export type OrderUncheckedUpdateInput = {
@@ -29508,6 +30837,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
@@ -29515,8 +30845,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrdersProfessions?: OrdersProfessionUncheckedUpdateManyWithoutOrderNestedInput
-    Masters?: MasterUncheckedUpdateManyWithoutOrdersNestedInput
     OrderTools?: OrderToolsUncheckedUpdateManyWithoutOrderNestedInput
+    Masters?: MasterUncheckedUpdateManyWithoutOrdersNestedInput
   }
 
   export type OrderCreateManyInput = {
@@ -29527,6 +30857,7 @@ export namespace Prisma {
     address: string
     dete: Date | string
     payment_type?: $Enums.PaymentType
+    paid?: boolean
     status?: $Enums.StatusOrder
     with_delivery: boolean
     comment_delivery: string
@@ -29542,6 +30873,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
@@ -29558,6 +30890,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
@@ -29569,6 +30902,8 @@ export namespace Prisma {
   export type OrderToolsCreateInput = {
     id?: string
     count: number
+    measure: $Enums.Measure
+    time: number
     total_sum: number
     Order?: OrderCreateNestedOneWithoutOrderToolsInput
     Tool?: ToolCreateNestedOneWithoutOrderToolsInput
@@ -29579,12 +30914,16 @@ export namespace Prisma {
     order_id?: string | null
     tool_id?: string | null
     count: number
+    measure: $Enums.Measure
+    time: number
     total_sum: number
   }
 
   export type OrderToolsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     count?: IntFieldUpdateOperationsInput | number
+    measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
+    time?: IntFieldUpdateOperationsInput | number
     total_sum?: FloatFieldUpdateOperationsInput | number
     Order?: OrderUpdateOneWithoutOrderToolsNestedInput
     Tool?: ToolUpdateOneWithoutOrderToolsNestedInput
@@ -29595,6 +30934,8 @@ export namespace Prisma {
     order_id?: NullableStringFieldUpdateOperationsInput | string | null
     tool_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
+    measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
+    time?: IntFieldUpdateOperationsInput | number
     total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
@@ -29603,12 +30944,16 @@ export namespace Prisma {
     order_id?: string | null
     tool_id?: string | null
     count: number
+    measure: $Enums.Measure
+    time: number
     total_sum: number
   }
 
   export type OrderToolsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     count?: IntFieldUpdateOperationsInput | number
+    measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
+    time?: IntFieldUpdateOperationsInput | number
     total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
@@ -29617,6 +30962,8 @@ export namespace Prisma {
     order_id?: NullableStringFieldUpdateOperationsInput | string | null
     tool_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
+    measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
+    time?: IntFieldUpdateOperationsInput | number
     total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
@@ -29625,17 +30972,21 @@ export namespace Prisma {
     count: number
     measure: $Enums.Measure
     time: number
+    total_sum: number
     Order: OrderCreateNestedOneWithoutOrdersProfessionsInput
     Profession: ProfessionCreateNestedOneWithoutOrdersProfessionInput
+    Level?: LevelCreateNestedOneWithoutOrdersProfessionInput
   }
 
   export type OrdersProfessionUncheckedCreateInput = {
     id?: string
     order_id: string
     profession_id: string
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
+    total_sum: number
   }
 
   export type OrdersProfessionUpdateInput = {
@@ -29643,26 +30994,32 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
     Order?: OrderUpdateOneRequiredWithoutOrdersProfessionsNestedInput
     Profession?: ProfessionUpdateOneRequiredWithoutOrdersProfessionNestedInput
+    Level?: LevelUpdateOneWithoutOrdersProfessionNestedInput
   }
 
   export type OrdersProfessionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     order_id?: StringFieldUpdateOperationsInput | string
     profession_id?: StringFieldUpdateOperationsInput | string
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
   export type OrdersProfessionCreateManyInput = {
     id?: string
     order_id: string
     profession_id: string
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
+    total_sum: number
   }
 
   export type OrdersProfessionUpdateManyMutationInput = {
@@ -29670,15 +31027,18 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
   export type OrdersProfessionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     order_id?: StringFieldUpdateOperationsInput | string
     profession_id?: StringFieldUpdateOperationsInput | string
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
   export type CommentCreateInput = {
@@ -30040,6 +31400,62 @@ export namespace Prisma {
     link?: StringFieldUpdateOperationsInput | string
   }
 
+  export type PartnersCreateInput = {
+    id?: string
+    name_uz: string
+    name_ru: string
+    name_en: string
+    image: string
+  }
+
+  export type PartnersUncheckedCreateInput = {
+    id?: string
+    name_uz: string
+    name_ru: string
+    name_en: string
+    image: string
+  }
+
+  export type PartnersUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name_uz?: StringFieldUpdateOperationsInput | string
+    name_ru?: StringFieldUpdateOperationsInput | string
+    name_en?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PartnersUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name_uz?: StringFieldUpdateOperationsInput | string
+    name_ru?: StringFieldUpdateOperationsInput | string
+    name_en?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PartnersCreateManyInput = {
+    id?: string
+    name_uz: string
+    name_ru: string
+    name_en: string
+    image: string
+  }
+
+  export type PartnersUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name_uz?: StringFieldUpdateOperationsInput | string
+    name_ru?: StringFieldUpdateOperationsInput | string
+    name_en?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PartnersUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name_uz?: StringFieldUpdateOperationsInput | string
+    name_ru?: StringFieldUpdateOperationsInput | string
+    name_en?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -30272,10 +31688,10 @@ export namespace Prisma {
     id?: SortOrder
     user_id?: SortOrder
     name?: SortOrder
-    tax_id?: SortOrder
-    bank_code?: SortOrder
-    bank_acc?: SortOrder
-    bank_name?: SortOrder
+    inn?: SortOrder
+    mfo?: SortOrder
+    rs?: SortOrder
+    bank?: SortOrder
     oked?: SortOrder
     address?: SortOrder
     createdAt?: SortOrder
@@ -30286,10 +31702,10 @@ export namespace Prisma {
     id?: SortOrder
     user_id?: SortOrder
     name?: SortOrder
-    tax_id?: SortOrder
-    bank_code?: SortOrder
-    bank_acc?: SortOrder
-    bank_name?: SortOrder
+    inn?: SortOrder
+    mfo?: SortOrder
+    rs?: SortOrder
+    bank?: SortOrder
     oked?: SortOrder
     address?: SortOrder
     createdAt?: SortOrder
@@ -30300,10 +31716,10 @@ export namespace Prisma {
     id?: SortOrder
     user_id?: SortOrder
     name?: SortOrder
-    tax_id?: SortOrder
-    bank_code?: SortOrder
-    bank_acc?: SortOrder
-    bank_name?: SortOrder
+    inn?: SortOrder
+    mfo?: SortOrder
+    rs?: SortOrder
+    bank?: SortOrder
     oked?: SortOrder
     address?: SortOrder
     createdAt?: SortOrder
@@ -30624,7 +32040,17 @@ export namespace Prisma {
     none?: MasterSkillsWhereInput
   }
 
+  export type OrdersProfessionListRelationFilter = {
+    every?: OrdersProfessionWhereInput
+    some?: OrdersProfessionWhereInput
+    none?: OrdersProfessionWhereInput
+  }
+
   export type MasterSkillsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type OrdersProfessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -30655,17 +32081,7 @@ export namespace Prisma {
     none?: LevelWhereInput
   }
 
-  export type OrdersProfessionListRelationFilter = {
-    every?: OrdersProfessionWhereInput
-    some?: OrdersProfessionWhereInput
-    none?: OrdersProfessionWhereInput
-  }
-
   export type LevelOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type OrdersProfessionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -30860,6 +32276,7 @@ export namespace Prisma {
     address?: SortOrder
     dete?: SortOrder
     payment_type?: SortOrder
+    paid?: SortOrder
     status?: SortOrder
     with_delivery?: SortOrder
     comment_delivery?: SortOrder
@@ -30880,6 +32297,7 @@ export namespace Prisma {
     address?: SortOrder
     dete?: SortOrder
     payment_type?: SortOrder
+    paid?: SortOrder
     status?: SortOrder
     with_delivery?: SortOrder
     comment_delivery?: SortOrder
@@ -30895,6 +32313,7 @@ export namespace Prisma {
     address?: SortOrder
     dete?: SortOrder
     payment_type?: SortOrder
+    paid?: SortOrder
     status?: SortOrder
     with_delivery?: SortOrder
     comment_delivery?: SortOrder
@@ -30928,6 +32347,13 @@ export namespace Prisma {
     _max?: NestedEnumStatusOrderFilter<$PrismaModel>
   }
 
+  export type EnumMeasureFilter<$PrismaModel = never> = {
+    equals?: $Enums.Measure | EnumMeasureFieldRefInput<$PrismaModel>
+    in?: $Enums.Measure[] | ListEnumMeasureFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Measure[] | ListEnumMeasureFieldRefInput<$PrismaModel>
+    not?: NestedEnumMeasureFilter<$PrismaModel> | $Enums.Measure
+  }
+
   export type OrderNullableScalarRelationFilter = {
     is?: OrderWhereInput | null
     isNot?: OrderWhereInput | null
@@ -30943,11 +32369,14 @@ export namespace Prisma {
     order_id?: SortOrder
     tool_id?: SortOrder
     count?: SortOrder
+    measure?: SortOrder
+    time?: SortOrder
     total_sum?: SortOrder
   }
 
   export type OrderToolsAvgOrderByAggregateInput = {
     count?: SortOrder
+    time?: SortOrder
     total_sum?: SortOrder
   }
 
@@ -30956,6 +32385,8 @@ export namespace Prisma {
     order_id?: SortOrder
     tool_id?: SortOrder
     count?: SortOrder
+    measure?: SortOrder
+    time?: SortOrder
     total_sum?: SortOrder
   }
 
@@ -30964,61 +32395,15 @@ export namespace Prisma {
     order_id?: SortOrder
     tool_id?: SortOrder
     count?: SortOrder
+    measure?: SortOrder
+    time?: SortOrder
     total_sum?: SortOrder
   }
 
   export type OrderToolsSumOrderByAggregateInput = {
     count?: SortOrder
+    time?: SortOrder
     total_sum?: SortOrder
-  }
-
-  export type EnumMeasureFilter<$PrismaModel = never> = {
-    equals?: $Enums.Measure | EnumMeasureFieldRefInput<$PrismaModel>
-    in?: $Enums.Measure[] | ListEnumMeasureFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Measure[] | ListEnumMeasureFieldRefInput<$PrismaModel>
-    not?: NestedEnumMeasureFilter<$PrismaModel> | $Enums.Measure
-  }
-
-  export type OrderScalarRelationFilter = {
-    is?: OrderWhereInput
-    isNot?: OrderWhereInput
-  }
-
-  export type OrdersProfessionCountOrderByAggregateInput = {
-    id?: SortOrder
-    order_id?: SortOrder
-    profession_id?: SortOrder
-    count?: SortOrder
-    measure?: SortOrder
-    time?: SortOrder
-  }
-
-  export type OrdersProfessionAvgOrderByAggregateInput = {
-    count?: SortOrder
-    time?: SortOrder
-  }
-
-  export type OrdersProfessionMaxOrderByAggregateInput = {
-    id?: SortOrder
-    order_id?: SortOrder
-    profession_id?: SortOrder
-    count?: SortOrder
-    measure?: SortOrder
-    time?: SortOrder
-  }
-
-  export type OrdersProfessionMinOrderByAggregateInput = {
-    id?: SortOrder
-    order_id?: SortOrder
-    profession_id?: SortOrder
-    count?: SortOrder
-    measure?: SortOrder
-    time?: SortOrder
-  }
-
-  export type OrdersProfessionSumOrderByAggregateInput = {
-    count?: SortOrder
-    time?: SortOrder
   }
 
   export type EnumMeasureWithAggregatesFilter<$PrismaModel = never> = {
@@ -31029,6 +32414,61 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumMeasureFilter<$PrismaModel>
     _max?: NestedEnumMeasureFilter<$PrismaModel>
+  }
+
+  export type OrderScalarRelationFilter = {
+    is?: OrderWhereInput
+    isNot?: OrderWhereInput
+  }
+
+  export type LevelNullableScalarRelationFilter = {
+    is?: LevelWhereInput | null
+    isNot?: LevelWhereInput | null
+  }
+
+  export type OrdersProfessionCountOrderByAggregateInput = {
+    id?: SortOrder
+    order_id?: SortOrder
+    profession_id?: SortOrder
+    level_id?: SortOrder
+    count?: SortOrder
+    measure?: SortOrder
+    time?: SortOrder
+    total_sum?: SortOrder
+  }
+
+  export type OrdersProfessionAvgOrderByAggregateInput = {
+    count?: SortOrder
+    time?: SortOrder
+    total_sum?: SortOrder
+  }
+
+  export type OrdersProfessionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    order_id?: SortOrder
+    profession_id?: SortOrder
+    level_id?: SortOrder
+    count?: SortOrder
+    measure?: SortOrder
+    time?: SortOrder
+    total_sum?: SortOrder
+  }
+
+  export type OrdersProfessionMinOrderByAggregateInput = {
+    id?: SortOrder
+    order_id?: SortOrder
+    profession_id?: SortOrder
+    level_id?: SortOrder
+    count?: SortOrder
+    measure?: SortOrder
+    time?: SortOrder
+    total_sum?: SortOrder
+  }
+
+  export type OrdersProfessionSumOrderByAggregateInput = {
+    count?: SortOrder
+    time?: SortOrder
+    total_sum?: SortOrder
   }
 
   export type CommentCountOrderByAggregateInput = {
@@ -31199,6 +32639,30 @@ export namespace Prisma {
     description_en?: SortOrder
     image?: SortOrder
     link?: SortOrder
+  }
+
+  export type PartnersCountOrderByAggregateInput = {
+    id?: SortOrder
+    name_uz?: SortOrder
+    name_ru?: SortOrder
+    name_en?: SortOrder
+    image?: SortOrder
+  }
+
+  export type PartnersMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name_uz?: SortOrder
+    name_ru?: SortOrder
+    name_en?: SortOrder
+    image?: SortOrder
+  }
+
+  export type PartnersMinOrderByAggregateInput = {
+    id?: SortOrder
+    name_uz?: SortOrder
+    name_ru?: SortOrder
+    name_en?: SortOrder
+    image?: SortOrder
   }
 
   export type UserCreateNestedManyWithoutRegionInput = {
@@ -31708,6 +33172,13 @@ export namespace Prisma {
     connect?: MasterSkillsWhereUniqueInput | MasterSkillsWhereUniqueInput[]
   }
 
+  export type OrdersProfessionCreateNestedManyWithoutLevelInput = {
+    create?: XOR<OrdersProfessionCreateWithoutLevelInput, OrdersProfessionUncheckedCreateWithoutLevelInput> | OrdersProfessionCreateWithoutLevelInput[] | OrdersProfessionUncheckedCreateWithoutLevelInput[]
+    connectOrCreate?: OrdersProfessionCreateOrConnectWithoutLevelInput | OrdersProfessionCreateOrConnectWithoutLevelInput[]
+    createMany?: OrdersProfessionCreateManyLevelInputEnvelope
+    connect?: OrdersProfessionWhereUniqueInput | OrdersProfessionWhereUniqueInput[]
+  }
+
   export type ProfessionUncheckedCreateNestedManyWithoutLevelsInput = {
     create?: XOR<ProfessionCreateWithoutLevelsInput, ProfessionUncheckedCreateWithoutLevelsInput> | ProfessionCreateWithoutLevelsInput[] | ProfessionUncheckedCreateWithoutLevelsInput[]
     connectOrCreate?: ProfessionCreateOrConnectWithoutLevelsInput | ProfessionCreateOrConnectWithoutLevelsInput[]
@@ -31719,6 +33190,13 @@ export namespace Prisma {
     connectOrCreate?: MasterSkillsCreateOrConnectWithoutLevelInput | MasterSkillsCreateOrConnectWithoutLevelInput[]
     createMany?: MasterSkillsCreateManyLevelInputEnvelope
     connect?: MasterSkillsWhereUniqueInput | MasterSkillsWhereUniqueInput[]
+  }
+
+  export type OrdersProfessionUncheckedCreateNestedManyWithoutLevelInput = {
+    create?: XOR<OrdersProfessionCreateWithoutLevelInput, OrdersProfessionUncheckedCreateWithoutLevelInput> | OrdersProfessionCreateWithoutLevelInput[] | OrdersProfessionUncheckedCreateWithoutLevelInput[]
+    connectOrCreate?: OrdersProfessionCreateOrConnectWithoutLevelInput | OrdersProfessionCreateOrConnectWithoutLevelInput[]
+    createMany?: OrdersProfessionCreateManyLevelInputEnvelope
+    connect?: OrdersProfessionWhereUniqueInput | OrdersProfessionWhereUniqueInput[]
   }
 
   export type ProfessionUpdateManyWithoutLevelsNestedInput = {
@@ -31748,6 +33226,20 @@ export namespace Prisma {
     deleteMany?: MasterSkillsScalarWhereInput | MasterSkillsScalarWhereInput[]
   }
 
+  export type OrdersProfessionUpdateManyWithoutLevelNestedInput = {
+    create?: XOR<OrdersProfessionCreateWithoutLevelInput, OrdersProfessionUncheckedCreateWithoutLevelInput> | OrdersProfessionCreateWithoutLevelInput[] | OrdersProfessionUncheckedCreateWithoutLevelInput[]
+    connectOrCreate?: OrdersProfessionCreateOrConnectWithoutLevelInput | OrdersProfessionCreateOrConnectWithoutLevelInput[]
+    upsert?: OrdersProfessionUpsertWithWhereUniqueWithoutLevelInput | OrdersProfessionUpsertWithWhereUniqueWithoutLevelInput[]
+    createMany?: OrdersProfessionCreateManyLevelInputEnvelope
+    set?: OrdersProfessionWhereUniqueInput | OrdersProfessionWhereUniqueInput[]
+    disconnect?: OrdersProfessionWhereUniqueInput | OrdersProfessionWhereUniqueInput[]
+    delete?: OrdersProfessionWhereUniqueInput | OrdersProfessionWhereUniqueInput[]
+    connect?: OrdersProfessionWhereUniqueInput | OrdersProfessionWhereUniqueInput[]
+    update?: OrdersProfessionUpdateWithWhereUniqueWithoutLevelInput | OrdersProfessionUpdateWithWhereUniqueWithoutLevelInput[]
+    updateMany?: OrdersProfessionUpdateManyWithWhereWithoutLevelInput | OrdersProfessionUpdateManyWithWhereWithoutLevelInput[]
+    deleteMany?: OrdersProfessionScalarWhereInput | OrdersProfessionScalarWhereInput[]
+  }
+
   export type ProfessionUncheckedUpdateManyWithoutLevelsNestedInput = {
     create?: XOR<ProfessionCreateWithoutLevelsInput, ProfessionUncheckedCreateWithoutLevelsInput> | ProfessionCreateWithoutLevelsInput[] | ProfessionUncheckedCreateWithoutLevelsInput[]
     connectOrCreate?: ProfessionCreateOrConnectWithoutLevelsInput | ProfessionCreateOrConnectWithoutLevelsInput[]
@@ -31773,6 +33265,20 @@ export namespace Prisma {
     update?: MasterSkillsUpdateWithWhereUniqueWithoutLevelInput | MasterSkillsUpdateWithWhereUniqueWithoutLevelInput[]
     updateMany?: MasterSkillsUpdateManyWithWhereWithoutLevelInput | MasterSkillsUpdateManyWithWhereWithoutLevelInput[]
     deleteMany?: MasterSkillsScalarWhereInput | MasterSkillsScalarWhereInput[]
+  }
+
+  export type OrdersProfessionUncheckedUpdateManyWithoutLevelNestedInput = {
+    create?: XOR<OrdersProfessionCreateWithoutLevelInput, OrdersProfessionUncheckedCreateWithoutLevelInput> | OrdersProfessionCreateWithoutLevelInput[] | OrdersProfessionUncheckedCreateWithoutLevelInput[]
+    connectOrCreate?: OrdersProfessionCreateOrConnectWithoutLevelInput | OrdersProfessionCreateOrConnectWithoutLevelInput[]
+    upsert?: OrdersProfessionUpsertWithWhereUniqueWithoutLevelInput | OrdersProfessionUpsertWithWhereUniqueWithoutLevelInput[]
+    createMany?: OrdersProfessionCreateManyLevelInputEnvelope
+    set?: OrdersProfessionWhereUniqueInput | OrdersProfessionWhereUniqueInput[]
+    disconnect?: OrdersProfessionWhereUniqueInput | OrdersProfessionWhereUniqueInput[]
+    delete?: OrdersProfessionWhereUniqueInput | OrdersProfessionWhereUniqueInput[]
+    connect?: OrdersProfessionWhereUniqueInput | OrdersProfessionWhereUniqueInput[]
+    update?: OrdersProfessionUpdateWithWhereUniqueWithoutLevelInput | OrdersProfessionUpdateWithWhereUniqueWithoutLevelInput[]
+    updateMany?: OrdersProfessionUpdateManyWithWhereWithoutLevelInput | OrdersProfessionUpdateManyWithWhereWithoutLevelInput[]
+    deleteMany?: OrdersProfessionScalarWhereInput | OrdersProfessionScalarWhereInput[]
   }
 
   export type LevelCreateNestedManyWithoutProfessionsInput = {
@@ -32112,17 +33618,17 @@ export namespace Prisma {
     connect?: OrdersProfessionWhereUniqueInput | OrdersProfessionWhereUniqueInput[]
   }
 
-  export type MasterCreateNestedManyWithoutOrdersInput = {
-    create?: XOR<MasterCreateWithoutOrdersInput, MasterUncheckedCreateWithoutOrdersInput> | MasterCreateWithoutOrdersInput[] | MasterUncheckedCreateWithoutOrdersInput[]
-    connectOrCreate?: MasterCreateOrConnectWithoutOrdersInput | MasterCreateOrConnectWithoutOrdersInput[]
-    connect?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
-  }
-
   export type OrderToolsCreateNestedManyWithoutOrderInput = {
     create?: XOR<OrderToolsCreateWithoutOrderInput, OrderToolsUncheckedCreateWithoutOrderInput> | OrderToolsCreateWithoutOrderInput[] | OrderToolsUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: OrderToolsCreateOrConnectWithoutOrderInput | OrderToolsCreateOrConnectWithoutOrderInput[]
     createMany?: OrderToolsCreateManyOrderInputEnvelope
     connect?: OrderToolsWhereUniqueInput | OrderToolsWhereUniqueInput[]
+  }
+
+  export type MasterCreateNestedManyWithoutOrdersInput = {
+    create?: XOR<MasterCreateWithoutOrdersInput, MasterUncheckedCreateWithoutOrdersInput> | MasterCreateWithoutOrdersInput[] | MasterUncheckedCreateWithoutOrdersInput[]
+    connectOrCreate?: MasterCreateOrConnectWithoutOrdersInput | MasterCreateOrConnectWithoutOrdersInput[]
+    connect?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
   }
 
   export type OrdersProfessionUncheckedCreateNestedManyWithoutOrderInput = {
@@ -32132,17 +33638,17 @@ export namespace Prisma {
     connect?: OrdersProfessionWhereUniqueInput | OrdersProfessionWhereUniqueInput[]
   }
 
-  export type MasterUncheckedCreateNestedManyWithoutOrdersInput = {
-    create?: XOR<MasterCreateWithoutOrdersInput, MasterUncheckedCreateWithoutOrdersInput> | MasterCreateWithoutOrdersInput[] | MasterUncheckedCreateWithoutOrdersInput[]
-    connectOrCreate?: MasterCreateOrConnectWithoutOrdersInput | MasterCreateOrConnectWithoutOrdersInput[]
-    connect?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
-  }
-
   export type OrderToolsUncheckedCreateNestedManyWithoutOrderInput = {
     create?: XOR<OrderToolsCreateWithoutOrderInput, OrderToolsUncheckedCreateWithoutOrderInput> | OrderToolsCreateWithoutOrderInput[] | OrderToolsUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: OrderToolsCreateOrConnectWithoutOrderInput | OrderToolsCreateOrConnectWithoutOrderInput[]
     createMany?: OrderToolsCreateManyOrderInputEnvelope
     connect?: OrderToolsWhereUniqueInput | OrderToolsWhereUniqueInput[]
+  }
+
+  export type MasterUncheckedCreateNestedManyWithoutOrdersInput = {
+    create?: XOR<MasterCreateWithoutOrdersInput, MasterUncheckedCreateWithoutOrdersInput> | MasterCreateWithoutOrdersInput[] | MasterUncheckedCreateWithoutOrdersInput[]
+    connectOrCreate?: MasterCreateOrConnectWithoutOrdersInput | MasterCreateOrConnectWithoutOrdersInput[]
+    connect?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
   }
 
   export type EnumPaymentTypeFieldUpdateOperationsInput = {
@@ -32175,19 +33681,6 @@ export namespace Prisma {
     deleteMany?: OrdersProfessionScalarWhereInput | OrdersProfessionScalarWhereInput[]
   }
 
-  export type MasterUpdateManyWithoutOrdersNestedInput = {
-    create?: XOR<MasterCreateWithoutOrdersInput, MasterUncheckedCreateWithoutOrdersInput> | MasterCreateWithoutOrdersInput[] | MasterUncheckedCreateWithoutOrdersInput[]
-    connectOrCreate?: MasterCreateOrConnectWithoutOrdersInput | MasterCreateOrConnectWithoutOrdersInput[]
-    upsert?: MasterUpsertWithWhereUniqueWithoutOrdersInput | MasterUpsertWithWhereUniqueWithoutOrdersInput[]
-    set?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
-    disconnect?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
-    delete?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
-    connect?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
-    update?: MasterUpdateWithWhereUniqueWithoutOrdersInput | MasterUpdateWithWhereUniqueWithoutOrdersInput[]
-    updateMany?: MasterUpdateManyWithWhereWithoutOrdersInput | MasterUpdateManyWithWhereWithoutOrdersInput[]
-    deleteMany?: MasterScalarWhereInput | MasterScalarWhereInput[]
-  }
-
   export type OrderToolsUpdateManyWithoutOrderNestedInput = {
     create?: XOR<OrderToolsCreateWithoutOrderInput, OrderToolsUncheckedCreateWithoutOrderInput> | OrderToolsCreateWithoutOrderInput[] | OrderToolsUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: OrderToolsCreateOrConnectWithoutOrderInput | OrderToolsCreateOrConnectWithoutOrderInput[]
@@ -32200,6 +33693,19 @@ export namespace Prisma {
     update?: OrderToolsUpdateWithWhereUniqueWithoutOrderInput | OrderToolsUpdateWithWhereUniqueWithoutOrderInput[]
     updateMany?: OrderToolsUpdateManyWithWhereWithoutOrderInput | OrderToolsUpdateManyWithWhereWithoutOrderInput[]
     deleteMany?: OrderToolsScalarWhereInput | OrderToolsScalarWhereInput[]
+  }
+
+  export type MasterUpdateManyWithoutOrdersNestedInput = {
+    create?: XOR<MasterCreateWithoutOrdersInput, MasterUncheckedCreateWithoutOrdersInput> | MasterCreateWithoutOrdersInput[] | MasterUncheckedCreateWithoutOrdersInput[]
+    connectOrCreate?: MasterCreateOrConnectWithoutOrdersInput | MasterCreateOrConnectWithoutOrdersInput[]
+    upsert?: MasterUpsertWithWhereUniqueWithoutOrdersInput | MasterUpsertWithWhereUniqueWithoutOrdersInput[]
+    set?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
+    disconnect?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
+    delete?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
+    connect?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
+    update?: MasterUpdateWithWhereUniqueWithoutOrdersInput | MasterUpdateWithWhereUniqueWithoutOrdersInput[]
+    updateMany?: MasterUpdateManyWithWhereWithoutOrdersInput | MasterUpdateManyWithWhereWithoutOrdersInput[]
+    deleteMany?: MasterScalarWhereInput | MasterScalarWhereInput[]
   }
 
   export type OrdersProfessionUncheckedUpdateManyWithoutOrderNestedInput = {
@@ -32216,19 +33722,6 @@ export namespace Prisma {
     deleteMany?: OrdersProfessionScalarWhereInput | OrdersProfessionScalarWhereInput[]
   }
 
-  export type MasterUncheckedUpdateManyWithoutOrdersNestedInput = {
-    create?: XOR<MasterCreateWithoutOrdersInput, MasterUncheckedCreateWithoutOrdersInput> | MasterCreateWithoutOrdersInput[] | MasterUncheckedCreateWithoutOrdersInput[]
-    connectOrCreate?: MasterCreateOrConnectWithoutOrdersInput | MasterCreateOrConnectWithoutOrdersInput[]
-    upsert?: MasterUpsertWithWhereUniqueWithoutOrdersInput | MasterUpsertWithWhereUniqueWithoutOrdersInput[]
-    set?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
-    disconnect?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
-    delete?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
-    connect?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
-    update?: MasterUpdateWithWhereUniqueWithoutOrdersInput | MasterUpdateWithWhereUniqueWithoutOrdersInput[]
-    updateMany?: MasterUpdateManyWithWhereWithoutOrdersInput | MasterUpdateManyWithWhereWithoutOrdersInput[]
-    deleteMany?: MasterScalarWhereInput | MasterScalarWhereInput[]
-  }
-
   export type OrderToolsUncheckedUpdateManyWithoutOrderNestedInput = {
     create?: XOR<OrderToolsCreateWithoutOrderInput, OrderToolsUncheckedCreateWithoutOrderInput> | OrderToolsCreateWithoutOrderInput[] | OrderToolsUncheckedCreateWithoutOrderInput[]
     connectOrCreate?: OrderToolsCreateOrConnectWithoutOrderInput | OrderToolsCreateOrConnectWithoutOrderInput[]
@@ -32243,6 +33736,19 @@ export namespace Prisma {
     deleteMany?: OrderToolsScalarWhereInput | OrderToolsScalarWhereInput[]
   }
 
+  export type MasterUncheckedUpdateManyWithoutOrdersNestedInput = {
+    create?: XOR<MasterCreateWithoutOrdersInput, MasterUncheckedCreateWithoutOrdersInput> | MasterCreateWithoutOrdersInput[] | MasterUncheckedCreateWithoutOrdersInput[]
+    connectOrCreate?: MasterCreateOrConnectWithoutOrdersInput | MasterCreateOrConnectWithoutOrdersInput[]
+    upsert?: MasterUpsertWithWhereUniqueWithoutOrdersInput | MasterUpsertWithWhereUniqueWithoutOrdersInput[]
+    set?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
+    disconnect?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
+    delete?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
+    connect?: MasterWhereUniqueInput | MasterWhereUniqueInput[]
+    update?: MasterUpdateWithWhereUniqueWithoutOrdersInput | MasterUpdateWithWhereUniqueWithoutOrdersInput[]
+    updateMany?: MasterUpdateManyWithWhereWithoutOrdersInput | MasterUpdateManyWithWhereWithoutOrdersInput[]
+    deleteMany?: MasterScalarWhereInput | MasterScalarWhereInput[]
+  }
+
   export type OrderCreateNestedOneWithoutOrderToolsInput = {
     create?: XOR<OrderCreateWithoutOrderToolsInput, OrderUncheckedCreateWithoutOrderToolsInput>
     connectOrCreate?: OrderCreateOrConnectWithoutOrderToolsInput
@@ -32253,6 +33759,10 @@ export namespace Prisma {
     create?: XOR<ToolCreateWithoutOrderToolsInput, ToolUncheckedCreateWithoutOrderToolsInput>
     connectOrCreate?: ToolCreateOrConnectWithoutOrderToolsInput
     connect?: ToolWhereUniqueInput
+  }
+
+  export type EnumMeasureFieldUpdateOperationsInput = {
+    set?: $Enums.Measure
   }
 
   export type OrderUpdateOneWithoutOrderToolsNestedInput = {
@@ -32287,8 +33797,10 @@ export namespace Prisma {
     connect?: ProfessionWhereUniqueInput
   }
 
-  export type EnumMeasureFieldUpdateOperationsInput = {
-    set?: $Enums.Measure
+  export type LevelCreateNestedOneWithoutOrdersProfessionInput = {
+    create?: XOR<LevelCreateWithoutOrdersProfessionInput, LevelUncheckedCreateWithoutOrdersProfessionInput>
+    connectOrCreate?: LevelCreateOrConnectWithoutOrdersProfessionInput
+    connect?: LevelWhereUniqueInput
   }
 
   export type OrderUpdateOneRequiredWithoutOrdersProfessionsNestedInput = {
@@ -32305,6 +33817,16 @@ export namespace Prisma {
     upsert?: ProfessionUpsertWithoutOrdersProfessionInput
     connect?: ProfessionWhereUniqueInput
     update?: XOR<XOR<ProfessionUpdateToOneWithWhereWithoutOrdersProfessionInput, ProfessionUpdateWithoutOrdersProfessionInput>, ProfessionUncheckedUpdateWithoutOrdersProfessionInput>
+  }
+
+  export type LevelUpdateOneWithoutOrdersProfessionNestedInput = {
+    create?: XOR<LevelCreateWithoutOrdersProfessionInput, LevelUncheckedCreateWithoutOrdersProfessionInput>
+    connectOrCreate?: LevelCreateOrConnectWithoutOrdersProfessionInput
+    upsert?: LevelUpsertWithoutOrdersProfessionInput
+    disconnect?: LevelWhereInput | boolean
+    delete?: LevelWhereInput | boolean
+    connect?: LevelWhereUniqueInput
+    update?: XOR<XOR<LevelUpdateToOneWithWhereWithoutOrdersProfessionInput, LevelUpdateWithoutOrdersProfessionInput>, LevelUncheckedUpdateWithoutOrdersProfessionInput>
   }
 
   export type MasterRatingsCreateNestedManyWithoutCommentInput = {
@@ -32733,10 +34255,10 @@ export namespace Prisma {
   export type CompanyCreateWithoutUserInput = {
     id?: string
     name: string
-    tax_id: string
-    bank_code: string
-    bank_acc: string
-    bank_name: string
+    inn: string
+    mfo: string
+    rs: string
+    bank: string
     oked: string
     address: string
     createdAt?: Date | string
@@ -32746,10 +34268,10 @@ export namespace Prisma {
   export type CompanyUncheckedCreateWithoutUserInput = {
     id?: string
     name: string
-    tax_id: string
-    bank_code: string
-    bank_acc: string
-    bank_name: string
+    inn: string
+    mfo: string
+    rs: string
+    bank: string
     oked: string
     address: string
     createdAt?: Date | string
@@ -32792,6 +34314,7 @@ export namespace Prisma {
     address: string
     dete: Date | string
     payment_type?: $Enums.PaymentType
+    paid?: boolean
     status?: $Enums.StatusOrder
     with_delivery: boolean
     comment_delivery: string
@@ -32799,8 +34322,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     OrdersProfessions?: OrdersProfessionCreateNestedManyWithoutOrderInput
-    Masters?: MasterCreateNestedManyWithoutOrdersInput
     OrderTools?: OrderToolsCreateNestedManyWithoutOrderInput
+    Masters?: MasterCreateNestedManyWithoutOrdersInput
   }
 
   export type OrderUncheckedCreateWithoutUserInput = {
@@ -32810,6 +34333,7 @@ export namespace Prisma {
     address: string
     dete: Date | string
     payment_type?: $Enums.PaymentType
+    paid?: boolean
     status?: $Enums.StatusOrder
     with_delivery: boolean
     comment_delivery: string
@@ -32817,8 +34341,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     OrdersProfessions?: OrdersProfessionUncheckedCreateNestedManyWithoutOrderInput
-    Masters?: MasterUncheckedCreateNestedManyWithoutOrdersInput
     OrderTools?: OrderToolsUncheckedCreateNestedManyWithoutOrderInput
+    Masters?: MasterUncheckedCreateNestedManyWithoutOrdersInput
   }
 
   export type OrderCreateOrConnectWithoutUserInput = {
@@ -32870,10 +34394,10 @@ export namespace Prisma {
   export type CompanyUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    tax_id?: StringFieldUpdateOperationsInput | string
-    bank_code?: StringFieldUpdateOperationsInput | string
-    bank_acc?: StringFieldUpdateOperationsInput | string
-    bank_name?: StringFieldUpdateOperationsInput | string
+    inn?: StringFieldUpdateOperationsInput | string
+    mfo?: StringFieldUpdateOperationsInput | string
+    rs?: StringFieldUpdateOperationsInput | string
+    bank?: StringFieldUpdateOperationsInput | string
     oked?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32883,10 +34407,10 @@ export namespace Prisma {
   export type CompanyUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    tax_id?: StringFieldUpdateOperationsInput | string
-    bank_code?: StringFieldUpdateOperationsInput | string
-    bank_acc?: StringFieldUpdateOperationsInput | string
-    bank_name?: StringFieldUpdateOperationsInput | string
+    inn?: StringFieldUpdateOperationsInput | string
+    mfo?: StringFieldUpdateOperationsInput | string
+    rs?: StringFieldUpdateOperationsInput | string
+    bank?: StringFieldUpdateOperationsInput | string
     oked?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -32947,6 +34471,7 @@ export namespace Prisma {
     address?: StringFilter<"Order"> | string
     dete?: DateTimeFilter<"Order"> | Date | string
     payment_type?: EnumPaymentTypeFilter<"Order"> | $Enums.PaymentType
+    paid?: BoolFilter<"Order"> | boolean
     status?: EnumStatusOrderFilter<"Order"> | $Enums.StatusOrder
     with_delivery?: BoolFilter<"Order"> | boolean
     comment_delivery?: StringFilter<"Order"> | string
@@ -33421,6 +34946,8 @@ export namespace Prisma {
   export type OrderToolsCreateWithoutToolInput = {
     id?: string
     count: number
+    measure: $Enums.Measure
+    time: number
     total_sum: number
     Order?: OrderCreateNestedOneWithoutOrderToolsInput
   }
@@ -33429,6 +34956,8 @@ export namespace Prisma {
     id?: string
     order_id?: string | null
     count: number
+    measure: $Enums.Measure
+    time: number
     total_sum: number
   }
 
@@ -33572,6 +35101,8 @@ export namespace Prisma {
     order_id?: StringNullableFilter<"OrderTools"> | string | null
     tool_id?: StringNullableFilter<"OrderTools"> | string | null
     count?: IntFilter<"OrderTools"> | number
+    measure?: EnumMeasureFilter<"OrderTools"> | $Enums.Measure
+    time?: IntFilter<"OrderTools"> | number
     total_sum?: FloatFilter<"OrderTools"> | number
   }
 
@@ -33640,6 +35171,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type OrdersProfessionCreateWithoutLevelInput = {
+    id?: string
+    count: number
+    measure: $Enums.Measure
+    time: number
+    total_sum: number
+    Order: OrderCreateNestedOneWithoutOrdersProfessionsInput
+    Profession: ProfessionCreateNestedOneWithoutOrdersProfessionInput
+  }
+
+  export type OrdersProfessionUncheckedCreateWithoutLevelInput = {
+    id?: string
+    order_id: string
+    profession_id: string
+    count: number
+    measure: $Enums.Measure
+    time: number
+    total_sum: number
+  }
+
+  export type OrdersProfessionCreateOrConnectWithoutLevelInput = {
+    where: OrdersProfessionWhereUniqueInput
+    create: XOR<OrdersProfessionCreateWithoutLevelInput, OrdersProfessionUncheckedCreateWithoutLevelInput>
+  }
+
+  export type OrdersProfessionCreateManyLevelInputEnvelope = {
+    data: OrdersProfessionCreateManyLevelInput | OrdersProfessionCreateManyLevelInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ProfessionUpsertWithWhereUniqueWithoutLevelsInput = {
     where: ProfessionWhereUniqueInput
     update: XOR<ProfessionUpdateWithoutLevelsInput, ProfessionUncheckedUpdateWithoutLevelsInput>
@@ -33686,12 +35247,43 @@ export namespace Prisma {
     master_id?: StringFilter<"MasterSkills"> | string
   }
 
+  export type OrdersProfessionUpsertWithWhereUniqueWithoutLevelInput = {
+    where: OrdersProfessionWhereUniqueInput
+    update: XOR<OrdersProfessionUpdateWithoutLevelInput, OrdersProfessionUncheckedUpdateWithoutLevelInput>
+    create: XOR<OrdersProfessionCreateWithoutLevelInput, OrdersProfessionUncheckedCreateWithoutLevelInput>
+  }
+
+  export type OrdersProfessionUpdateWithWhereUniqueWithoutLevelInput = {
+    where: OrdersProfessionWhereUniqueInput
+    data: XOR<OrdersProfessionUpdateWithoutLevelInput, OrdersProfessionUncheckedUpdateWithoutLevelInput>
+  }
+
+  export type OrdersProfessionUpdateManyWithWhereWithoutLevelInput = {
+    where: OrdersProfessionScalarWhereInput
+    data: XOR<OrdersProfessionUpdateManyMutationInput, OrdersProfessionUncheckedUpdateManyWithoutLevelInput>
+  }
+
+  export type OrdersProfessionScalarWhereInput = {
+    AND?: OrdersProfessionScalarWhereInput | OrdersProfessionScalarWhereInput[]
+    OR?: OrdersProfessionScalarWhereInput[]
+    NOT?: OrdersProfessionScalarWhereInput | OrdersProfessionScalarWhereInput[]
+    id?: StringFilter<"OrdersProfession"> | string
+    order_id?: StringFilter<"OrdersProfession"> | string
+    profession_id?: StringFilter<"OrdersProfession"> | string
+    level_id?: StringNullableFilter<"OrdersProfession"> | string | null
+    count?: IntFilter<"OrdersProfession"> | number
+    measure?: EnumMeasureFilter<"OrdersProfession"> | $Enums.Measure
+    time?: IntFilter<"OrdersProfession"> | number
+    total_sum?: FloatFilter<"OrdersProfession"> | number
+  }
+
   export type LevelCreateWithoutProfessionsInput = {
     id?: string
     name_uz: string
     name_ru: string
     name_en: string
     MasterSkills?: MasterSkillsCreateNestedManyWithoutLevelInput
+    OrdersProfession?: OrdersProfessionCreateNestedManyWithoutLevelInput
   }
 
   export type LevelUncheckedCreateWithoutProfessionsInput = {
@@ -33700,6 +35292,7 @@ export namespace Prisma {
     name_ru: string
     name_en: string
     MasterSkills?: MasterSkillsUncheckedCreateNestedManyWithoutLevelInput
+    OrdersProfession?: OrdersProfessionUncheckedCreateNestedManyWithoutLevelInput
   }
 
   export type LevelCreateOrConnectWithoutProfessionsInput = {
@@ -33789,15 +35382,19 @@ export namespace Prisma {
     count: number
     measure: $Enums.Measure
     time: number
+    total_sum: number
     Order: OrderCreateNestedOneWithoutOrdersProfessionsInput
+    Level?: LevelCreateNestedOneWithoutOrdersProfessionInput
   }
 
   export type OrdersProfessionUncheckedCreateWithoutProfessionInput = {
     id?: string
     order_id: string
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
+    total_sum: number
   }
 
   export type OrdersProfessionCreateOrConnectWithoutProfessionInput = {
@@ -33884,18 +35481,6 @@ export namespace Prisma {
     data: XOR<OrdersProfessionUpdateManyMutationInput, OrdersProfessionUncheckedUpdateManyWithoutProfessionInput>
   }
 
-  export type OrdersProfessionScalarWhereInput = {
-    AND?: OrdersProfessionScalarWhereInput | OrdersProfessionScalarWhereInput[]
-    OR?: OrdersProfessionScalarWhereInput[]
-    NOT?: OrdersProfessionScalarWhereInput | OrdersProfessionScalarWhereInput[]
-    id?: StringFilter<"OrdersProfession"> | string
-    order_id?: StringFilter<"OrdersProfession"> | string
-    profession_id?: StringFilter<"OrdersProfession"> | string
-    count?: IntFilter<"OrdersProfession"> | number
-    measure?: EnumMeasureFilter<"OrdersProfession"> | $Enums.Measure
-    time?: IntFilter<"OrdersProfession"> | number
-  }
-
   export type MasterSkillsCreateWithoutMasterInput = {
     id?: string
     min_work_hours: number
@@ -33933,6 +35518,7 @@ export namespace Prisma {
     address: string
     dete: Date | string
     payment_type?: $Enums.PaymentType
+    paid?: boolean
     status?: $Enums.StatusOrder
     with_delivery: boolean
     comment_delivery: string
@@ -33952,6 +35538,7 @@ export namespace Prisma {
     address: string
     dete: Date | string
     payment_type?: $Enums.PaymentType
+    paid?: boolean
     status?: $Enums.StatusOrder
     with_delivery: boolean
     comment_delivery: string
@@ -34053,6 +35640,7 @@ export namespace Prisma {
     name_ru: string
     name_en: string
     Professions?: ProfessionCreateNestedManyWithoutLevelsInput
+    OrdersProfession?: OrdersProfessionCreateNestedManyWithoutLevelInput
   }
 
   export type LevelUncheckedCreateWithoutMasterSkillsInput = {
@@ -34061,6 +35649,7 @@ export namespace Prisma {
     name_ru: string
     name_en: string
     Professions?: ProfessionUncheckedCreateNestedManyWithoutLevelsInput
+    OrdersProfession?: OrdersProfessionUncheckedCreateNestedManyWithoutLevelInput
   }
 
   export type LevelCreateOrConnectWithoutMasterSkillsInput = {
@@ -34155,6 +35744,7 @@ export namespace Prisma {
     name_ru?: StringFieldUpdateOperationsInput | string
     name_en?: StringFieldUpdateOperationsInput | string
     Professions?: ProfessionUpdateManyWithoutLevelsNestedInput
+    OrdersProfession?: OrdersProfessionUpdateManyWithoutLevelNestedInput
   }
 
   export type LevelUncheckedUpdateWithoutMasterSkillsInput = {
@@ -34163,6 +35753,7 @@ export namespace Prisma {
     name_ru?: StringFieldUpdateOperationsInput | string
     name_en?: StringFieldUpdateOperationsInput | string
     Professions?: ProfessionUncheckedUpdateManyWithoutLevelsNestedInput
+    OrdersProfession?: OrdersProfessionUncheckedUpdateManyWithoutLevelNestedInput
   }
 
   export type ProfessionUpsertWithoutMasterSkillsInput = {
@@ -34285,15 +35876,19 @@ export namespace Prisma {
     count: number
     measure: $Enums.Measure
     time: number
+    total_sum: number
     Profession: ProfessionCreateNestedOneWithoutOrdersProfessionInput
+    Level?: LevelCreateNestedOneWithoutOrdersProfessionInput
   }
 
   export type OrdersProfessionUncheckedCreateWithoutOrderInput = {
     id?: string
     profession_id: string
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
+    total_sum: number
   }
 
   export type OrdersProfessionCreateOrConnectWithoutOrderInput = {
@@ -34303,6 +35898,34 @@ export namespace Prisma {
 
   export type OrdersProfessionCreateManyOrderInputEnvelope = {
     data: OrdersProfessionCreateManyOrderInput | OrdersProfessionCreateManyOrderInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OrderToolsCreateWithoutOrderInput = {
+    id?: string
+    count: number
+    measure: $Enums.Measure
+    time: number
+    total_sum: number
+    Tool?: ToolCreateNestedOneWithoutOrderToolsInput
+  }
+
+  export type OrderToolsUncheckedCreateWithoutOrderInput = {
+    id?: string
+    tool_id?: string | null
+    count: number
+    measure: $Enums.Measure
+    time: number
+    total_sum: number
+  }
+
+  export type OrderToolsCreateOrConnectWithoutOrderInput = {
+    where: OrderToolsWhereUniqueInput
+    create: XOR<OrderToolsCreateWithoutOrderInput, OrderToolsUncheckedCreateWithoutOrderInput>
+  }
+
+  export type OrderToolsCreateManyOrderInputEnvelope = {
+    data: OrderToolsCreateManyOrderInput | OrderToolsCreateManyOrderInput[]
     skipDuplicates?: boolean
   }
 
@@ -34339,30 +35962,6 @@ export namespace Prisma {
   export type MasterCreateOrConnectWithoutOrdersInput = {
     where: MasterWhereUniqueInput
     create: XOR<MasterCreateWithoutOrdersInput, MasterUncheckedCreateWithoutOrdersInput>
-  }
-
-  export type OrderToolsCreateWithoutOrderInput = {
-    id?: string
-    count: number
-    total_sum: number
-    Tool?: ToolCreateNestedOneWithoutOrderToolsInput
-  }
-
-  export type OrderToolsUncheckedCreateWithoutOrderInput = {
-    id?: string
-    tool_id?: string | null
-    count: number
-    total_sum: number
-  }
-
-  export type OrderToolsCreateOrConnectWithoutOrderInput = {
-    where: OrderToolsWhereUniqueInput
-    create: XOR<OrderToolsCreateWithoutOrderInput, OrderToolsUncheckedCreateWithoutOrderInput>
-  }
-
-  export type OrderToolsCreateManyOrderInputEnvelope = {
-    data: OrderToolsCreateManyOrderInput | OrderToolsCreateManyOrderInput[]
-    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutOrderInput = {
@@ -34420,6 +36019,22 @@ export namespace Prisma {
     data: XOR<OrdersProfessionUpdateManyMutationInput, OrdersProfessionUncheckedUpdateManyWithoutOrderInput>
   }
 
+  export type OrderToolsUpsertWithWhereUniqueWithoutOrderInput = {
+    where: OrderToolsWhereUniqueInput
+    update: XOR<OrderToolsUpdateWithoutOrderInput, OrderToolsUncheckedUpdateWithoutOrderInput>
+    create: XOR<OrderToolsCreateWithoutOrderInput, OrderToolsUncheckedCreateWithoutOrderInput>
+  }
+
+  export type OrderToolsUpdateWithWhereUniqueWithoutOrderInput = {
+    where: OrderToolsWhereUniqueInput
+    data: XOR<OrderToolsUpdateWithoutOrderInput, OrderToolsUncheckedUpdateWithoutOrderInput>
+  }
+
+  export type OrderToolsUpdateManyWithWhereWithoutOrderInput = {
+    where: OrderToolsScalarWhereInput
+    data: XOR<OrderToolsUpdateManyMutationInput, OrderToolsUncheckedUpdateManyWithoutOrderInput>
+  }
+
   export type MasterUpsertWithWhereUniqueWithoutOrdersInput = {
     where: MasterWhereUniqueInput
     update: XOR<MasterUpdateWithoutOrdersInput, MasterUncheckedUpdateWithoutOrdersInput>
@@ -34452,22 +36067,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Master"> | Date | string
   }
 
-  export type OrderToolsUpsertWithWhereUniqueWithoutOrderInput = {
-    where: OrderToolsWhereUniqueInput
-    update: XOR<OrderToolsUpdateWithoutOrderInput, OrderToolsUncheckedUpdateWithoutOrderInput>
-    create: XOR<OrderToolsCreateWithoutOrderInput, OrderToolsUncheckedCreateWithoutOrderInput>
-  }
-
-  export type OrderToolsUpdateWithWhereUniqueWithoutOrderInput = {
-    where: OrderToolsWhereUniqueInput
-    data: XOR<OrderToolsUpdateWithoutOrderInput, OrderToolsUncheckedUpdateWithoutOrderInput>
-  }
-
-  export type OrderToolsUpdateManyWithWhereWithoutOrderInput = {
-    where: OrderToolsScalarWhereInput
-    data: XOR<OrderToolsUpdateManyMutationInput, OrderToolsUncheckedUpdateManyWithoutOrderInput>
-  }
-
   export type OrderCreateWithoutOrderToolsInput = {
     id?: string
     total_sum: number
@@ -34475,6 +36074,7 @@ export namespace Prisma {
     address: string
     dete: Date | string
     payment_type?: $Enums.PaymentType
+    paid?: boolean
     status?: $Enums.StatusOrder
     with_delivery: boolean
     comment_delivery: string
@@ -34494,6 +36094,7 @@ export namespace Prisma {
     address: string
     dete: Date | string
     payment_type?: $Enums.PaymentType
+    paid?: boolean
     status?: $Enums.StatusOrder
     with_delivery: boolean
     comment_delivery: string
@@ -34574,6 +36175,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
@@ -34593,6 +36195,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
@@ -34663,6 +36266,7 @@ export namespace Prisma {
     address: string
     dete: Date | string
     payment_type?: $Enums.PaymentType
+    paid?: boolean
     status?: $Enums.StatusOrder
     with_delivery: boolean
     comment_delivery: string
@@ -34670,8 +36274,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     User: UserCreateNestedOneWithoutOrderInput
-    Masters?: MasterCreateNestedManyWithoutOrdersInput
     OrderTools?: OrderToolsCreateNestedManyWithoutOrderInput
+    Masters?: MasterCreateNestedManyWithoutOrdersInput
   }
 
   export type OrderUncheckedCreateWithoutOrdersProfessionsInput = {
@@ -34682,14 +36286,15 @@ export namespace Prisma {
     address: string
     dete: Date | string
     payment_type?: $Enums.PaymentType
+    paid?: boolean
     status?: $Enums.StatusOrder
     with_delivery: boolean
     comment_delivery: string
     tools_count: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    Masters?: MasterUncheckedCreateNestedManyWithoutOrdersInput
     OrderTools?: OrderToolsUncheckedCreateNestedManyWithoutOrderInput
+    Masters?: MasterUncheckedCreateNestedManyWithoutOrdersInput
   }
 
   export type OrderCreateOrConnectWithoutOrdersProfessionsInput = {
@@ -34732,6 +36337,29 @@ export namespace Prisma {
     create: XOR<ProfessionCreateWithoutOrdersProfessionInput, ProfessionUncheckedCreateWithoutOrdersProfessionInput>
   }
 
+  export type LevelCreateWithoutOrdersProfessionInput = {
+    id?: string
+    name_uz: string
+    name_ru: string
+    name_en: string
+    Professions?: ProfessionCreateNestedManyWithoutLevelsInput
+    MasterSkills?: MasterSkillsCreateNestedManyWithoutLevelInput
+  }
+
+  export type LevelUncheckedCreateWithoutOrdersProfessionInput = {
+    id?: string
+    name_uz: string
+    name_ru: string
+    name_en: string
+    Professions?: ProfessionUncheckedCreateNestedManyWithoutLevelsInput
+    MasterSkills?: MasterSkillsUncheckedCreateNestedManyWithoutLevelInput
+  }
+
+  export type LevelCreateOrConnectWithoutOrdersProfessionInput = {
+    where: LevelWhereUniqueInput
+    create: XOR<LevelCreateWithoutOrdersProfessionInput, LevelUncheckedCreateWithoutOrdersProfessionInput>
+  }
+
   export type OrderUpsertWithoutOrdersProfessionsInput = {
     update: XOR<OrderUpdateWithoutOrdersProfessionsInput, OrderUncheckedUpdateWithoutOrdersProfessionsInput>
     create: XOR<OrderCreateWithoutOrdersProfessionsInput, OrderUncheckedCreateWithoutOrdersProfessionsInput>
@@ -34750,6 +36378,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
@@ -34757,8 +36386,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     User?: UserUpdateOneRequiredWithoutOrderNestedInput
-    Masters?: MasterUpdateManyWithoutOrdersNestedInput
     OrderTools?: OrderToolsUpdateManyWithoutOrderNestedInput
+    Masters?: MasterUpdateManyWithoutOrdersNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutOrdersProfessionsInput = {
@@ -34769,14 +36398,15 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
     tools_count?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Masters?: MasterUncheckedUpdateManyWithoutOrdersNestedInput
     OrderTools?: OrderToolsUncheckedUpdateManyWithoutOrderNestedInput
+    Masters?: MasterUncheckedUpdateManyWithoutOrdersNestedInput
   }
 
   export type ProfessionUpsertWithoutOrdersProfessionInput = {
@@ -34818,6 +36448,35 @@ export namespace Prisma {
     Levels?: LevelUncheckedUpdateManyWithoutProfessionsNestedInput
     Tools?: ToolUncheckedUpdateManyWithoutProfessionsNestedInput
     MasterSkills?: MasterSkillsUncheckedUpdateManyWithoutProfessionNestedInput
+  }
+
+  export type LevelUpsertWithoutOrdersProfessionInput = {
+    update: XOR<LevelUpdateWithoutOrdersProfessionInput, LevelUncheckedUpdateWithoutOrdersProfessionInput>
+    create: XOR<LevelCreateWithoutOrdersProfessionInput, LevelUncheckedCreateWithoutOrdersProfessionInput>
+    where?: LevelWhereInput
+  }
+
+  export type LevelUpdateToOneWithWhereWithoutOrdersProfessionInput = {
+    where?: LevelWhereInput
+    data: XOR<LevelUpdateWithoutOrdersProfessionInput, LevelUncheckedUpdateWithoutOrdersProfessionInput>
+  }
+
+  export type LevelUpdateWithoutOrdersProfessionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name_uz?: StringFieldUpdateOperationsInput | string
+    name_ru?: StringFieldUpdateOperationsInput | string
+    name_en?: StringFieldUpdateOperationsInput | string
+    Professions?: ProfessionUpdateManyWithoutLevelsNestedInput
+    MasterSkills?: MasterSkillsUpdateManyWithoutLevelNestedInput
+  }
+
+  export type LevelUncheckedUpdateWithoutOrdersProfessionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name_uz?: StringFieldUpdateOperationsInput | string
+    name_ru?: StringFieldUpdateOperationsInput | string
+    name_en?: StringFieldUpdateOperationsInput | string
+    Professions?: ProfessionUncheckedUpdateManyWithoutLevelsNestedInput
+    MasterSkills?: MasterSkillsUncheckedUpdateManyWithoutLevelNestedInput
   }
 
   export type MasterRatingsCreateWithoutCommentInput = {
@@ -35042,6 +36701,7 @@ export namespace Prisma {
     address: string
     dete: Date | string
     payment_type?: $Enums.PaymentType
+    paid?: boolean
     status?: $Enums.StatusOrder
     with_delivery: boolean
     comment_delivery: string
@@ -35078,6 +36738,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
@@ -35085,8 +36746,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrdersProfessions?: OrdersProfessionUpdateManyWithoutOrderNestedInput
-    Masters?: MasterUpdateManyWithoutOrdersNestedInput
     OrderTools?: OrderToolsUpdateManyWithoutOrderNestedInput
+    Masters?: MasterUpdateManyWithoutOrdersNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutUserInput = {
@@ -35096,6 +36757,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
@@ -35103,8 +36765,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrdersProfessions?: OrdersProfessionUncheckedUpdateManyWithoutOrderNestedInput
-    Masters?: MasterUncheckedUpdateManyWithoutOrdersNestedInput
     OrderTools?: OrderToolsUncheckedUpdateManyWithoutOrderNestedInput
+    Masters?: MasterUncheckedUpdateManyWithoutOrdersNestedInput
   }
 
   export type OrderUncheckedUpdateManyWithoutUserInput = {
@@ -35114,6 +36776,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
@@ -35366,6 +37029,8 @@ export namespace Prisma {
     id?: string
     order_id?: string | null
     count: number
+    measure: $Enums.Measure
+    time: number
     total_sum: number
   }
 
@@ -35414,6 +37079,8 @@ export namespace Prisma {
   export type OrderToolsUpdateWithoutToolInput = {
     id?: StringFieldUpdateOperationsInput | string
     count?: IntFieldUpdateOperationsInput | number
+    measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
+    time?: IntFieldUpdateOperationsInput | number
     total_sum?: FloatFieldUpdateOperationsInput | number
     Order?: OrderUpdateOneWithoutOrderToolsNestedInput
   }
@@ -35422,6 +37089,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     order_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
+    measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
+    time?: IntFieldUpdateOperationsInput | number
     total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
@@ -35429,6 +37098,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     order_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
+    measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
+    time?: IntFieldUpdateOperationsInput | number
     total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
@@ -35440,6 +37111,16 @@ export namespace Prisma {
     experience: number
     profession_id: string
     master_id: string
+  }
+
+  export type OrdersProfessionCreateManyLevelInput = {
+    id?: string
+    order_id: string
+    profession_id: string
+    count: number
+    measure: $Enums.Measure
+    time: number
+    total_sum: number
   }
 
   export type ProfessionUpdateWithoutLevelsInput = {
@@ -35514,6 +37195,36 @@ export namespace Prisma {
     master_id?: StringFieldUpdateOperationsInput | string
   }
 
+  export type OrdersProfessionUpdateWithoutLevelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
+    time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
+    Order?: OrderUpdateOneRequiredWithoutOrdersProfessionsNestedInput
+    Profession?: ProfessionUpdateOneRequiredWithoutOrdersProfessionNestedInput
+  }
+
+  export type OrdersProfessionUncheckedUpdateWithoutLevelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    order_id?: StringFieldUpdateOperationsInput | string
+    profession_id?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
+    time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type OrdersProfessionUncheckedUpdateManyWithoutLevelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    order_id?: StringFieldUpdateOperationsInput | string
+    profession_id?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
+    time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
+  }
+
   export type MasterSkillsCreateManyProfessionInput = {
     id?: string
     min_work_hours: number
@@ -35527,9 +37238,11 @@ export namespace Prisma {
   export type OrdersProfessionCreateManyProfessionInput = {
     id?: string
     order_id: string
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
+    total_sum: number
   }
 
   export type LevelUpdateWithoutProfessionsInput = {
@@ -35538,6 +37251,7 @@ export namespace Prisma {
     name_ru?: StringFieldUpdateOperationsInput | string
     name_en?: StringFieldUpdateOperationsInput | string
     MasterSkills?: MasterSkillsUpdateManyWithoutLevelNestedInput
+    OrdersProfession?: OrdersProfessionUpdateManyWithoutLevelNestedInput
   }
 
   export type LevelUncheckedUpdateWithoutProfessionsInput = {
@@ -35546,6 +37260,7 @@ export namespace Prisma {
     name_ru?: StringFieldUpdateOperationsInput | string
     name_en?: StringFieldUpdateOperationsInput | string
     MasterSkills?: MasterSkillsUncheckedUpdateManyWithoutLevelNestedInput
+    OrdersProfession?: OrdersProfessionUncheckedUpdateManyWithoutLevelNestedInput
   }
 
   export type LevelUncheckedUpdateManyWithoutProfessionsInput = {
@@ -35652,23 +37367,29 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
     Order?: OrderUpdateOneRequiredWithoutOrdersProfessionsNestedInput
+    Level?: LevelUpdateOneWithoutOrdersProfessionNestedInput
   }
 
   export type OrdersProfessionUncheckedUpdateWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
     order_id?: StringFieldUpdateOperationsInput | string
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
   export type OrdersProfessionUncheckedUpdateManyWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
     order_id?: StringFieldUpdateOperationsInput | string
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
   export type MasterSkillsCreateManyMasterInput = {
@@ -35724,6 +37445,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
@@ -35743,6 +37465,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
@@ -35761,6 +37484,7 @@ export namespace Prisma {
     address?: StringFieldUpdateOperationsInput | string
     dete?: DateTimeFieldUpdateOperationsInput | Date | string
     payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
     with_delivery?: BoolFieldUpdateOperationsInput | boolean
     comment_delivery?: StringFieldUpdateOperationsInput | string
@@ -35790,15 +37514,19 @@ export namespace Prisma {
   export type OrdersProfessionCreateManyOrderInput = {
     id?: string
     profession_id: string
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
+    total_sum: number
   }
 
   export type OrderToolsCreateManyOrderInput = {
     id?: string
     tool_id?: string | null
     count: number
+    measure: $Enums.Measure
+    time: number
     total_sum: number
   }
 
@@ -35807,23 +37535,56 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
     Profession?: ProfessionUpdateOneRequiredWithoutOrdersProfessionNestedInput
+    Level?: LevelUpdateOneWithoutOrdersProfessionNestedInput
   }
 
   export type OrdersProfessionUncheckedUpdateWithoutOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
     profession_id?: StringFieldUpdateOperationsInput | string
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
   export type OrdersProfessionUncheckedUpdateManyWithoutOrderInput = {
     id?: StringFieldUpdateOperationsInput | string
     profession_id?: StringFieldUpdateOperationsInput | string
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type OrderToolsUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    count?: IntFieldUpdateOperationsInput | number
+    measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
+    time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
+    Tool?: ToolUpdateOneWithoutOrderToolsNestedInput
+  }
+
+  export type OrderToolsUncheckedUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tool_id?: NullableStringFieldUpdateOperationsInput | string | null
+    count?: IntFieldUpdateOperationsInput | number
+    measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
+    time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type OrderToolsUncheckedUpdateManyWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tool_id?: NullableStringFieldUpdateOperationsInput | string | null
+    count?: IntFieldUpdateOperationsInput | number
+    measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
+    time?: IntFieldUpdateOperationsInput | number
+    total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
   export type MasterUpdateWithoutOrdersInput = {
@@ -35867,27 +37628,6 @@ export namespace Prisma {
     about?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type OrderToolsUpdateWithoutOrderInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    count?: IntFieldUpdateOperationsInput | number
-    total_sum?: FloatFieldUpdateOperationsInput | number
-    Tool?: ToolUpdateOneWithoutOrderToolsNestedInput
-  }
-
-  export type OrderToolsUncheckedUpdateWithoutOrderInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    tool_id?: NullableStringFieldUpdateOperationsInput | string | null
-    count?: IntFieldUpdateOperationsInput | number
-    total_sum?: FloatFieldUpdateOperationsInput | number
-  }
-
-  export type OrderToolsUncheckedUpdateManyWithoutOrderInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    tool_id?: NullableStringFieldUpdateOperationsInput | string | null
-    count?: IntFieldUpdateOperationsInput | number
-    total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
   export type MasterRatingsCreateManyCommentInput = {

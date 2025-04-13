@@ -140,10 +140,10 @@ exports.Prisma.CompanyScalarFieldEnum = {
   id: 'id',
   user_id: 'user_id',
   name: 'name',
-  tax_id: 'tax_id',
-  bank_code: 'bank_code',
-  bank_acc: 'bank_acc',
-  bank_name: 'bank_name',
+  inn: 'inn',
+  mfo: 'mfo',
+  rs: 'rs',
+  bank: 'bank',
   oked: 'oked',
   address: 'address',
   createdAt: 'createdAt',
@@ -250,6 +250,7 @@ exports.Prisma.OrderScalarFieldEnum = {
   address: 'address',
   dete: 'dete',
   payment_type: 'payment_type',
+  paid: 'paid',
   status: 'status',
   with_delivery: 'with_delivery',
   comment_delivery: 'comment_delivery',
@@ -263,6 +264,8 @@ exports.Prisma.OrderToolsScalarFieldEnum = {
   order_id: 'order_id',
   tool_id: 'tool_id',
   count: 'count',
+  measure: 'measure',
+  time: 'time',
   total_sum: 'total_sum'
 };
 
@@ -270,9 +273,11 @@ exports.Prisma.OrdersProfessionScalarFieldEnum = {
   id: 'id',
   order_id: 'order_id',
   profession_id: 'profession_id',
+  level_id: 'level_id',
   count: 'count',
   measure: 'measure',
-  time: 'time'
+  time: 'time',
+  total_sum: 'total_sum'
 };
 
 exports.Prisma.CommentScalarFieldEnum = {
@@ -324,6 +329,14 @@ exports.Prisma.ShowcaseScalarFieldEnum = {
   description_en: 'description_en',
   image: 'image',
   link: 'link'
+};
+
+exports.Prisma.PartnersScalarFieldEnum = {
+  id: 'id',
+  name_uz: 'name_uz',
+  name_ru: 'name_ru',
+  name_en: 'name_en',
+  image: 'image'
 };
 
 exports.Prisma.SortOrder = {
@@ -397,7 +410,8 @@ exports.Prisma.ModelName = {
   Info: 'Info',
   Contact: 'Contact',
   FAQ: 'FAQ',
-  Showcase: 'Showcase'
+  Showcase: 'Showcase',
+  Partners: 'Partners'
 };
 
 /**

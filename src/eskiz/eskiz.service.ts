@@ -36,6 +36,7 @@ export class EskizService {
         {
           headers: {
             Authorization: `Bearer ${this.token}`,
+            
           },
         },
       );

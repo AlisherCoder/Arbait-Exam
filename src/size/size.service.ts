@@ -5,27 +5,25 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateRegionDto } from './dto/create-region.dto';
-import { UpdateRegionDto } from './dto/update-region.dto';
+import { CreateSizeDto } from './dto/create-size.dto';
+import { UpdateSizeDto } from './dto/update-size.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
-export class RegionService {
+export class SizeService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createRegionDto: CreateRegionDto) {
+  async create(createSizeDto: CreateSizeDto) {
     try {
-      const region = await this.prisma.region.findFirst({
-        where: { name_uz: createRegionDto.name_uz },
+      const size = await this.prisma.size.findFirst({
+        where: { name_uz: createSizeDto.name_uz },
       });
 
-      if (region) {
-        throw new ConflictException('Region already exists');
+      if (size) {
+        throw new ConflictException('Size already exists with name');
       }
 
-      const data = await this.prisma.region.create({
-        data: createRegionDto,
-      });
+      const data = await this.prisma.size.create({ data: createSizeDto });
 
       return { data };
     } catch (error) {
@@ -38,10 +36,10 @@ export class RegionService {
 
   async findAll() {
     try {
-      const data = await this.prisma.region.findMany();
+      const data = await this.prisma.size.findMany();
 
       if (!data.length) {
-        throw new NotFoundException('No regions found');
+        throw new NotFoundException('Not found sizes');
       }
 
       return { data };
@@ -55,13 +53,10 @@ export class RegionService {
 
   async findOne(id: string) {
     try {
-      const data = await this.prisma.region.findUnique({
-        where: { id },
-        include: { Users: true },
-      });
+      const data = await this.prisma.size.findUnique({ where: { id } });
 
       if (!data) {
-        throw new NotFoundException('No region found');
+        throw new NotFoundException('Not found size');
       }
 
       return { data };
@@ -73,22 +68,20 @@ export class RegionService {
     }
   }
 
-  async update(id: string, updateRegionDto: UpdateRegionDto) {
+  async update(id: string, updateSizeDto: UpdateSizeDto) {
     try {
-      const region = await this.prisma.region.findFirst({
-        where: { name_uz: updateRegionDto.name_uz },
-      });
+      const data = await this.prisma.size.findUnique({ where: { id } });
 
-      if (region) {
-        throw new ConflictException('Region already exists');
+      if (!data) {
+        throw new NotFoundException('Not found size');
       }
 
-      const data = await this.prisma.region.update({
+      const updated = await this.prisma.size.update({
         where: { id },
-        data: updateRegionDto,
+        data: updateSizeDto,
       });
 
-      return { data };
+      return { data: updated };
     } catch (error) {
       if (error instanceof HttpException) {
         throw error;
@@ -99,13 +92,17 @@ export class RegionService {
 
   async remove(id: string) {
     try {
-      const data = await this.prisma.region.delete({ where: { id } });
+      const data = await this.prisma.size.findUnique({ where: { id } });
 
       if (!data) {
-        throw new NotFoundException('No region found');
+        throw new NotFoundException('Not found size');
       }
 
-      return { data };
+      const deleted = await this.prisma.size.delete({
+        where: { id },
+      });
+
+      return { data: deleted };
     } catch (error) {
       if (error instanceof HttpException) {
         throw error;

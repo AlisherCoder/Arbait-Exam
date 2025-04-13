@@ -1,30 +1,29 @@
 import {
   BadRequestException,
-  ConflictException,
   HttpException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { CreateRegionDto } from './dto/create-region.dto';
-import { UpdateRegionDto } from './dto/update-region.dto';
+import { CreateCompanyDto } from './dto/create-company.dto';
+import { UpdateCompanyDto } from './dto/update-company.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
-export class RegionService {
+export class CompaniesService {
   constructor(private prisma: PrismaService) {}
 
-  async create(createRegionDto: CreateRegionDto) {
+  async create(createCompanyDto: CreateCompanyDto) {
     try {
-      const region = await this.prisma.region.findFirst({
-        where: { name_uz: createRegionDto.name_uz },
+      const user = await this.prisma.user.findUnique({
+        where: { id: createCompanyDto.user_id },
       });
 
-      if (region) {
-        throw new ConflictException('Region already exists');
+      if (!user) {
+        throw new NotFoundException('User not found with user_id');
       }
 
-      const data = await this.prisma.region.create({
-        data: createRegionDto,
+      const data = await this.prisma.company.create({
+        data: createCompanyDto,
       });
 
       return { data };
@@ -38,10 +37,10 @@ export class RegionService {
 
   async findAll() {
     try {
-      const data = await this.prisma.region.findMany();
+      const data = await this.prisma.company.findMany();
 
       if (!data.length) {
-        throw new NotFoundException('No regions found');
+        throw new NotFoundException('Not found companies');
       }
 
       return { data };
@@ -55,13 +54,10 @@ export class RegionService {
 
   async findOne(id: string) {
     try {
-      const data = await this.prisma.region.findUnique({
-        where: { id },
-        include: { Users: true },
-      });
+      const data = await this.prisma.company.findUnique({ where: { id } });
 
       if (!data) {
-        throw new NotFoundException('No region found');
+        throw new NotFoundException('Not found company');
       }
 
       return { data };
@@ -73,22 +69,20 @@ export class RegionService {
     }
   }
 
-  async update(id: string, updateRegionDto: UpdateRegionDto) {
+  async update(id: string, updateCompanyDto: UpdateCompanyDto) {
     try {
-      const region = await this.prisma.region.findFirst({
-        where: { name_uz: updateRegionDto.name_uz },
-      });
+      const data = await this.prisma.company.findUnique({ where: { id } });
 
-      if (region) {
-        throw new ConflictException('Region already exists');
+      if (!data) {
+        throw new NotFoundException('Not found company');
       }
 
-      const data = await this.prisma.region.update({
+      const updatedCompany = await this.prisma.company.update({
         where: { id },
-        data: updateRegionDto,
+        data: updateCompanyDto,
       });
 
-      return { data };
+      return { data: updatedCompany };
     } catch (error) {
       if (error instanceof HttpException) {
         throw error;
@@ -99,13 +93,17 @@ export class RegionService {
 
   async remove(id: string) {
     try {
-      const data = await this.prisma.region.delete({ where: { id } });
+      const data = await this.prisma.company.findUnique({ where: { id } });
 
       if (!data) {
-        throw new NotFoundException('No region found');
+        throw new NotFoundException('Not found company');
       }
 
-      return { data };
+      const deletedCompany = await this.prisma.company.delete({
+        where: { id },
+      });
+
+      return { data: deletedCompany };
     } catch (error) {
       if (error instanceof HttpException) {
         throw error;

@@ -10,16 +10,16 @@ datasource db {
 
 model Region {
   id      String @id @default(uuid())
-  name_uz String @unique()
-  name_ru String @unique()
-  name_en String @unique()
+  name_uz String @unique
+  name_ru String @unique
+  name_en String @unique
   Users   User[]
 }
 
 model User {
   id        String    @id @default(uuid())
   full_name String
-  phone     String    @unique()
+  phone     String    @unique
   password  String
   status    Boolean   @default(false)
   Region    Region?   @relation(fields: [region_id], references: [id], onDelete: SetNull)
@@ -34,13 +34,13 @@ model User {
 
 model Company {
   id        String   @id @default(uuid())
-  user_id   String?  @unique()
+  user_id   String?  @unique
   User      User?    @relation(fields: [user_id], references: [id], onDelete: Cascade)
   name      String
-  tax_id    String // INN - Tax Identification Number
-  bank_code String // MFO - Bank Code
-  bank_acc  String // R/S - Bank Account
-  bank_name String // Bank Name
+  inn       String // INN - Tax Identification Number
+  mfo       String // MFO - Bank Code
+  rs        String // R/S - Bank Account
+  bank      String // Bank Name
   oked      String // OKED - Business Activity Code
   address   String // Company Address
   createdAt DateTime @default(now())
@@ -90,7 +90,7 @@ model Tool {
   description_en String
   price          Float
   count          Int
-  code           String       @unique()
+  code           String       @unique
   brand_id       String?
   size_id        String?
   capacity_id    String?
@@ -106,12 +106,13 @@ model Tool {
 }
 
 model Level {
-  id           String         @id @default(uuid())
-  name_uz      String
-  name_ru      String
-  name_en      String
-  Professions  Profession[]   @relation("LevelsProfessions")
-  MasterSkills MasterSkills[]
+  id               String             @id @default(uuid())
+  name_uz          String
+  name_ru          String
+  name_en          String
+  Professions      Profession[]       @relation("LevelsProfessions")
+  MasterSkills     MasterSkills[]
+  OrdersProfession OrdersProfession[]
 }
 
 model Profession {
@@ -169,6 +170,7 @@ model Order {
   address           String
   dete              DateTime
   payment_type      PaymentType        @default(CASH)
+  paid              Boolean            @default(false)
   status            StatusOrder        @default(PENDING)
   with_delivery     Boolean
   comment_delivery  String
@@ -176,8 +178,8 @@ model Order {
   createdAt         DateTime           @default(now())
   updatedAt         DateTime           @updatedAt
   OrdersProfessions OrdersProfession[]
-  Masters           Master[]           @relation("OrderMasters")
   OrderTools        OrderTools[]
+  Masters           Master[]           @relation("OrderMasters")
 }
 
 model OrderTools {
@@ -195,9 +197,11 @@ model OrderTools {
 model OrdersProfession {
   id            String     @id @default(uuid())
   order_id      String
-  Order         Order      @relation(fields: [order_id], references: [id])
+  Order         Order      @relation(fields: [order_id], references: [id], onDelete: Cascade)
   profession_id String
-  Profession    Profession @relation(fields: [profession_id], references: [id])
+  Profession    Profession @relation(fields: [profession_id], references: [id], onDelete: Cascade)
+  level_id      String?
+  Level         Level?     @relation(fields: [level_id], references: [id], onDelete: SetNull)
   count         Int
   measure       Measure
   time          Int
@@ -256,6 +260,14 @@ model Showcase {
   description_en String
   image          String
   link           String
+}
+
+model Partners {
+  id      String @id @default(uuid())
+  name_uz String
+  name_ru String
+  name_en String
+  image   String
 }
 
 enum Role {
