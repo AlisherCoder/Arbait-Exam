@@ -189,17 +189,6 @@ export class AuthService {
     }
   }
 
-  refreshToken(req: Request) {
-    const user = req['user'];
-    try {
-      const accessToken = this.genAccessToken({ id: user.id, role: user.role });
-
-      return { accessToken };
-    } catch (error) {
-      throw new BadRequestException(error?.message || 'Something went wrong');
-    }
-  }
-
   async logout(req: Request) {
     const user = req['user'];
     try {
@@ -222,6 +211,17 @@ export class AuthService {
       });
 
       return { data };
+    } catch (error) {
+      throw new BadRequestException(error?.message || 'Something went wrong');
+    }
+  }
+
+  refreshToken(req: Request) {
+    const user = req['user'];
+    try {
+      const accessToken = this.genAccessToken({ id: user.id, role: user.role });
+
+      return { accessToken };
     } catch (error) {
       throw new BadRequestException(error?.message || 'Something went wrong');
     }

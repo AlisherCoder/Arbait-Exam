@@ -212,7 +212,13 @@ exports.Prisma.ProfessionScalarFieldEnum = {
   name_ru: 'name_ru',
   name_en: 'name_en',
   image: 'image',
-  isActive: 'isActive',
+  isActive: 'isActive'
+};
+
+exports.Prisma.LevelsProfessionsScalarFieldEnum = {
+  id: 'id',
+  profession_id: 'profession_id',
+  level_id: 'level_id',
   min_work_hours: 'min_work_hours',
   price_hourly: 'price_hourly',
   price_daily: 'price_daily'
@@ -254,30 +260,31 @@ exports.Prisma.OrderScalarFieldEnum = {
   status: 'status',
   with_delivery: 'with_delivery',
   comment_delivery: 'comment_delivery',
-  tools_count: 'tools_count',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.OrderToolsScalarFieldEnum = {
+exports.Prisma.OrderItemsScalarFieldEnum = {
   id: 'id',
   order_id: 'order_id',
   tool_id: 'tool_id',
+  profession_id: 'profession_id',
+  levelId: 'levelId',
   count: 'count',
   measure: 'measure',
   time: 'time',
   total_sum: 'total_sum'
 };
 
-exports.Prisma.OrdersProfessionScalarFieldEnum = {
+exports.Prisma.BacketItemsScalarFieldEnum = {
   id: 'id',
-  order_id: 'order_id',
+  user_id: 'user_id',
   profession_id: 'profession_id',
+  tool_id: 'tool_id',
   level_id: 'level_id',
   count: 'count',
   measure: 'measure',
-  time: 'time',
-  total_sum: 'total_sum'
+  time: 'time'
 };
 
 exports.Prisma.CommentScalarFieldEnum = {
@@ -400,11 +407,12 @@ exports.Prisma.ModelName = {
   Tool: 'Tool',
   Level: 'Level',
   Profession: 'Profession',
+  LevelsProfessions: 'LevelsProfessions',
   Master: 'Master',
   MasterSkills: 'MasterSkills',
   Order: 'Order',
-  OrderTools: 'OrderTools',
-  OrdersProfession: 'OrdersProfession',
+  OrderItems: 'OrderItems',
+  BacketItems: 'BacketItems',
   Comment: 'Comment',
   MasterRatings: 'MasterRatings',
   Info: 'Info',

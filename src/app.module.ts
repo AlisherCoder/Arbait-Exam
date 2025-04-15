@@ -11,10 +11,22 @@ import { CompaniesModule } from './companies/companies.module';
 import { BrandModule } from './brand/brand.module';
 import { SizeModule } from './size/size.module';
 import { CapacityModule } from './capacity/capacity.module';
+import { UploadModule } from './upload/upload.module';
+import { CloudinaryModule } from 'nestjs-cloudinary';
+import { ToolsModule } from './tools/tools.module';
+import { LevelsModule } from './levels/levels.module';
+import { ProfessionsModule } from './professions/professions.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    CloudinaryModule.forRootAsync({
+      useFactory: () => ({
+        cloud_name: process.env.CLOUD_NAME,
+        api_key: process.env.API_KEY,
+        api_secret: process.env.API_SECRET,
+      }),
+    }),
     AuthModule,
     PrismaModule,
     RegionModule,
@@ -23,6 +35,10 @@ import { CapacityModule } from './capacity/capacity.module';
     BrandModule,
     SizeModule,
     CapacityModule,
+    UploadModule,
+    ToolsModule,
+    LevelsModule,
+    ProfessionsModule,
   ],
   controllers: [AppController],
   providers: [AppService, EskizService],
