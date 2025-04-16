@@ -3,14 +3,20 @@ import {
   ConflictException,
   HttpException,
   Injectable,
+  NotFoundException,
 } from '@nestjs/common';
 import { CreateProfessionDto } from './dto/create-profession.dto';
 import { UpdateProfessionDto } from './dto/update-profession.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { error } from 'console';
+import { UploadService } from 'src/upload/upload.service';
 
 @Injectable()
 export class ProfessionsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private uploadService: UploadService,
+  ) {}
 
   async create(createProfessionDto: CreateProfessionDto) {
     const { levels, tools, ...body } = createProfessionDto;
@@ -23,18 +29,6 @@ export class ProfessionsService {
         throw new ConflictException('Profession already exists with this name');
       }
 
-      const levelsCount = await this.prisma.level.count({
-        where: {
-          id: {
-            in: levels,
-          },
-        },
-      });
-
-      if (levels.length !== levelsCount) {
-        throw new BadRequestException('Some level id does not exist.');
-      }
-
       const toolsCount = await this.prisma.tool.count({
         where: {
           id: {
@@ -44,13 +38,24 @@ export class ProfessionsService {
       });
 
       if (tools.length !== toolsCount) {
-        throw new BadRequestException('Some tool id does not exist.');
+        throw new BadRequestException('Some tool id does not exists.');
       }
 
-      const levelsToConnect = levels.map((id) => ({ id }));
-      const toolsToConnect = tools.map((id) => ({ id }));
+      const lvls = levels.map((lvl) => lvl.level_id);
+      const lvlsCount = await this.prisma.level.count({
+        where: {
+          id: {
+            in: lvls,
+          },
+        },
+      });
 
-      let data = await this.prisma.profession.create({
+      if (lvls.length !== lvlsCount) {
+        throw new BadRequestException('Some level id does not exists.');
+      }
+
+      const toolsToConnect = tools.map((id) => ({ id }));
+      const data = await this.prisma.profession.create({
         data: {
           ...body,
           Tools: {
@@ -58,6 +63,13 @@ export class ProfessionsService {
           },
         },
       });
+
+      const level = levels.map((level) => ({
+        ...level,
+        profession_id: data.id,
+      }));
+
+      await this.prisma.levelsProfessions.createMany({ data: level });
 
       return { data };
     } catch (error) {
@@ -69,18 +81,148 @@ export class ProfessionsService {
   }
 
   async findAll() {
-    return `This action returns all professions`;
+    try {
+      const data = await this.prisma.profession.findMany();
+
+      if (!data.length) {
+        throw new NotFoundException('Not found professions');
+      }
+
+      return { data };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new BadRequestException(error.message);
+    }
   }
 
   async findOne(id: string) {
-    return `This action returns a #${id} profession`;
+    try {
+      const data = await this.prisma.profession.findUnique({
+        where: { id },
+        include: { LevelsProfessions: true, Tools: true },
+      });
+
+      if (!data) {
+        throw new NotFoundException('Not found profession');
+      }
+
+      return { data };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new BadRequestException(error.message);
+    }
   }
 
   async update(id: string, updateProfessionDto: UpdateProfessionDto) {
-    return `This action updates a #${id} profession`;
+    const { levels, tools, ...body } = updateProfessionDto;
+    try {
+      const data = await this.prisma.profession.findUnique({
+        where: { id },
+      });
+
+      if (!data) {
+        throw new NotFoundException('Not found profession');
+      }
+
+      if (levels?.length) {
+        let lvls = levels.map((lvl) => lvl.level_id);
+
+        const lvlsCount = await this.prisma.level.count({
+          where: {
+            id: {
+              in: lvls,
+            },
+          },
+        });
+
+        if (lvls.length !== lvlsCount) {
+          throw new BadRequestException('Some level id does not exists.');
+        }
+      }
+
+      if (tools?.length) {
+        const toolsCount = await this.prisma.tool.count({
+          where: {
+            id: {
+              in: tools,
+            },
+          },
+        });
+
+        if (tools.length !== toolsCount) {
+          throw new BadRequestException('Some tool id does not exists.');
+        }
+      }
+
+      const updated = await this.prisma.profession.update({
+        where: { id },
+        data: body,
+      });
+
+      if (body.image) {
+        this.uploadService.deleteFile(data.image);
+      }
+
+      if (levels?.length) {
+        await this.prisma.levelsProfessions.deleteMany({
+          where: { profession_id: data.id },
+        });
+
+        const level = levels.map((level) => ({
+          ...level,
+          profession_id: data.id,
+        }));
+
+        this.prisma.levelsProfessions.createMany({ data: level });
+      }
+
+      if (tools?.length) {
+        const toolsToConnect = tools.map((id) => ({ id }));
+
+        this.prisma.profession.update({
+          where: { id },
+          data: {
+            Tools: {
+              set: toolsToConnect,
+            },
+          },
+        });
+      }
+
+      return { data: updated };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new BadRequestException(error.message);
+    }
   }
 
   async remove(id: string) {
-    return `This action removes a #${id} profession`;
+    try {
+      const data = await this.prisma.profession.findUnique({
+        where: { id },
+        include: { LevelsProfessions: true, Tools: true },
+      });
+
+      if (!data) {
+        throw new NotFoundException('Not found profession');
+      }
+
+      const deleted = await this.prisma.profession.delete({ where: { id } });
+
+      this.uploadService.deleteFile(deleted.image);
+
+      return { data: deleted };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new BadRequestException(error.message);
+    }
   }
 }

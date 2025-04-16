@@ -1,15 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
 import {
   IsString,
   IsBoolean,
+  IsNotEmpty,
+  IsArray,
+  ArrayNotEmpty,
+  IsObject,
   IsNumber,
   Min,
   Max,
-  IsNotEmpty,
   IsInt,
   IsPositive,
-  IsArray,
-  ArrayNotEmpty,
+  ValidateNested,
 } from 'class-validator';
 
 export class CreateProfessionDto {
@@ -38,32 +41,48 @@ export class CreateProfessionDto {
   @IsNotEmpty()
   isActive: boolean;
 
-  @ApiProperty({ example: 2 })
-  @IsNumber()
-  @IsInt()
-  @Min(1)
-  @Max(24)
-  min_work_hours: number;
-
-  @ApiProperty({ example: 50 })
-  @IsNumber()
-  @IsPositive()
-  price_hourly: number;
-
-  @ApiProperty({ example: 400 })
-  @IsNumber()
-  @IsNumber()
-  price_daily: number;
-
-  @ApiProperty({ example: ['level_id', 'level_id'] })
+  @ApiProperty({
+    example: [
+      {
+        level_id: 'level_id',
+        min_work_hours: 2,
+        price_hourly: 50000,
+        price_daily: 40000,
+      },
+    ],
+  })
   @IsArray()
   @ArrayNotEmpty()
-  @IsString({ each: true })
-  levels: string[];
+  @ValidateNested({ each: true })
+  @Type(() => LevelProfessionDto)
+  levels: LevelProfessionDto[];
 
   @ApiProperty({ example: ['tool_id', 'tool_id'] })
   @IsArray()
   @ArrayNotEmpty()
   @IsString({ each: true })
   tools: string[];
+}
+
+export class LevelProfessionDto {
+  @IsString()
+  @IsNotEmpty()
+  level_id: string;
+
+  @IsNumber()
+  @IsInt()
+  @Min(1)
+  @Max(24)
+  @IsNotEmpty()
+  min_work_hours: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @IsPositive()
+  price_hourly: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @IsPositive()
+  price_daily: number;
 }

@@ -16,6 +16,8 @@ import { CloudinaryModule } from 'nestjs-cloudinary';
 import { ToolsModule } from './tools/tools.module';
 import { LevelsModule } from './levels/levels.module';
 import { ProfessionsModule } from './professions/professions.module';
+import { OrderModule } from './order/order.module';
+import { MasterModule } from './master/master.module';
 
 @Module({
   imports: [
@@ -39,6 +41,8 @@ import { ProfessionsModule } from './professions/professions.module';
     ToolsModule,
     LevelsModule,
     ProfessionsModule,
+    OrderModule,
+    MasterModule,
   ],
   controllers: [AppController],
   providers: [AppService, EskizService],

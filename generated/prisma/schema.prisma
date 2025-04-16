@@ -200,8 +200,8 @@ model OrderItems {
   Tool          Tool?       @relation(fields: [tool_id], references: [id], onDelete: SetNull)
   profession_id String?
   Profession    Profession? @relation(fields: [profession_id], references: [id], onDelete: SetNull)
-  Level         Level?      @relation(fields: [levelId], references: [id], onDelete: SetNull)
-  levelId       String?
+  Level         Level?      @relation(fields: [level_id], references: [id], onDelete: SetNull)
+  level_id      String?
   count         Int
   measure       Measure
   time          Int

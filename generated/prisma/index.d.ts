@@ -19625,7 +19625,7 @@ export namespace Prisma {
     order_id: string | null
     tool_id: string | null
     profession_id: string | null
-    levelId: string | null
+    level_id: string | null
     count: number | null
     measure: $Enums.Measure | null
     time: number | null
@@ -19637,7 +19637,7 @@ export namespace Prisma {
     order_id: string | null
     tool_id: string | null
     profession_id: string | null
-    levelId: string | null
+    level_id: string | null
     count: number | null
     measure: $Enums.Measure | null
     time: number | null
@@ -19649,7 +19649,7 @@ export namespace Prisma {
     order_id: number
     tool_id: number
     profession_id: number
-    levelId: number
+    level_id: number
     count: number
     measure: number
     time: number
@@ -19675,7 +19675,7 @@ export namespace Prisma {
     order_id?: true
     tool_id?: true
     profession_id?: true
-    levelId?: true
+    level_id?: true
     count?: true
     measure?: true
     time?: true
@@ -19687,7 +19687,7 @@ export namespace Prisma {
     order_id?: true
     tool_id?: true
     profession_id?: true
-    levelId?: true
+    level_id?: true
     count?: true
     measure?: true
     time?: true
@@ -19699,7 +19699,7 @@ export namespace Prisma {
     order_id?: true
     tool_id?: true
     profession_id?: true
-    levelId?: true
+    level_id?: true
     count?: true
     measure?: true
     time?: true
@@ -19798,7 +19798,7 @@ export namespace Prisma {
     order_id: string
     tool_id: string | null
     profession_id: string | null
-    levelId: string | null
+    level_id: string | null
     count: number
     measure: $Enums.Measure
     time: number
@@ -19829,7 +19829,7 @@ export namespace Prisma {
     order_id?: boolean
     tool_id?: boolean
     profession_id?: boolean
-    levelId?: boolean
+    level_id?: boolean
     count?: boolean
     measure?: boolean
     time?: boolean
@@ -19845,7 +19845,7 @@ export namespace Prisma {
     order_id?: boolean
     tool_id?: boolean
     profession_id?: boolean
-    levelId?: boolean
+    level_id?: boolean
     count?: boolean
     measure?: boolean
     time?: boolean
@@ -19861,7 +19861,7 @@ export namespace Prisma {
     order_id?: boolean
     tool_id?: boolean
     profession_id?: boolean
-    levelId?: boolean
+    level_id?: boolean
     count?: boolean
     measure?: boolean
     time?: boolean
@@ -19877,14 +19877,14 @@ export namespace Prisma {
     order_id?: boolean
     tool_id?: boolean
     profession_id?: boolean
-    levelId?: boolean
+    level_id?: boolean
     count?: boolean
     measure?: boolean
     time?: boolean
     total_sum?: boolean
   }
 
-  export type OrderItemsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "order_id" | "tool_id" | "profession_id" | "levelId" | "count" | "measure" | "time" | "total_sum", ExtArgs["result"]["orderItems"]>
+  export type OrderItemsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "order_id" | "tool_id" | "profession_id" | "level_id" | "count" | "measure" | "time" | "total_sum", ExtArgs["result"]["orderItems"]>
   export type OrderItemsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Order?: boolean | OrderDefaultArgs<ExtArgs>
     Tool?: boolean | OrderItems$ToolArgs<ExtArgs>
@@ -19917,7 +19917,7 @@ export namespace Prisma {
       order_id: string
       tool_id: string | null
       profession_id: string | null
-      levelId: string | null
+      level_id: string | null
       count: number
       measure: $Enums.Measure
       time: number
@@ -20353,7 +20353,7 @@ export namespace Prisma {
     readonly order_id: FieldRef<"OrderItems", 'String'>
     readonly tool_id: FieldRef<"OrderItems", 'String'>
     readonly profession_id: FieldRef<"OrderItems", 'String'>
-    readonly levelId: FieldRef<"OrderItems", 'String'>
+    readonly level_id: FieldRef<"OrderItems", 'String'>
     readonly count: FieldRef<"OrderItems", 'Int'>
     readonly measure: FieldRef<"OrderItems", 'Measure'>
     readonly time: FieldRef<"OrderItems", 'Int'>
@@ -29429,7 +29429,7 @@ export namespace Prisma {
     order_id: 'order_id',
     tool_id: 'tool_id',
     profession_id: 'profession_id',
-    levelId: 'levelId',
+    level_id: 'level_id',
     count: 'count',
     measure: 'measure',
     time: 'time',
@@ -30744,7 +30744,7 @@ export namespace Prisma {
     order_id?: StringFilter<"OrderItems"> | string
     tool_id?: StringNullableFilter<"OrderItems"> | string | null
     profession_id?: StringNullableFilter<"OrderItems"> | string | null
-    levelId?: StringNullableFilter<"OrderItems"> | string | null
+    level_id?: StringNullableFilter<"OrderItems"> | string | null
     count?: IntFilter<"OrderItems"> | number
     measure?: EnumMeasureFilter<"OrderItems"> | $Enums.Measure
     time?: IntFilter<"OrderItems"> | number
@@ -30760,7 +30760,7 @@ export namespace Prisma {
     order_id?: SortOrder
     tool_id?: SortOrderInput | SortOrder
     profession_id?: SortOrderInput | SortOrder
-    levelId?: SortOrderInput | SortOrder
+    level_id?: SortOrderInput | SortOrder
     count?: SortOrder
     measure?: SortOrder
     time?: SortOrder
@@ -30779,7 +30779,7 @@ export namespace Prisma {
     order_id?: StringFilter<"OrderItems"> | string
     tool_id?: StringNullableFilter<"OrderItems"> | string | null
     profession_id?: StringNullableFilter<"OrderItems"> | string | null
-    levelId?: StringNullableFilter<"OrderItems"> | string | null
+    level_id?: StringNullableFilter<"OrderItems"> | string | null
     count?: IntFilter<"OrderItems"> | number
     measure?: EnumMeasureFilter<"OrderItems"> | $Enums.Measure
     time?: IntFilter<"OrderItems"> | number
@@ -30795,7 +30795,7 @@ export namespace Prisma {
     order_id?: SortOrder
     tool_id?: SortOrderInput | SortOrder
     profession_id?: SortOrderInput | SortOrder
-    levelId?: SortOrderInput | SortOrder
+    level_id?: SortOrderInput | SortOrder
     count?: SortOrder
     measure?: SortOrder
     time?: SortOrder
@@ -30815,7 +30815,7 @@ export namespace Prisma {
     order_id?: StringWithAggregatesFilter<"OrderItems"> | string
     tool_id?: StringNullableWithAggregatesFilter<"OrderItems"> | string | null
     profession_id?: StringNullableWithAggregatesFilter<"OrderItems"> | string | null
-    levelId?: StringNullableWithAggregatesFilter<"OrderItems"> | string | null
+    level_id?: StringNullableWithAggregatesFilter<"OrderItems"> | string | null
     count?: IntWithAggregatesFilter<"OrderItems"> | number
     measure?: EnumMeasureWithAggregatesFilter<"OrderItems"> | $Enums.Measure
     time?: IntWithAggregatesFilter<"OrderItems"> | number
@@ -32427,7 +32427,7 @@ export namespace Prisma {
     order_id: string
     tool_id?: string | null
     profession_id?: string | null
-    levelId?: string | null
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
@@ -32451,7 +32451,7 @@ export namespace Prisma {
     order_id?: StringFieldUpdateOperationsInput | string
     tool_id?: NullableStringFieldUpdateOperationsInput | string | null
     profession_id?: NullableStringFieldUpdateOperationsInput | string | null
-    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
@@ -32463,7 +32463,7 @@ export namespace Prisma {
     order_id: string
     tool_id?: string | null
     profession_id?: string | null
-    levelId?: string | null
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
@@ -32483,7 +32483,7 @@ export namespace Prisma {
     order_id?: StringFieldUpdateOperationsInput | string
     tool_id?: NullableStringFieldUpdateOperationsInput | string | null
     profession_id?: NullableStringFieldUpdateOperationsInput | string | null
-    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
@@ -33909,7 +33909,7 @@ export namespace Prisma {
     order_id?: SortOrder
     tool_id?: SortOrder
     profession_id?: SortOrder
-    levelId?: SortOrder
+    level_id?: SortOrder
     count?: SortOrder
     measure?: SortOrder
     time?: SortOrder
@@ -33927,7 +33927,7 @@ export namespace Prisma {
     order_id?: SortOrder
     tool_id?: SortOrder
     profession_id?: SortOrder
-    levelId?: SortOrder
+    level_id?: SortOrder
     count?: SortOrder
     measure?: SortOrder
     time?: SortOrder
@@ -33939,7 +33939,7 @@ export namespace Prisma {
     order_id?: SortOrder
     tool_id?: SortOrder
     profession_id?: SortOrder
-    levelId?: SortOrder
+    level_id?: SortOrder
     count?: SortOrder
     measure?: SortOrder
     time?: SortOrder
@@ -36775,7 +36775,7 @@ export namespace Prisma {
     id?: string
     order_id: string
     profession_id?: string | null
-    levelId?: string | null
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
@@ -36949,7 +36949,7 @@ export namespace Prisma {
     order_id?: StringFilter<"OrderItems"> | string
     tool_id?: StringNullableFilter<"OrderItems"> | string | null
     profession_id?: StringNullableFilter<"OrderItems"> | string | null
-    levelId?: StringNullableFilter<"OrderItems"> | string | null
+    level_id?: StringNullableFilter<"OrderItems"> | string | null
     count?: IntFilter<"OrderItems"> | number
     measure?: EnumMeasureFilter<"OrderItems"> | $Enums.Measure
     time?: IntFilter<"OrderItems"> | number
@@ -37300,7 +37300,7 @@ export namespace Prisma {
     id?: string
     order_id: string
     tool_id?: string | null
-    levelId?: string | null
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
@@ -37985,7 +37985,7 @@ export namespace Prisma {
     id?: string
     tool_id?: string | null
     profession_id?: string | null
-    levelId?: string | null
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
@@ -39299,7 +39299,7 @@ export namespace Prisma {
     id?: string
     order_id: string
     profession_id?: string | null
-    levelId?: string | null
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
@@ -39366,7 +39366,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     order_id?: StringFieldUpdateOperationsInput | string
     profession_id?: NullableStringFieldUpdateOperationsInput | string | null
-    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
@@ -39377,7 +39377,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     order_id?: StringFieldUpdateOperationsInput | string
     profession_id?: NullableStringFieldUpdateOperationsInput | string | null
-    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
@@ -39592,7 +39592,7 @@ export namespace Prisma {
     id?: string
     order_id: string
     tool_id?: string | null
-    levelId?: string | null
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
@@ -39742,7 +39742,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     order_id?: StringFieldUpdateOperationsInput | string
     tool_id?: NullableStringFieldUpdateOperationsInput | string | null
-    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
@@ -39753,7 +39753,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     order_id?: StringFieldUpdateOperationsInput | string
     tool_id?: NullableStringFieldUpdateOperationsInput | string | null
-    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
@@ -39908,7 +39908,7 @@ export namespace Prisma {
     id?: string
     tool_id?: string | null
     profession_id?: string | null
-    levelId?: string | null
+    level_id?: string | null
     count: number
     measure: $Enums.Measure
     time: number
@@ -39973,7 +39973,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     tool_id?: NullableStringFieldUpdateOperationsInput | string | null
     profession_id?: NullableStringFieldUpdateOperationsInput | string | null
-    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
@@ -39984,7 +39984,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     tool_id?: NullableStringFieldUpdateOperationsInput | string | null
     profession_id?: NullableStringFieldUpdateOperationsInput | string | null
-    levelId?: NullableStringFieldUpdateOperationsInput | string | null
+    level_id?: NullableStringFieldUpdateOperationsInput | string | null
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number

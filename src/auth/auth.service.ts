@@ -109,8 +109,6 @@ export class AuthService {
         });
       }
 
-      console.log(session);
-
       const payload = { id: user.id, role: user.role };
       const accessToken = this.genAccessToken(payload);
       const refreshToken = this.genRefreshToken(payload);
@@ -205,6 +203,14 @@ export class AuthService {
   async me(req: Request) {
     const user = req['user'];
     try {
+      const session = await this.prisma.session.findFirst({
+        where: { ip_address: req.ip, user_id: user.id },
+      });
+
+      if (!session) {
+        throw new UnauthorizedException();
+      }
+
       const data = this.prisma.user.findUnique({
         where: { id: user.id },
         omit: { password: true },

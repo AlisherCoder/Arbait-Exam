@@ -269,7 +269,7 @@ exports.Prisma.OrderItemsScalarFieldEnum = {
   order_id: 'order_id',
   tool_id: 'tool_id',
   profession_id: 'profession_id',
-  levelId: 'levelId',
+  level_id: 'level_id',
   count: 'count',
   measure: 'measure',
   time: 'time',
