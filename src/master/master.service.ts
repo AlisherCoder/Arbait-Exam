@@ -19,7 +19,9 @@ export class MasterService {
   async create(createMasterDto: CreateMasterDto) {
     const { skills, ...body } = createMasterDto;
 
-    const lvlsid = skills.map((skill) => skill.level_id);
+    let lvlsid = skills.map((skill) => skill.level_id);
+    lvlsid = Array.from(new Set(lvlsid));
+
     const prfsid = skills.map((skill) => skill.profession_id);
 
     try {
@@ -72,7 +74,21 @@ export class MasterService {
 
   async findOne(id: string) {
     try {
-      const data = await this.prisma.master.findUnique({ where: { id } });
+      const data = await this.prisma.master.findUnique({
+        where: { id },
+        include: {
+          MasterRatings: { include: { Comment: { include: { user: true } } } },
+          MasterSkills: { include: { Level: true, Profession: true } },
+          Orders: {
+            include: {
+              OrderItems: {
+                include: { Level: true, Profession: true, Tool: true },
+              },
+              User: true,
+            },
+          },
+        },
+      });
 
       if (!data) {
         throw new NotFoundException('Not found master');
@@ -98,7 +114,9 @@ export class MasterService {
       }
 
       if (skills?.length) {
-        const lvlsid = skills.map((skill) => skill.level_id);
+        let lvlsid = skills.map((skill) => skill.level_id);
+        lvlsid = Array.from(new Set(lvlsid));
+
         const lvlsCount = await this.prisma.level.count({
           where: { id: { in: lvlsid } },
         });
@@ -106,13 +124,37 @@ export class MasterService {
         if (lvlsCount !== lvlsid.length) {
           throw new BadRequestException('Some level id does not exists');
         }
-      }
 
+        const prfsid = skills.map((skill) => skill.profession_id);
+        const prfCount = await this.prisma.profession.count({
+          where: {
+            id: { in: prfsid },
+          },
+        });
+
+        if (prfCount !== prfsid.length) {
+          throw new BadRequestException('Some profession id does not exists');
+        }
+      }
 
       const updated = await this.prisma.master.update({
         where: { id },
         data: body,
+        include: { MasterSkills: true },
       });
+
+      if (skills?.length) {
+        await this.prisma.masterSkills.deleteMany({
+          where: { master_id: data.id },
+        });
+
+        await this.prisma.masterSkills.createMany({
+          data: skills.map((skill) => ({ ...skill, master_id: data.id })),
+        });
+      }
+
+      this.uploadService.deleteFile(updated.image);
+      this.uploadService.deleteFile(updated.passport_image);
 
       return { data: updated };
     } catch (error) {

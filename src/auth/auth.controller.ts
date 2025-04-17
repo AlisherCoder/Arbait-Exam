@@ -53,4 +53,9 @@ export class AuthController {
   me(@Req() req: Request) {
     return this.authService.me(req);
   }
+
+  @Get('myBackets')
+  myBacket(@Req() req: Request) {
+    return this.authService.myBacket(req);
+  }
 }

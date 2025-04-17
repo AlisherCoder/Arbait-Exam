@@ -18,6 +18,8 @@ import { LevelsModule } from './levels/levels.module';
 import { ProfessionsModule } from './professions/professions.module';
 import { OrderModule } from './order/order.module';
 import { MasterModule } from './master/master.module';
+import { BacketitemsModule } from './backetitems/backetitems.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [
@@ -43,6 +45,8 @@ import { MasterModule } from './master/master.module';
     ProfessionsModule,
     OrderModule,
     MasterModule,
+    BacketitemsModule,
+    CommentsModule,
   ],
   controllers: [AppController],
   providers: [AppService, EskizService],

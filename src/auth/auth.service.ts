@@ -222,6 +222,24 @@ export class AuthService {
     }
   }
 
+  async myBacket(req: Request) {
+    const user = req['user'];
+    try {
+      const backets = await this.prisma.backetItems.findMany({
+        where: { user_id: user.id },
+        include: { Level: true, Profession: true, Tool: true },
+      });
+
+      if (!backets.length) {
+        throw new BadRequestException('Empty backet');
+      }
+
+      return { data: backets };
+    } catch (error) {
+      throw new BadRequestException(error?.message || 'Something went wrong');
+    }
+  }
+
   refreshToken(req: Request) {
     const user = req['user'];
     try {

@@ -2964,12 +2964,14 @@ export namespace Prisma {
     Session: number
     Order: number
     BacketItems: number
+    Comment: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Session?: boolean | UserCountOutputTypeCountSessionArgs
     Order?: boolean | UserCountOutputTypeCountOrderArgs
     BacketItems?: boolean | UserCountOutputTypeCountBacketItemsArgs
+    Comment?: boolean | UserCountOutputTypeCountCommentArgs
   }
 
   // Custom InputTypes
@@ -3002,6 +3004,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountBacketItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BacketItemsWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCommentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentWhereInput
   }
 
 
@@ -3328,11 +3337,13 @@ export namespace Prisma {
   export type OrderCountOutputType = {
     Masters: number
     OrderItems: number
+    Comment: number
   }
 
   export type OrderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Masters?: boolean | OrderCountOutputTypeCountMastersArgs
     OrderItems?: boolean | OrderCountOutputTypeCountOrderItemsArgs
+    Comment?: boolean | OrderCountOutputTypeCountCommentArgs
   }
 
   // Custom InputTypes
@@ -3358,6 +3369,13 @@ export namespace Prisma {
    */
   export type OrderCountOutputTypeCountOrderItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderItemsWhereInput
+  }
+
+  /**
+   * OrderCountOutputType without action
+   */
+  export type OrderCountOutputTypeCountCommentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentWhereInput
   }
 
 
@@ -4654,6 +4672,7 @@ export namespace Prisma {
     Session?: boolean | User$SessionArgs<ExtArgs>
     Order?: boolean | User$OrderArgs<ExtArgs>
     BacketItems?: boolean | User$BacketItemsArgs<ExtArgs>
+    Comment?: boolean | User$CommentArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4702,6 +4721,7 @@ export namespace Prisma {
     Session?: boolean | User$SessionArgs<ExtArgs>
     Order?: boolean | User$OrderArgs<ExtArgs>
     BacketItems?: boolean | User$BacketItemsArgs<ExtArgs>
+    Comment?: boolean | User$CommentArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4719,6 +4739,7 @@ export namespace Prisma {
       Session: Prisma.$SessionPayload<ExtArgs>[]
       Order: Prisma.$OrderPayload<ExtArgs>[]
       BacketItems: Prisma.$BacketItemsPayload<ExtArgs>[]
+      Comment: Prisma.$CommentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5129,6 +5150,7 @@ export namespace Prisma {
     Session<T extends User$SessionArgs<ExtArgs> = {}>(args?: Subset<T, User$SessionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Order<T extends User$OrderArgs<ExtArgs> = {}>(args?: Subset<T, User$OrderArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     BacketItems<T extends User$BacketItemsArgs<ExtArgs> = {}>(args?: Subset<T, User$BacketItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BacketItemsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Comment<T extends User$CommentArgs<ExtArgs> = {}>(args?: Subset<T, User$CommentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5670,6 +5692,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BacketItemsScalarFieldEnum | BacketItemsScalarFieldEnum[]
+  }
+
+  /**
+   * User.Comment
+   */
+  export type User$CommentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    where?: CommentWhereInput
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    cursor?: CommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
   }
 
   /**
@@ -18607,6 +18653,7 @@ export namespace Prisma {
     User?: boolean | UserDefaultArgs<ExtArgs>
     Masters?: boolean | Order$MastersArgs<ExtArgs>
     OrderItems?: boolean | Order$OrderItemsArgs<ExtArgs>
+    Comment?: boolean | Order$CommentArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
 
@@ -18665,6 +18712,7 @@ export namespace Prisma {
     User?: boolean | UserDefaultArgs<ExtArgs>
     Masters?: boolean | Order$MastersArgs<ExtArgs>
     OrderItems?: boolean | Order$OrderItemsArgs<ExtArgs>
+    Comment?: boolean | Order$CommentArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type OrderIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -18680,6 +18728,7 @@ export namespace Prisma {
       User: Prisma.$UserPayload<ExtArgs>
       Masters: Prisma.$MasterPayload<ExtArgs>[]
       OrderItems: Prisma.$OrderItemsPayload<ExtArgs>[]
+      Comment: Prisma.$CommentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -19092,6 +19141,7 @@ export namespace Prisma {
     User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Masters<T extends Order$MastersArgs<ExtArgs> = {}>(args?: Subset<T, Order$MastersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MasterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     OrderItems<T extends Order$OrderItemsArgs<ExtArgs> = {}>(args?: Subset<T, Order$OrderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Comment<T extends Order$CommentArgs<ExtArgs> = {}>(args?: Subset<T, Order$CommentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19575,6 +19625,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: OrderItemsScalarFieldEnum | OrderItemsScalarFieldEnum[]
+  }
+
+  /**
+   * Order.Comment
+   */
+  export type Order$CommentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    where?: CommentWhereInput
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    cursor?: CommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
   }
 
   /**
@@ -21056,7 +21130,7 @@ export namespace Prisma {
     measure?: boolean
     time?: boolean
     User?: boolean | UserDefaultArgs<ExtArgs>
-    Pofession?: boolean | BacketItems$PofessionArgs<ExtArgs>
+    Profession?: boolean | BacketItems$ProfessionArgs<ExtArgs>
     Tool?: boolean | BacketItems$ToolArgs<ExtArgs>
     Level?: boolean | BacketItems$LevelArgs<ExtArgs>
   }, ExtArgs["result"]["backetItems"]>
@@ -21071,7 +21145,7 @@ export namespace Prisma {
     measure?: boolean
     time?: boolean
     User?: boolean | UserDefaultArgs<ExtArgs>
-    Pofession?: boolean | BacketItems$PofessionArgs<ExtArgs>
+    Profession?: boolean | BacketItems$ProfessionArgs<ExtArgs>
     Tool?: boolean | BacketItems$ToolArgs<ExtArgs>
     Level?: boolean | BacketItems$LevelArgs<ExtArgs>
   }, ExtArgs["result"]["backetItems"]>
@@ -21086,7 +21160,7 @@ export namespace Prisma {
     measure?: boolean
     time?: boolean
     User?: boolean | UserDefaultArgs<ExtArgs>
-    Pofession?: boolean | BacketItems$PofessionArgs<ExtArgs>
+    Profession?: boolean | BacketItems$ProfessionArgs<ExtArgs>
     Tool?: boolean | BacketItems$ToolArgs<ExtArgs>
     Level?: boolean | BacketItems$LevelArgs<ExtArgs>
   }, ExtArgs["result"]["backetItems"]>
@@ -21105,19 +21179,19 @@ export namespace Prisma {
   export type BacketItemsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "profession_id" | "tool_id" | "level_id" | "count" | "measure" | "time", ExtArgs["result"]["backetItems"]>
   export type BacketItemsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | UserDefaultArgs<ExtArgs>
-    Pofession?: boolean | BacketItems$PofessionArgs<ExtArgs>
+    Profession?: boolean | BacketItems$ProfessionArgs<ExtArgs>
     Tool?: boolean | BacketItems$ToolArgs<ExtArgs>
     Level?: boolean | BacketItems$LevelArgs<ExtArgs>
   }
   export type BacketItemsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | UserDefaultArgs<ExtArgs>
-    Pofession?: boolean | BacketItems$PofessionArgs<ExtArgs>
+    Profession?: boolean | BacketItems$ProfessionArgs<ExtArgs>
     Tool?: boolean | BacketItems$ToolArgs<ExtArgs>
     Level?: boolean | BacketItems$LevelArgs<ExtArgs>
   }
   export type BacketItemsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     User?: boolean | UserDefaultArgs<ExtArgs>
-    Pofession?: boolean | BacketItems$PofessionArgs<ExtArgs>
+    Profession?: boolean | BacketItems$ProfessionArgs<ExtArgs>
     Tool?: boolean | BacketItems$ToolArgs<ExtArgs>
     Level?: boolean | BacketItems$LevelArgs<ExtArgs>
   }
@@ -21126,7 +21200,7 @@ export namespace Prisma {
     name: "BacketItems"
     objects: {
       User: Prisma.$UserPayload<ExtArgs>
-      Pofession: Prisma.$ProfessionPayload<ExtArgs> | null
+      Profession: Prisma.$ProfessionPayload<ExtArgs> | null
       Tool: Prisma.$ToolPayload<ExtArgs> | null
       Level: Prisma.$LevelPayload<ExtArgs> | null
     }
@@ -21534,7 +21608,7 @@ export namespace Prisma {
   export interface Prisma__BacketItemsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     User<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    Pofession<T extends BacketItems$PofessionArgs<ExtArgs> = {}>(args?: Subset<T, BacketItems$PofessionArgs<ExtArgs>>): Prisma__ProfessionClient<$Result.GetResult<Prisma.$ProfessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    Profession<T extends BacketItems$ProfessionArgs<ExtArgs> = {}>(args?: Subset<T, BacketItems$ProfessionArgs<ExtArgs>>): Prisma__ProfessionClient<$Result.GetResult<Prisma.$ProfessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     Tool<T extends BacketItems$ToolArgs<ExtArgs> = {}>(args?: Subset<T, BacketItems$ToolArgs<ExtArgs>>): Prisma__ToolClient<$Result.GetResult<Prisma.$ToolPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     Level<T extends BacketItems$LevelArgs<ExtArgs> = {}>(args?: Subset<T, BacketItems$LevelArgs<ExtArgs>>): Prisma__LevelClient<$Result.GetResult<Prisma.$LevelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
@@ -21970,9 +22044,9 @@ export namespace Prisma {
   }
 
   /**
-   * BacketItems.Pofession
+   * BacketItems.Profession
    */
-  export type BacketItems$PofessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type BacketItems$ProfessionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Profession
      */
@@ -22058,6 +22132,8 @@ export namespace Prisma {
   export type CommentMinAggregateOutputType = {
     id: string | null
     text: string | null
+    user_id: string | null
+    order_id: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -22065,6 +22141,8 @@ export namespace Prisma {
   export type CommentMaxAggregateOutputType = {
     id: string | null
     text: string | null
+    user_id: string | null
+    order_id: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -22072,6 +22150,8 @@ export namespace Prisma {
   export type CommentCountAggregateOutputType = {
     id: number
     text: number
+    user_id: number
+    order_id: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -22081,6 +22161,8 @@ export namespace Prisma {
   export type CommentMinAggregateInputType = {
     id?: true
     text?: true
+    user_id?: true
+    order_id?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -22088,6 +22170,8 @@ export namespace Prisma {
   export type CommentMaxAggregateInputType = {
     id?: true
     text?: true
+    user_id?: true
+    order_id?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -22095,6 +22179,8 @@ export namespace Prisma {
   export type CommentCountAggregateInputType = {
     id?: true
     text?: true
+    user_id?: true
+    order_id?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -22175,6 +22261,8 @@ export namespace Prisma {
   export type CommentGroupByOutputType = {
     id: string
     text: string
+    user_id: string | null
+    order_id: string | null
     createdAt: Date
     updatedAt: Date
     _count: CommentCountAggregateOutputType | null
@@ -22199,8 +22287,12 @@ export namespace Prisma {
   export type CommentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     text?: boolean
+    user_id?: boolean
+    order_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | Comment$userArgs<ExtArgs>
+    order?: boolean | Comment$orderArgs<ExtArgs>
     MasterRatings?: boolean | Comment$MasterRatingsArgs<ExtArgs>
     _count?: boolean | CommentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
@@ -22208,40 +22300,62 @@ export namespace Prisma {
   export type CommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     text?: boolean
+    user_id?: boolean
+    order_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | Comment$userArgs<ExtArgs>
+    order?: boolean | Comment$orderArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     text?: boolean
+    user_id?: boolean
+    order_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    user?: boolean | Comment$userArgs<ExtArgs>
+    order?: boolean | Comment$orderArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectScalar = {
     id?: boolean
     text?: boolean
+    user_id?: boolean
+    order_id?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "text" | "createdAt" | "updatedAt", ExtArgs["result"]["comment"]>
+  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "text" | "user_id" | "order_id" | "createdAt" | "updatedAt", ExtArgs["result"]["comment"]>
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | Comment$userArgs<ExtArgs>
+    order?: boolean | Comment$orderArgs<ExtArgs>
     MasterRatings?: boolean | Comment$MasterRatingsArgs<ExtArgs>
     _count?: boolean | CommentCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type CommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type CommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type CommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | Comment$userArgs<ExtArgs>
+    order?: boolean | Comment$orderArgs<ExtArgs>
+  }
+  export type CommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | Comment$userArgs<ExtArgs>
+    order?: boolean | Comment$orderArgs<ExtArgs>
+  }
 
   export type $CommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Comment"
     objects: {
+      user: Prisma.$UserPayload<ExtArgs> | null
+      order: Prisma.$OrderPayload<ExtArgs> | null
       MasterRatings: Prisma.$MasterRatingsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       text: string
+      user_id: string | null
+      order_id: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["comment"]>
@@ -22638,6 +22752,8 @@ export namespace Prisma {
    */
   export interface Prisma__CommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends Comment$userArgs<ExtArgs> = {}>(args?: Subset<T, Comment$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    order<T extends Comment$orderArgs<ExtArgs> = {}>(args?: Subset<T, Comment$orderArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     MasterRatings<T extends Comment$MasterRatingsArgs<ExtArgs> = {}>(args?: Subset<T, Comment$MasterRatingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MasterRatingsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -22670,6 +22786,8 @@ export namespace Prisma {
   interface CommentFieldRefs {
     readonly id: FieldRef<"Comment", 'String'>
     readonly text: FieldRef<"Comment", 'String'>
+    readonly user_id: FieldRef<"Comment", 'String'>
+    readonly order_id: FieldRef<"Comment", 'String'>
     readonly createdAt: FieldRef<"Comment", 'DateTime'>
     readonly updatedAt: FieldRef<"Comment", 'DateTime'>
   }
@@ -22921,6 +23039,10 @@ export namespace Prisma {
      */
     data: CommentCreateManyInput | CommentCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -22991,6 +23113,10 @@ export namespace Prisma {
      * Limit how many Comments to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -23057,6 +23183,44 @@ export namespace Prisma {
      * Limit how many Comments to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Comment.user
+   */
+  export type Comment$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * Comment.order
+   */
+  export type Comment$orderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Order
+     */
+    select?: OrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Order
+     */
+    omit?: OrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderInclude<ExtArgs> | null
+    where?: OrderWhereInput
   }
 
   /**
@@ -29456,6 +29620,8 @@ export namespace Prisma {
   export const CommentScalarFieldEnum: {
     id: 'id',
     text: 'text',
+    user_id: 'user_id',
+    order_id: 'order_id',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -29782,6 +29948,7 @@ export namespace Prisma {
     Session?: SessionListRelationFilter
     Order?: OrderListRelationFilter
     BacketItems?: BacketItemsListRelationFilter
+    Comment?: CommentListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -29799,6 +29966,7 @@ export namespace Prisma {
     Session?: SessionOrderByRelationAggregateInput
     Order?: OrderOrderByRelationAggregateInput
     BacketItems?: BacketItemsOrderByRelationAggregateInput
+    Comment?: CommentOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -29819,6 +29987,7 @@ export namespace Prisma {
     Session?: SessionListRelationFilter
     Order?: OrderListRelationFilter
     BacketItems?: BacketItemsListRelationFilter
+    Comment?: CommentListRelationFilter
   }, "id" | "phone">
 
   export type UserOrderByWithAggregationInput = {
@@ -30653,6 +30822,7 @@ export namespace Prisma {
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
     Masters?: MasterListRelationFilter
     OrderItems?: OrderItemsListRelationFilter
+    Comment?: CommentListRelationFilter
   }
 
   export type OrderOrderByWithRelationInput = {
@@ -30672,6 +30842,7 @@ export namespace Prisma {
     User?: UserOrderByWithRelationInput
     Masters?: MasterOrderByRelationAggregateInput
     OrderItems?: OrderItemsOrderByRelationAggregateInput
+    Comment?: CommentOrderByRelationAggregateInput
   }
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<{
@@ -30694,6 +30865,7 @@ export namespace Prisma {
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
     Masters?: MasterListRelationFilter
     OrderItems?: OrderItemsListRelationFilter
+    Comment?: CommentListRelationFilter
   }, "id">
 
   export type OrderOrderByWithAggregationInput = {
@@ -30835,7 +31007,7 @@ export namespace Prisma {
     measure?: EnumMeasureFilter<"BacketItems"> | $Enums.Measure
     time?: IntFilter<"BacketItems"> | number
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
-    Pofession?: XOR<ProfessionNullableScalarRelationFilter, ProfessionWhereInput> | null
+    Profession?: XOR<ProfessionNullableScalarRelationFilter, ProfessionWhereInput> | null
     Tool?: XOR<ToolNullableScalarRelationFilter, ToolWhereInput> | null
     Level?: XOR<LevelNullableScalarRelationFilter, LevelWhereInput> | null
   }
@@ -30850,7 +31022,7 @@ export namespace Prisma {
     measure?: SortOrder
     time?: SortOrder
     User?: UserOrderByWithRelationInput
-    Pofession?: ProfessionOrderByWithRelationInput
+    Profession?: ProfessionOrderByWithRelationInput
     Tool?: ToolOrderByWithRelationInput
     Level?: LevelOrderByWithRelationInput
   }
@@ -30868,7 +31040,7 @@ export namespace Prisma {
     measure?: EnumMeasureFilter<"BacketItems"> | $Enums.Measure
     time?: IntFilter<"BacketItems"> | number
     User?: XOR<UserScalarRelationFilter, UserWhereInput>
-    Pofession?: XOR<ProfessionNullableScalarRelationFilter, ProfessionWhereInput> | null
+    Profession?: XOR<ProfessionNullableScalarRelationFilter, ProfessionWhereInput> | null
     Tool?: XOR<ToolNullableScalarRelationFilter, ToolWhereInput> | null
     Level?: XOR<LevelNullableScalarRelationFilter, LevelWhereInput> | null
   }, "id">
@@ -30909,16 +31081,24 @@ export namespace Prisma {
     NOT?: CommentWhereInput | CommentWhereInput[]
     id?: StringFilter<"Comment"> | string
     text?: StringFilter<"Comment"> | string
+    user_id?: StringNullableFilter<"Comment"> | string | null
+    order_id?: StringNullableFilter<"Comment"> | string | null
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
     MasterRatings?: MasterRatingsListRelationFilter
   }
 
   export type CommentOrderByWithRelationInput = {
     id?: SortOrder
     text?: SortOrder
+    user_id?: SortOrderInput | SortOrder
+    order_id?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    order?: OrderOrderByWithRelationInput
     MasterRatings?: MasterRatingsOrderByRelationAggregateInput
   }
 
@@ -30928,14 +31108,20 @@ export namespace Prisma {
     OR?: CommentWhereInput[]
     NOT?: CommentWhereInput | CommentWhereInput[]
     text?: StringFilter<"Comment"> | string
+    user_id?: StringNullableFilter<"Comment"> | string | null
+    order_id?: StringNullableFilter<"Comment"> | string | null
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
     MasterRatings?: MasterRatingsListRelationFilter
   }, "id">
 
   export type CommentOrderByWithAggregationInput = {
     id?: SortOrder
     text?: SortOrder
+    user_id?: SortOrderInput | SortOrder
+    order_id?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CommentCountOrderByAggregateInput
@@ -30949,6 +31135,8 @@ export namespace Prisma {
     NOT?: CommentScalarWhereWithAggregatesInput | CommentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Comment"> | string
     text?: StringWithAggregatesFilter<"Comment"> | string
+    user_id?: StringNullableWithAggregatesFilter<"Comment"> | string | null
+    order_id?: StringNullableWithAggregatesFilter<"Comment"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
   }
@@ -31360,6 +31548,7 @@ export namespace Prisma {
     Session?: SessionCreateNestedManyWithoutUserInput
     Order?: OrderCreateNestedManyWithoutUserInput
     BacketItems?: BacketItemsCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -31376,6 +31565,7 @@ export namespace Prisma {
     Session?: SessionUncheckedCreateNestedManyWithoutUserInput
     Order?: OrderUncheckedCreateNestedManyWithoutUserInput
     BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -31392,6 +31582,7 @@ export namespace Prisma {
     Session?: SessionUpdateManyWithoutUserNestedInput
     Order?: OrderUpdateManyWithoutUserNestedInput
     BacketItems?: BacketItemsUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -31408,6 +31599,7 @@ export namespace Prisma {
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     Order?: OrderUncheckedUpdateManyWithoutUserNestedInput
     BacketItems?: BacketItemsUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -31981,7 +32173,7 @@ export namespace Prisma {
     MasterSkills?: MasterSkillsCreateNestedManyWithoutProfessionInput
     LevelsProfessions?: LevelsProfessionsCreateNestedManyWithoutProfessionInput
     OrderItems?: OrderItemsCreateNestedManyWithoutProfessionInput
-    BacketItems?: BacketItemsCreateNestedManyWithoutPofessionInput
+    BacketItems?: BacketItemsCreateNestedManyWithoutProfessionInput
   }
 
   export type ProfessionUncheckedCreateInput = {
@@ -31995,7 +32187,7 @@ export namespace Prisma {
     MasterSkills?: MasterSkillsUncheckedCreateNestedManyWithoutProfessionInput
     LevelsProfessions?: LevelsProfessionsUncheckedCreateNestedManyWithoutProfessionInput
     OrderItems?: OrderItemsUncheckedCreateNestedManyWithoutProfessionInput
-    BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutPofessionInput
+    BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutProfessionInput
   }
 
   export type ProfessionUpdateInput = {
@@ -32009,7 +32201,7 @@ export namespace Prisma {
     MasterSkills?: MasterSkillsUpdateManyWithoutProfessionNestedInput
     LevelsProfessions?: LevelsProfessionsUpdateManyWithoutProfessionNestedInput
     OrderItems?: OrderItemsUpdateManyWithoutProfessionNestedInput
-    BacketItems?: BacketItemsUpdateManyWithoutPofessionNestedInput
+    BacketItems?: BacketItemsUpdateManyWithoutProfessionNestedInput
   }
 
   export type ProfessionUncheckedUpdateInput = {
@@ -32023,7 +32215,7 @@ export namespace Prisma {
     MasterSkills?: MasterSkillsUncheckedUpdateManyWithoutProfessionNestedInput
     LevelsProfessions?: LevelsProfessionsUncheckedUpdateManyWithoutProfessionNestedInput
     OrderItems?: OrderItemsUncheckedUpdateManyWithoutProfessionNestedInput
-    BacketItems?: BacketItemsUncheckedUpdateManyWithoutPofessionNestedInput
+    BacketItems?: BacketItemsUncheckedUpdateManyWithoutProfessionNestedInput
   }
 
   export type ProfessionCreateManyInput = {
@@ -32307,6 +32499,7 @@ export namespace Prisma {
     User: UserCreateNestedOneWithoutOrderInput
     Masters?: MasterCreateNestedManyWithoutOrdersInput
     OrderItems?: OrderItemsCreateNestedManyWithoutOrderInput
+    Comment?: CommentCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateInput = {
@@ -32325,6 +32518,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     Masters?: MasterUncheckedCreateNestedManyWithoutOrdersInput
     OrderItems?: OrderItemsUncheckedCreateNestedManyWithoutOrderInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUpdateInput = {
@@ -32343,6 +32537,7 @@ export namespace Prisma {
     User?: UserUpdateOneRequiredWithoutOrderNestedInput
     Masters?: MasterUpdateManyWithoutOrdersNestedInput
     OrderItems?: OrderItemsUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateInput = {
@@ -32361,6 +32556,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Masters?: MasterUncheckedUpdateManyWithoutOrdersNestedInput
     OrderItems?: OrderItemsUncheckedUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderCreateManyInput = {
@@ -32496,7 +32692,7 @@ export namespace Prisma {
     measure: $Enums.Measure
     time: number
     User: UserCreateNestedOneWithoutBacketItemsInput
-    Pofession?: ProfessionCreateNestedOneWithoutBacketItemsInput
+    Profession?: ProfessionCreateNestedOneWithoutBacketItemsInput
     Tool?: ToolCreateNestedOneWithoutBacketItemsInput
     Level?: LevelCreateNestedOneWithoutBacketItemsInput
   }
@@ -32518,7 +32714,7 @@ export namespace Prisma {
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
     User?: UserUpdateOneRequiredWithoutBacketItemsNestedInput
-    Pofession?: ProfessionUpdateOneWithoutBacketItemsNestedInput
+    Profession?: ProfessionUpdateOneWithoutBacketItemsNestedInput
     Tool?: ToolUpdateOneWithoutBacketItemsNestedInput
     Level?: LevelUpdateOneWithoutBacketItemsNestedInput
   }
@@ -32568,12 +32764,16 @@ export namespace Prisma {
     text: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutCommentInput
+    order?: OrderCreateNestedOneWithoutCommentInput
     MasterRatings?: MasterRatingsCreateNestedManyWithoutCommentInput
   }
 
   export type CommentUncheckedCreateInput = {
     id?: string
     text: string
+    user_id?: string | null
+    order_id?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     MasterRatings?: MasterRatingsUncheckedCreateNestedManyWithoutCommentInput
@@ -32584,12 +32784,16 @@ export namespace Prisma {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutCommentNestedInput
+    order?: OrderUpdateOneWithoutCommentNestedInput
     MasterRatings?: MasterRatingsUpdateManyWithoutCommentNestedInput
   }
 
   export type CommentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    order_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     MasterRatings?: MasterRatingsUncheckedUpdateManyWithoutCommentNestedInput
@@ -32598,6 +32802,8 @@ export namespace Prisma {
   export type CommentCreateManyInput = {
     id?: string
     text: string
+    user_id?: string | null
+    order_id?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -32612,6 +32818,8 @@ export namespace Prisma {
   export type CommentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    order_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -33108,6 +33316,12 @@ export namespace Prisma {
     none?: BacketItemsWhereInput
   }
 
+  export type CommentListRelationFilter = {
+    every?: CommentWhereInput
+    some?: CommentWhereInput
+    none?: CommentWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -33122,6 +33336,10 @@ export namespace Prisma {
   }
 
   export type BacketItemsOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type CommentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -34005,9 +34223,16 @@ export namespace Prisma {
     time?: SortOrder
   }
 
+  export type OrderNullableScalarRelationFilter = {
+    is?: OrderWhereInput | null
+    isNot?: OrderWhereInput | null
+  }
+
   export type CommentCountOrderByAggregateInput = {
     id?: SortOrder
     text?: SortOrder
+    user_id?: SortOrder
+    order_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -34015,6 +34240,8 @@ export namespace Prisma {
   export type CommentMaxOrderByAggregateInput = {
     id?: SortOrder
     text?: SortOrder
+    user_id?: SortOrder
+    order_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -34022,6 +34249,8 @@ export namespace Prisma {
   export type CommentMinOrderByAggregateInput = {
     id?: SortOrder
     text?: SortOrder
+    user_id?: SortOrder
+    order_id?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -34278,6 +34507,13 @@ export namespace Prisma {
     connect?: BacketItemsWhereUniqueInput | BacketItemsWhereUniqueInput[]
   }
 
+  export type CommentCreateNestedManyWithoutUserInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
   export type CompanyUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<CompanyCreateWithoutUserInput, CompanyUncheckedCreateWithoutUserInput>
     connectOrCreate?: CompanyCreateOrConnectWithoutUserInput
@@ -34303,6 +34539,13 @@ export namespace Prisma {
     connectOrCreate?: BacketItemsCreateOrConnectWithoutUserInput | BacketItemsCreateOrConnectWithoutUserInput[]
     createMany?: BacketItemsCreateManyUserInputEnvelope
     connect?: BacketItemsWhereUniqueInput | BacketItemsWhereUniqueInput[]
+  }
+
+  export type CommentUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -34379,6 +34622,20 @@ export namespace Prisma {
     deleteMany?: BacketItemsScalarWhereInput | BacketItemsScalarWhereInput[]
   }
 
+  export type CommentUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutUserInput | CommentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
   }
@@ -34433,6 +34690,20 @@ export namespace Prisma {
     update?: BacketItemsUpdateWithWhereUniqueWithoutUserInput | BacketItemsUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: BacketItemsUpdateManyWithWhereWithoutUserInput | BacketItemsUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: BacketItemsScalarWhereInput | BacketItemsScalarWhereInput[]
+  }
+
+  export type CommentUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput> | CommentCreateWithoutUserInput[] | CommentUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutUserInput | CommentCreateOrConnectWithoutUserInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutUserInput | CommentUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: CommentCreateManyUserInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutUserInput | CommentUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutUserInput | CommentUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutCompanyInput = {
@@ -34972,10 +35243,10 @@ export namespace Prisma {
     connect?: OrderItemsWhereUniqueInput | OrderItemsWhereUniqueInput[]
   }
 
-  export type BacketItemsCreateNestedManyWithoutPofessionInput = {
-    create?: XOR<BacketItemsCreateWithoutPofessionInput, BacketItemsUncheckedCreateWithoutPofessionInput> | BacketItemsCreateWithoutPofessionInput[] | BacketItemsUncheckedCreateWithoutPofessionInput[]
-    connectOrCreate?: BacketItemsCreateOrConnectWithoutPofessionInput | BacketItemsCreateOrConnectWithoutPofessionInput[]
-    createMany?: BacketItemsCreateManyPofessionInputEnvelope
+  export type BacketItemsCreateNestedManyWithoutProfessionInput = {
+    create?: XOR<BacketItemsCreateWithoutProfessionInput, BacketItemsUncheckedCreateWithoutProfessionInput> | BacketItemsCreateWithoutProfessionInput[] | BacketItemsUncheckedCreateWithoutProfessionInput[]
+    connectOrCreate?: BacketItemsCreateOrConnectWithoutProfessionInput | BacketItemsCreateOrConnectWithoutProfessionInput[]
+    createMany?: BacketItemsCreateManyProfessionInputEnvelope
     connect?: BacketItemsWhereUniqueInput | BacketItemsWhereUniqueInput[]
   }
 
@@ -35006,10 +35277,10 @@ export namespace Prisma {
     connect?: OrderItemsWhereUniqueInput | OrderItemsWhereUniqueInput[]
   }
 
-  export type BacketItemsUncheckedCreateNestedManyWithoutPofessionInput = {
-    create?: XOR<BacketItemsCreateWithoutPofessionInput, BacketItemsUncheckedCreateWithoutPofessionInput> | BacketItemsCreateWithoutPofessionInput[] | BacketItemsUncheckedCreateWithoutPofessionInput[]
-    connectOrCreate?: BacketItemsCreateOrConnectWithoutPofessionInput | BacketItemsCreateOrConnectWithoutPofessionInput[]
-    createMany?: BacketItemsCreateManyPofessionInputEnvelope
+  export type BacketItemsUncheckedCreateNestedManyWithoutProfessionInput = {
+    create?: XOR<BacketItemsCreateWithoutProfessionInput, BacketItemsUncheckedCreateWithoutProfessionInput> | BacketItemsCreateWithoutProfessionInput[] | BacketItemsUncheckedCreateWithoutProfessionInput[]
+    connectOrCreate?: BacketItemsCreateOrConnectWithoutProfessionInput | BacketItemsCreateOrConnectWithoutProfessionInput[]
+    createMany?: BacketItemsCreateManyProfessionInputEnvelope
     connect?: BacketItemsWhereUniqueInput | BacketItemsWhereUniqueInput[]
   }
 
@@ -35068,17 +35339,17 @@ export namespace Prisma {
     deleteMany?: OrderItemsScalarWhereInput | OrderItemsScalarWhereInput[]
   }
 
-  export type BacketItemsUpdateManyWithoutPofessionNestedInput = {
-    create?: XOR<BacketItemsCreateWithoutPofessionInput, BacketItemsUncheckedCreateWithoutPofessionInput> | BacketItemsCreateWithoutPofessionInput[] | BacketItemsUncheckedCreateWithoutPofessionInput[]
-    connectOrCreate?: BacketItemsCreateOrConnectWithoutPofessionInput | BacketItemsCreateOrConnectWithoutPofessionInput[]
-    upsert?: BacketItemsUpsertWithWhereUniqueWithoutPofessionInput | BacketItemsUpsertWithWhereUniqueWithoutPofessionInput[]
-    createMany?: BacketItemsCreateManyPofessionInputEnvelope
+  export type BacketItemsUpdateManyWithoutProfessionNestedInput = {
+    create?: XOR<BacketItemsCreateWithoutProfessionInput, BacketItemsUncheckedCreateWithoutProfessionInput> | BacketItemsCreateWithoutProfessionInput[] | BacketItemsUncheckedCreateWithoutProfessionInput[]
+    connectOrCreate?: BacketItemsCreateOrConnectWithoutProfessionInput | BacketItemsCreateOrConnectWithoutProfessionInput[]
+    upsert?: BacketItemsUpsertWithWhereUniqueWithoutProfessionInput | BacketItemsUpsertWithWhereUniqueWithoutProfessionInput[]
+    createMany?: BacketItemsCreateManyProfessionInputEnvelope
     set?: BacketItemsWhereUniqueInput | BacketItemsWhereUniqueInput[]
     disconnect?: BacketItemsWhereUniqueInput | BacketItemsWhereUniqueInput[]
     delete?: BacketItemsWhereUniqueInput | BacketItemsWhereUniqueInput[]
     connect?: BacketItemsWhereUniqueInput | BacketItemsWhereUniqueInput[]
-    update?: BacketItemsUpdateWithWhereUniqueWithoutPofessionInput | BacketItemsUpdateWithWhereUniqueWithoutPofessionInput[]
-    updateMany?: BacketItemsUpdateManyWithWhereWithoutPofessionInput | BacketItemsUpdateManyWithWhereWithoutPofessionInput[]
+    update?: BacketItemsUpdateWithWhereUniqueWithoutProfessionInput | BacketItemsUpdateWithWhereUniqueWithoutProfessionInput[]
+    updateMany?: BacketItemsUpdateManyWithWhereWithoutProfessionInput | BacketItemsUpdateManyWithWhereWithoutProfessionInput[]
     deleteMany?: BacketItemsScalarWhereInput | BacketItemsScalarWhereInput[]
   }
 
@@ -35137,17 +35408,17 @@ export namespace Prisma {
     deleteMany?: OrderItemsScalarWhereInput | OrderItemsScalarWhereInput[]
   }
 
-  export type BacketItemsUncheckedUpdateManyWithoutPofessionNestedInput = {
-    create?: XOR<BacketItemsCreateWithoutPofessionInput, BacketItemsUncheckedCreateWithoutPofessionInput> | BacketItemsCreateWithoutPofessionInput[] | BacketItemsUncheckedCreateWithoutPofessionInput[]
-    connectOrCreate?: BacketItemsCreateOrConnectWithoutPofessionInput | BacketItemsCreateOrConnectWithoutPofessionInput[]
-    upsert?: BacketItemsUpsertWithWhereUniqueWithoutPofessionInput | BacketItemsUpsertWithWhereUniqueWithoutPofessionInput[]
-    createMany?: BacketItemsCreateManyPofessionInputEnvelope
+  export type BacketItemsUncheckedUpdateManyWithoutProfessionNestedInput = {
+    create?: XOR<BacketItemsCreateWithoutProfessionInput, BacketItemsUncheckedCreateWithoutProfessionInput> | BacketItemsCreateWithoutProfessionInput[] | BacketItemsUncheckedCreateWithoutProfessionInput[]
+    connectOrCreate?: BacketItemsCreateOrConnectWithoutProfessionInput | BacketItemsCreateOrConnectWithoutProfessionInput[]
+    upsert?: BacketItemsUpsertWithWhereUniqueWithoutProfessionInput | BacketItemsUpsertWithWhereUniqueWithoutProfessionInput[]
+    createMany?: BacketItemsCreateManyProfessionInputEnvelope
     set?: BacketItemsWhereUniqueInput | BacketItemsWhereUniqueInput[]
     disconnect?: BacketItemsWhereUniqueInput | BacketItemsWhereUniqueInput[]
     delete?: BacketItemsWhereUniqueInput | BacketItemsWhereUniqueInput[]
     connect?: BacketItemsWhereUniqueInput | BacketItemsWhereUniqueInput[]
-    update?: BacketItemsUpdateWithWhereUniqueWithoutPofessionInput | BacketItemsUpdateWithWhereUniqueWithoutPofessionInput[]
-    updateMany?: BacketItemsUpdateManyWithWhereWithoutPofessionInput | BacketItemsUpdateManyWithWhereWithoutPofessionInput[]
+    update?: BacketItemsUpdateWithWhereUniqueWithoutProfessionInput | BacketItemsUpdateWithWhereUniqueWithoutProfessionInput[]
+    updateMany?: BacketItemsUpdateManyWithWhereWithoutProfessionInput | BacketItemsUpdateManyWithWhereWithoutProfessionInput[]
     deleteMany?: BacketItemsScalarWhereInput | BacketItemsScalarWhereInput[]
   }
 
@@ -35368,6 +35639,13 @@ export namespace Prisma {
     connect?: OrderItemsWhereUniqueInput | OrderItemsWhereUniqueInput[]
   }
 
+  export type CommentCreateNestedManyWithoutOrderInput = {
+    create?: XOR<CommentCreateWithoutOrderInput, CommentUncheckedCreateWithoutOrderInput> | CommentCreateWithoutOrderInput[] | CommentUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutOrderInput | CommentCreateOrConnectWithoutOrderInput[]
+    createMany?: CommentCreateManyOrderInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
   export type MasterUncheckedCreateNestedManyWithoutOrdersInput = {
     create?: XOR<MasterCreateWithoutOrdersInput, MasterUncheckedCreateWithoutOrdersInput> | MasterCreateWithoutOrdersInput[] | MasterUncheckedCreateWithoutOrdersInput[]
     connectOrCreate?: MasterCreateOrConnectWithoutOrdersInput | MasterCreateOrConnectWithoutOrdersInput[]
@@ -35379,6 +35657,13 @@ export namespace Prisma {
     connectOrCreate?: OrderItemsCreateOrConnectWithoutOrderInput | OrderItemsCreateOrConnectWithoutOrderInput[]
     createMany?: OrderItemsCreateManyOrderInputEnvelope
     connect?: OrderItemsWhereUniqueInput | OrderItemsWhereUniqueInput[]
+  }
+
+  export type CommentUncheckedCreateNestedManyWithoutOrderInput = {
+    create?: XOR<CommentCreateWithoutOrderInput, CommentUncheckedCreateWithoutOrderInput> | CommentCreateWithoutOrderInput[] | CommentUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutOrderInput | CommentCreateOrConnectWithoutOrderInput[]
+    createMany?: CommentCreateManyOrderInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
   }
 
   export type EnumPaymentTypeFieldUpdateOperationsInput = {
@@ -35424,6 +35709,20 @@ export namespace Prisma {
     deleteMany?: OrderItemsScalarWhereInput | OrderItemsScalarWhereInput[]
   }
 
+  export type CommentUpdateManyWithoutOrderNestedInput = {
+    create?: XOR<CommentCreateWithoutOrderInput, CommentUncheckedCreateWithoutOrderInput> | CommentCreateWithoutOrderInput[] | CommentUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutOrderInput | CommentCreateOrConnectWithoutOrderInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutOrderInput | CommentUpsertWithWhereUniqueWithoutOrderInput[]
+    createMany?: CommentCreateManyOrderInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutOrderInput | CommentUpdateWithWhereUniqueWithoutOrderInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutOrderInput | CommentUpdateManyWithWhereWithoutOrderInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
   export type MasterUncheckedUpdateManyWithoutOrdersNestedInput = {
     create?: XOR<MasterCreateWithoutOrdersInput, MasterUncheckedCreateWithoutOrdersInput> | MasterCreateWithoutOrdersInput[] | MasterUncheckedCreateWithoutOrdersInput[]
     connectOrCreate?: MasterCreateOrConnectWithoutOrdersInput | MasterCreateOrConnectWithoutOrdersInput[]
@@ -35449,6 +35748,20 @@ export namespace Prisma {
     update?: OrderItemsUpdateWithWhereUniqueWithoutOrderInput | OrderItemsUpdateWithWhereUniqueWithoutOrderInput[]
     updateMany?: OrderItemsUpdateManyWithWhereWithoutOrderInput | OrderItemsUpdateManyWithWhereWithoutOrderInput[]
     deleteMany?: OrderItemsScalarWhereInput | OrderItemsScalarWhereInput[]
+  }
+
+  export type CommentUncheckedUpdateManyWithoutOrderNestedInput = {
+    create?: XOR<CommentCreateWithoutOrderInput, CommentUncheckedCreateWithoutOrderInput> | CommentCreateWithoutOrderInput[] | CommentUncheckedCreateWithoutOrderInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutOrderInput | CommentCreateOrConnectWithoutOrderInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutOrderInput | CommentUpsertWithWhereUniqueWithoutOrderInput[]
+    createMany?: CommentCreateManyOrderInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutOrderInput | CommentUpdateWithWhereUniqueWithoutOrderInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutOrderInput | CommentUpdateManyWithWhereWithoutOrderInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
   export type OrderCreateNestedOneWithoutOrderItemsInput = {
@@ -35579,6 +35892,18 @@ export namespace Prisma {
     update?: XOR<XOR<LevelUpdateToOneWithWhereWithoutBacketItemsInput, LevelUpdateWithoutBacketItemsInput>, LevelUncheckedUpdateWithoutBacketItemsInput>
   }
 
+  export type UserCreateNestedOneWithoutCommentInput = {
+    create?: XOR<UserCreateWithoutCommentInput, UserUncheckedCreateWithoutCommentInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type OrderCreateNestedOneWithoutCommentInput = {
+    create?: XOR<OrderCreateWithoutCommentInput, OrderUncheckedCreateWithoutCommentInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutCommentInput
+    connect?: OrderWhereUniqueInput
+  }
+
   export type MasterRatingsCreateNestedManyWithoutCommentInput = {
     create?: XOR<MasterRatingsCreateWithoutCommentInput, MasterRatingsUncheckedCreateWithoutCommentInput> | MasterRatingsCreateWithoutCommentInput[] | MasterRatingsUncheckedCreateWithoutCommentInput[]
     connectOrCreate?: MasterRatingsCreateOrConnectWithoutCommentInput | MasterRatingsCreateOrConnectWithoutCommentInput[]
@@ -35591,6 +35916,26 @@ export namespace Prisma {
     connectOrCreate?: MasterRatingsCreateOrConnectWithoutCommentInput | MasterRatingsCreateOrConnectWithoutCommentInput[]
     createMany?: MasterRatingsCreateManyCommentInputEnvelope
     connect?: MasterRatingsWhereUniqueInput | MasterRatingsWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneWithoutCommentNestedInput = {
+    create?: XOR<UserCreateWithoutCommentInput, UserUncheckedCreateWithoutCommentInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCommentInput
+    upsert?: UserUpsertWithoutCommentInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentInput, UserUpdateWithoutCommentInput>, UserUncheckedUpdateWithoutCommentInput>
+  }
+
+  export type OrderUpdateOneWithoutCommentNestedInput = {
+    create?: XOR<OrderCreateWithoutCommentInput, OrderUncheckedCreateWithoutCommentInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutCommentInput
+    upsert?: OrderUpsertWithoutCommentInput
+    disconnect?: OrderWhereInput | boolean
+    delete?: OrderWhereInput | boolean
+    connect?: OrderWhereUniqueInput
+    update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutCommentInput, OrderUpdateWithoutCommentInput>, OrderUncheckedUpdateWithoutCommentInput>
   }
 
   export type MasterRatingsUpdateManyWithoutCommentNestedInput = {
@@ -35927,6 +36272,7 @@ export namespace Prisma {
     Session?: SessionCreateNestedManyWithoutUserInput
     Order?: OrderCreateNestedManyWithoutUserInput
     BacketItems?: BacketItemsCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutRegionInput = {
@@ -35942,6 +36288,7 @@ export namespace Prisma {
     Session?: SessionUncheckedCreateNestedManyWithoutUserInput
     Order?: OrderUncheckedCreateNestedManyWithoutUserInput
     BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutRegionInput = {
@@ -36074,6 +36421,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     Masters?: MasterCreateNestedManyWithoutOrdersInput
     OrderItems?: OrderItemsCreateNestedManyWithoutOrderInput
+    Comment?: CommentCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateWithoutUserInput = {
@@ -36091,6 +36439,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     Masters?: MasterUncheckedCreateNestedManyWithoutOrdersInput
     OrderItems?: OrderItemsUncheckedCreateNestedManyWithoutOrderInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderCreateOrConnectWithoutUserInput = {
@@ -36108,7 +36457,7 @@ export namespace Prisma {
     count: number
     measure: $Enums.Measure
     time: number
-    Pofession?: ProfessionCreateNestedOneWithoutBacketItemsInput
+    Profession?: ProfessionCreateNestedOneWithoutBacketItemsInput
     Tool?: ToolCreateNestedOneWithoutBacketItemsInput
     Level?: LevelCreateNestedOneWithoutBacketItemsInput
   }
@@ -36130,6 +36479,34 @@ export namespace Prisma {
 
   export type BacketItemsCreateManyUserInputEnvelope = {
     data: BacketItemsCreateManyUserInput | BacketItemsCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommentCreateWithoutUserInput = {
+    id?: string
+    text: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    order?: OrderCreateNestedOneWithoutCommentInput
+    MasterRatings?: MasterRatingsCreateNestedManyWithoutCommentInput
+  }
+
+  export type CommentUncheckedCreateWithoutUserInput = {
+    id?: string
+    text: string
+    order_id?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    MasterRatings?: MasterRatingsUncheckedCreateNestedManyWithoutCommentInput
+  }
+
+  export type CommentCreateOrConnectWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    create: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput>
+  }
+
+  export type CommentCreateManyUserInputEnvelope = {
+    data: CommentCreateManyUserInput | CommentCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -36287,6 +36664,34 @@ export namespace Prisma {
     time?: IntFilter<"BacketItems"> | number
   }
 
+  export type CommentUpsertWithWhereUniqueWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    update: XOR<CommentUpdateWithoutUserInput, CommentUncheckedUpdateWithoutUserInput>
+    create: XOR<CommentCreateWithoutUserInput, CommentUncheckedCreateWithoutUserInput>
+  }
+
+  export type CommentUpdateWithWhereUniqueWithoutUserInput = {
+    where: CommentWhereUniqueInput
+    data: XOR<CommentUpdateWithoutUserInput, CommentUncheckedUpdateWithoutUserInput>
+  }
+
+  export type CommentUpdateManyWithWhereWithoutUserInput = {
+    where: CommentScalarWhereInput
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type CommentScalarWhereInput = {
+    AND?: CommentScalarWhereInput | CommentScalarWhereInput[]
+    OR?: CommentScalarWhereInput[]
+    NOT?: CommentScalarWhereInput | CommentScalarWhereInput[]
+    id?: StringFilter<"Comment"> | string
+    text?: StringFilter<"Comment"> | string
+    user_id?: StringNullableFilter<"Comment"> | string | null
+    order_id?: StringNullableFilter<"Comment"> | string | null
+    createdAt?: DateTimeFilter<"Comment"> | Date | string
+    updatedAt?: DateTimeFilter<"Comment"> | Date | string
+  }
+
   export type UserCreateWithoutCompanyInput = {
     id?: string
     full_name: string
@@ -36300,6 +36705,7 @@ export namespace Prisma {
     Session?: SessionCreateNestedManyWithoutUserInput
     Order?: OrderCreateNestedManyWithoutUserInput
     BacketItems?: BacketItemsCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCompanyInput = {
@@ -36315,6 +36721,7 @@ export namespace Prisma {
     Session?: SessionUncheckedCreateNestedManyWithoutUserInput
     Order?: OrderUncheckedCreateNestedManyWithoutUserInput
     BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCompanyInput = {
@@ -36346,6 +36753,7 @@ export namespace Prisma {
     Session?: SessionUpdateManyWithoutUserNestedInput
     Order?: OrderUpdateManyWithoutUserNestedInput
     BacketItems?: BacketItemsUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCompanyInput = {
@@ -36361,6 +36769,7 @@ export namespace Prisma {
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     Order?: OrderUncheckedUpdateManyWithoutUserNestedInput
     BacketItems?: BacketItemsUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionInput = {
@@ -36376,6 +36785,7 @@ export namespace Prisma {
     Company?: CompanyCreateNestedOneWithoutUserInput
     Order?: OrderCreateNestedManyWithoutUserInput
     BacketItems?: BacketItemsCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionInput = {
@@ -36391,6 +36801,7 @@ export namespace Prisma {
     Company?: CompanyUncheckedCreateNestedOneWithoutUserInput
     Order?: OrderUncheckedCreateNestedManyWithoutUserInput
     BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionInput = {
@@ -36422,6 +36833,7 @@ export namespace Prisma {
     Company?: CompanyUpdateOneWithoutUserNestedInput
     Order?: OrderUpdateManyWithoutUserNestedInput
     BacketItems?: BacketItemsUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionInput = {
@@ -36437,6 +36849,7 @@ export namespace Prisma {
     Company?: CompanyUncheckedUpdateOneWithoutUserNestedInput
     Order?: OrderUncheckedUpdateManyWithoutUserNestedInput
     BacketItems?: BacketItemsUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ToolCreateWithoutBrandInput = {
@@ -36739,7 +37152,7 @@ export namespace Prisma {
     MasterSkills?: MasterSkillsCreateNestedManyWithoutProfessionInput
     LevelsProfessions?: LevelsProfessionsCreateNestedManyWithoutProfessionInput
     OrderItems?: OrderItemsCreateNestedManyWithoutProfessionInput
-    BacketItems?: BacketItemsCreateNestedManyWithoutPofessionInput
+    BacketItems?: BacketItemsCreateNestedManyWithoutProfessionInput
   }
 
   export type ProfessionUncheckedCreateWithoutToolsInput = {
@@ -36752,7 +37165,7 @@ export namespace Prisma {
     MasterSkills?: MasterSkillsUncheckedCreateNestedManyWithoutProfessionInput
     LevelsProfessions?: LevelsProfessionsUncheckedCreateNestedManyWithoutProfessionInput
     OrderItems?: OrderItemsUncheckedCreateNestedManyWithoutProfessionInput
-    BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutPofessionInput
+    BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutProfessionInput
   }
 
   export type ProfessionCreateOrConnectWithoutToolsInput = {
@@ -36798,7 +37211,7 @@ export namespace Prisma {
     measure: $Enums.Measure
     time: number
     User: UserCreateNestedOneWithoutBacketItemsInput
-    Pofession?: ProfessionCreateNestedOneWithoutBacketItemsInput
+    Profession?: ProfessionCreateNestedOneWithoutBacketItemsInput
     Level?: LevelCreateNestedOneWithoutBacketItemsInput
   }
 
@@ -37066,7 +37479,7 @@ export namespace Prisma {
     measure: $Enums.Measure
     time: number
     User: UserCreateNestedOneWithoutBacketItemsInput
-    Pofession?: ProfessionCreateNestedOneWithoutBacketItemsInput
+    Profession?: ProfessionCreateNestedOneWithoutBacketItemsInput
     Tool?: ToolCreateNestedOneWithoutBacketItemsInput
   }
 
@@ -37317,7 +37730,7 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type BacketItemsCreateWithoutPofessionInput = {
+  export type BacketItemsCreateWithoutProfessionInput = {
     id?: string
     count: number
     measure: $Enums.Measure
@@ -37327,7 +37740,7 @@ export namespace Prisma {
     Level?: LevelCreateNestedOneWithoutBacketItemsInput
   }
 
-  export type BacketItemsUncheckedCreateWithoutPofessionInput = {
+  export type BacketItemsUncheckedCreateWithoutProfessionInput = {
     id?: string
     user_id: string
     tool_id?: string | null
@@ -37337,13 +37750,13 @@ export namespace Prisma {
     time: number
   }
 
-  export type BacketItemsCreateOrConnectWithoutPofessionInput = {
+  export type BacketItemsCreateOrConnectWithoutProfessionInput = {
     where: BacketItemsWhereUniqueInput
-    create: XOR<BacketItemsCreateWithoutPofessionInput, BacketItemsUncheckedCreateWithoutPofessionInput>
+    create: XOR<BacketItemsCreateWithoutProfessionInput, BacketItemsUncheckedCreateWithoutProfessionInput>
   }
 
-  export type BacketItemsCreateManyPofessionInputEnvelope = {
-    data: BacketItemsCreateManyPofessionInput | BacketItemsCreateManyPofessionInput[]
+  export type BacketItemsCreateManyProfessionInputEnvelope = {
+    data: BacketItemsCreateManyProfessionInput | BacketItemsCreateManyProfessionInput[]
     skipDuplicates?: boolean
   }
 
@@ -37411,20 +37824,20 @@ export namespace Prisma {
     data: XOR<OrderItemsUpdateManyMutationInput, OrderItemsUncheckedUpdateManyWithoutProfessionInput>
   }
 
-  export type BacketItemsUpsertWithWhereUniqueWithoutPofessionInput = {
+  export type BacketItemsUpsertWithWhereUniqueWithoutProfessionInput = {
     where: BacketItemsWhereUniqueInput
-    update: XOR<BacketItemsUpdateWithoutPofessionInput, BacketItemsUncheckedUpdateWithoutPofessionInput>
-    create: XOR<BacketItemsCreateWithoutPofessionInput, BacketItemsUncheckedCreateWithoutPofessionInput>
+    update: XOR<BacketItemsUpdateWithoutProfessionInput, BacketItemsUncheckedUpdateWithoutProfessionInput>
+    create: XOR<BacketItemsCreateWithoutProfessionInput, BacketItemsUncheckedCreateWithoutProfessionInput>
   }
 
-  export type BacketItemsUpdateWithWhereUniqueWithoutPofessionInput = {
+  export type BacketItemsUpdateWithWhereUniqueWithoutProfessionInput = {
     where: BacketItemsWhereUniqueInput
-    data: XOR<BacketItemsUpdateWithoutPofessionInput, BacketItemsUncheckedUpdateWithoutPofessionInput>
+    data: XOR<BacketItemsUpdateWithoutProfessionInput, BacketItemsUncheckedUpdateWithoutProfessionInput>
   }
 
-  export type BacketItemsUpdateManyWithWhereWithoutPofessionInput = {
+  export type BacketItemsUpdateManyWithWhereWithoutProfessionInput = {
     where: BacketItemsScalarWhereInput
-    data: XOR<BacketItemsUpdateManyMutationInput, BacketItemsUncheckedUpdateManyWithoutPofessionInput>
+    data: XOR<BacketItemsUpdateManyMutationInput, BacketItemsUncheckedUpdateManyWithoutProfessionInput>
   }
 
   export type ProfessionCreateWithoutLevelsProfessionsInput = {
@@ -37437,7 +37850,7 @@ export namespace Prisma {
     Tools?: ToolCreateNestedManyWithoutProfessionsInput
     MasterSkills?: MasterSkillsCreateNestedManyWithoutProfessionInput
     OrderItems?: OrderItemsCreateNestedManyWithoutProfessionInput
-    BacketItems?: BacketItemsCreateNestedManyWithoutPofessionInput
+    BacketItems?: BacketItemsCreateNestedManyWithoutProfessionInput
   }
 
   export type ProfessionUncheckedCreateWithoutLevelsProfessionsInput = {
@@ -37450,7 +37863,7 @@ export namespace Prisma {
     Tools?: ToolUncheckedCreateNestedManyWithoutProfessionsInput
     MasterSkills?: MasterSkillsUncheckedCreateNestedManyWithoutProfessionInput
     OrderItems?: OrderItemsUncheckedCreateNestedManyWithoutProfessionInput
-    BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutPofessionInput
+    BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutProfessionInput
   }
 
   export type ProfessionCreateOrConnectWithoutLevelsProfessionsInput = {
@@ -37504,7 +37917,7 @@ export namespace Prisma {
     Tools?: ToolUpdateManyWithoutProfessionsNestedInput
     MasterSkills?: MasterSkillsUpdateManyWithoutProfessionNestedInput
     OrderItems?: OrderItemsUpdateManyWithoutProfessionNestedInput
-    BacketItems?: BacketItemsUpdateManyWithoutPofessionNestedInput
+    BacketItems?: BacketItemsUpdateManyWithoutProfessionNestedInput
   }
 
   export type ProfessionUncheckedUpdateWithoutLevelsProfessionsInput = {
@@ -37517,7 +37930,7 @@ export namespace Prisma {
     Tools?: ToolUncheckedUpdateManyWithoutProfessionsNestedInput
     MasterSkills?: MasterSkillsUncheckedUpdateManyWithoutProfessionNestedInput
     OrderItems?: OrderItemsUncheckedUpdateManyWithoutProfessionNestedInput
-    BacketItems?: BacketItemsUncheckedUpdateManyWithoutPofessionNestedInput
+    BacketItems?: BacketItemsUncheckedUpdateManyWithoutProfessionNestedInput
   }
 
   export type LevelUpsertWithoutLevelsProfessionsInput = {
@@ -37596,6 +38009,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     User: UserCreateNestedOneWithoutOrderInput
     OrderItems?: OrderItemsCreateNestedManyWithoutOrderInput
+    Comment?: CommentCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateWithoutMastersInput = {
@@ -37613,6 +38027,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     OrderItems?: OrderItemsUncheckedCreateNestedManyWithoutOrderInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderCreateOrConnectWithoutMastersInput = {
@@ -37735,7 +38150,7 @@ export namespace Prisma {
     Tools?: ToolCreateNestedManyWithoutProfessionsInput
     LevelsProfessions?: LevelsProfessionsCreateNestedManyWithoutProfessionInput
     OrderItems?: OrderItemsCreateNestedManyWithoutProfessionInput
-    BacketItems?: BacketItemsCreateNestedManyWithoutPofessionInput
+    BacketItems?: BacketItemsCreateNestedManyWithoutProfessionInput
   }
 
   export type ProfessionUncheckedCreateWithoutMasterSkillsInput = {
@@ -37748,7 +38163,7 @@ export namespace Prisma {
     Tools?: ToolUncheckedCreateNestedManyWithoutProfessionsInput
     LevelsProfessions?: LevelsProfessionsUncheckedCreateNestedManyWithoutProfessionInput
     OrderItems?: OrderItemsUncheckedCreateNestedManyWithoutProfessionInput
-    BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutPofessionInput
+    BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutProfessionInput
   }
 
   export type ProfessionCreateOrConnectWithoutMasterSkillsInput = {
@@ -37843,7 +38258,7 @@ export namespace Prisma {
     Tools?: ToolUpdateManyWithoutProfessionsNestedInput
     LevelsProfessions?: LevelsProfessionsUpdateManyWithoutProfessionNestedInput
     OrderItems?: OrderItemsUpdateManyWithoutProfessionNestedInput
-    BacketItems?: BacketItemsUpdateManyWithoutPofessionNestedInput
+    BacketItems?: BacketItemsUpdateManyWithoutProfessionNestedInput
   }
 
   export type ProfessionUncheckedUpdateWithoutMasterSkillsInput = {
@@ -37856,7 +38271,7 @@ export namespace Prisma {
     Tools?: ToolUncheckedUpdateManyWithoutProfessionsNestedInput
     LevelsProfessions?: LevelsProfessionsUncheckedUpdateManyWithoutProfessionNestedInput
     OrderItems?: OrderItemsUncheckedUpdateManyWithoutProfessionNestedInput
-    BacketItems?: BacketItemsUncheckedUpdateManyWithoutPofessionNestedInput
+    BacketItems?: BacketItemsUncheckedUpdateManyWithoutProfessionNestedInput
   }
 
   export type MasterUpsertWithoutMasterSkillsInput = {
@@ -37913,6 +38328,7 @@ export namespace Prisma {
     Company?: CompanyCreateNestedOneWithoutUserInput
     Session?: SessionCreateNestedManyWithoutUserInput
     BacketItems?: BacketItemsCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutOrderInput = {
@@ -37928,6 +38344,7 @@ export namespace Prisma {
     Company?: CompanyUncheckedCreateNestedOneWithoutUserInput
     Session?: SessionUncheckedCreateNestedManyWithoutUserInput
     BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutOrderInput = {
@@ -38002,6 +38419,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CommentCreateWithoutOrderInput = {
+    id?: string
+    text: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutCommentInput
+    MasterRatings?: MasterRatingsCreateNestedManyWithoutCommentInput
+  }
+
+  export type CommentUncheckedCreateWithoutOrderInput = {
+    id?: string
+    text: string
+    user_id?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    MasterRatings?: MasterRatingsUncheckedCreateNestedManyWithoutCommentInput
+  }
+
+  export type CommentCreateOrConnectWithoutOrderInput = {
+    where: CommentWhereUniqueInput
+    create: XOR<CommentCreateWithoutOrderInput, CommentUncheckedCreateWithoutOrderInput>
+  }
+
+  export type CommentCreateManyOrderInputEnvelope = {
+    data: CommentCreateManyOrderInput | CommentCreateManyOrderInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutOrderInput = {
     update: XOR<UserUpdateWithoutOrderInput, UserUncheckedUpdateWithoutOrderInput>
     create: XOR<UserCreateWithoutOrderInput, UserUncheckedCreateWithoutOrderInput>
@@ -38026,6 +38471,7 @@ export namespace Prisma {
     Company?: CompanyUpdateOneWithoutUserNestedInput
     Session?: SessionUpdateManyWithoutUserNestedInput
     BacketItems?: BacketItemsUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutOrderInput = {
@@ -38041,6 +38487,7 @@ export namespace Prisma {
     Company?: CompanyUncheckedUpdateOneWithoutUserNestedInput
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     BacketItems?: BacketItemsUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MasterUpsertWithWhereUniqueWithoutOrdersInput = {
@@ -38091,6 +38538,22 @@ export namespace Prisma {
     data: XOR<OrderItemsUpdateManyMutationInput, OrderItemsUncheckedUpdateManyWithoutOrderInput>
   }
 
+  export type CommentUpsertWithWhereUniqueWithoutOrderInput = {
+    where: CommentWhereUniqueInput
+    update: XOR<CommentUpdateWithoutOrderInput, CommentUncheckedUpdateWithoutOrderInput>
+    create: XOR<CommentCreateWithoutOrderInput, CommentUncheckedCreateWithoutOrderInput>
+  }
+
+  export type CommentUpdateWithWhereUniqueWithoutOrderInput = {
+    where: CommentWhereUniqueInput
+    data: XOR<CommentUpdateWithoutOrderInput, CommentUncheckedUpdateWithoutOrderInput>
+  }
+
+  export type CommentUpdateManyWithWhereWithoutOrderInput = {
+    where: CommentScalarWhereInput
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutOrderInput>
+  }
+
   export type OrderCreateWithoutOrderItemsInput = {
     id?: string
     total_sum: number
@@ -38106,6 +38569,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     User: UserCreateNestedOneWithoutOrderInput
     Masters?: MasterCreateNestedManyWithoutOrdersInput
+    Comment?: CommentCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateWithoutOrderItemsInput = {
@@ -38123,6 +38587,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     Masters?: MasterUncheckedCreateNestedManyWithoutOrdersInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderCreateOrConnectWithoutOrderItemsInput = {
@@ -38189,7 +38654,7 @@ export namespace Prisma {
     Tools?: ToolCreateNestedManyWithoutProfessionsInput
     MasterSkills?: MasterSkillsCreateNestedManyWithoutProfessionInput
     LevelsProfessions?: LevelsProfessionsCreateNestedManyWithoutProfessionInput
-    BacketItems?: BacketItemsCreateNestedManyWithoutPofessionInput
+    BacketItems?: BacketItemsCreateNestedManyWithoutProfessionInput
   }
 
   export type ProfessionUncheckedCreateWithoutOrderItemsInput = {
@@ -38202,7 +38667,7 @@ export namespace Prisma {
     Tools?: ToolUncheckedCreateNestedManyWithoutProfessionsInput
     MasterSkills?: MasterSkillsUncheckedCreateNestedManyWithoutProfessionInput
     LevelsProfessions?: LevelsProfessionsUncheckedCreateNestedManyWithoutProfessionInput
-    BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutPofessionInput
+    BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutProfessionInput
   }
 
   export type ProfessionCreateOrConnectWithoutOrderItemsInput = {
@@ -38261,6 +38726,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     User?: UserUpdateOneRequiredWithoutOrderNestedInput
     Masters?: MasterUpdateManyWithoutOrdersNestedInput
+    Comment?: CommentUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutOrderItemsInput = {
@@ -38278,6 +38744,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Masters?: MasterUncheckedUpdateManyWithoutOrdersNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type ToolUpsertWithoutOrderItemsInput = {
@@ -38356,7 +38823,7 @@ export namespace Prisma {
     Tools?: ToolUpdateManyWithoutProfessionsNestedInput
     MasterSkills?: MasterSkillsUpdateManyWithoutProfessionNestedInput
     LevelsProfessions?: LevelsProfessionsUpdateManyWithoutProfessionNestedInput
-    BacketItems?: BacketItemsUpdateManyWithoutPofessionNestedInput
+    BacketItems?: BacketItemsUpdateManyWithoutProfessionNestedInput
   }
 
   export type ProfessionUncheckedUpdateWithoutOrderItemsInput = {
@@ -38369,7 +38836,7 @@ export namespace Prisma {
     Tools?: ToolUncheckedUpdateManyWithoutProfessionsNestedInput
     MasterSkills?: MasterSkillsUncheckedUpdateManyWithoutProfessionNestedInput
     LevelsProfessions?: LevelsProfessionsUncheckedUpdateManyWithoutProfessionNestedInput
-    BacketItems?: BacketItemsUncheckedUpdateManyWithoutPofessionNestedInput
+    BacketItems?: BacketItemsUncheckedUpdateManyWithoutProfessionNestedInput
   }
 
   export type LevelUpsertWithoutOrderItemsInput = {
@@ -38416,6 +38883,7 @@ export namespace Prisma {
     Company?: CompanyCreateNestedOneWithoutUserInput
     Session?: SessionCreateNestedManyWithoutUserInput
     Order?: OrderCreateNestedManyWithoutUserInput
+    Comment?: CommentCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutBacketItemsInput = {
@@ -38431,6 +38899,7 @@ export namespace Prisma {
     Company?: CompanyUncheckedCreateNestedOneWithoutUserInput
     Session?: SessionUncheckedCreateNestedManyWithoutUserInput
     Order?: OrderUncheckedCreateNestedManyWithoutUserInput
+    Comment?: CommentUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutBacketItemsInput = {
@@ -38567,6 +39036,7 @@ export namespace Prisma {
     Company?: CompanyUpdateOneWithoutUserNestedInput
     Session?: SessionUpdateManyWithoutUserNestedInput
     Order?: OrderUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutBacketItemsInput = {
@@ -38582,6 +39052,7 @@ export namespace Prisma {
     Company?: CompanyUncheckedUpdateOneWithoutUserNestedInput
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     Order?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProfessionUpsertWithoutBacketItemsInput = {
@@ -38707,6 +39178,84 @@ export namespace Prisma {
     OrderItems?: OrderItemsUncheckedUpdateManyWithoutLevelNestedInput
   }
 
+  export type UserCreateWithoutCommentInput = {
+    id?: string
+    full_name: string
+    phone: string
+    password: string
+    status?: boolean
+    role: $Enums.Role
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Region?: RegionCreateNestedOneWithoutUsersInput
+    Company?: CompanyCreateNestedOneWithoutUserInput
+    Session?: SessionCreateNestedManyWithoutUserInput
+    Order?: OrderCreateNestedManyWithoutUserInput
+    BacketItems?: BacketItemsCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCommentInput = {
+    id?: string
+    full_name: string
+    phone: string
+    password: string
+    status?: boolean
+    region_id?: string | null
+    role: $Enums.Role
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Company?: CompanyUncheckedCreateNestedOneWithoutUserInput
+    Session?: SessionUncheckedCreateNestedManyWithoutUserInput
+    Order?: OrderUncheckedCreateNestedManyWithoutUserInput
+    BacketItems?: BacketItemsUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCommentInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCommentInput, UserUncheckedCreateWithoutCommentInput>
+  }
+
+  export type OrderCreateWithoutCommentInput = {
+    id?: string
+    total_sum: number
+    location: JsonNullValueInput | InputJsonValue
+    address: string
+    dete: Date | string
+    payment_type?: $Enums.PaymentType
+    paid?: boolean
+    status?: $Enums.StatusOrder
+    with_delivery: boolean
+    comment_delivery: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    User: UserCreateNestedOneWithoutOrderInput
+    Masters?: MasterCreateNestedManyWithoutOrdersInput
+    OrderItems?: OrderItemsCreateNestedManyWithoutOrderInput
+  }
+
+  export type OrderUncheckedCreateWithoutCommentInput = {
+    id?: string
+    user_id: string
+    total_sum: number
+    location: JsonNullValueInput | InputJsonValue
+    address: string
+    dete: Date | string
+    payment_type?: $Enums.PaymentType
+    paid?: boolean
+    status?: $Enums.StatusOrder
+    with_delivery: boolean
+    comment_delivery: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Masters?: MasterUncheckedCreateNestedManyWithoutOrdersInput
+    OrderItems?: OrderItemsUncheckedCreateNestedManyWithoutOrderInput
+  }
+
+  export type OrderCreateOrConnectWithoutCommentInput = {
+    where: OrderWhereUniqueInput
+    create: XOR<OrderCreateWithoutCommentInput, OrderUncheckedCreateWithoutCommentInput>
+  }
+
   export type MasterRatingsCreateWithoutCommentInput = {
     id?: string
     star: number
@@ -38727,6 +39276,96 @@ export namespace Prisma {
   export type MasterRatingsCreateManyCommentInputEnvelope = {
     data: MasterRatingsCreateManyCommentInput | MasterRatingsCreateManyCommentInput[]
     skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutCommentInput = {
+    update: XOR<UserUpdateWithoutCommentInput, UserUncheckedUpdateWithoutCommentInput>
+    create: XOR<UserCreateWithoutCommentInput, UserUncheckedCreateWithoutCommentInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCommentInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCommentInput, UserUncheckedUpdateWithoutCommentInput>
+  }
+
+  export type UserUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    full_name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Region?: RegionUpdateOneWithoutUsersNestedInput
+    Company?: CompanyUpdateOneWithoutUserNestedInput
+    Session?: SessionUpdateManyWithoutUserNestedInput
+    Order?: OrderUpdateManyWithoutUserNestedInput
+    BacketItems?: BacketItemsUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    full_name?: StringFieldUpdateOperationsInput | string
+    phone?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    region_id?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Company?: CompanyUncheckedUpdateOneWithoutUserNestedInput
+    Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    Order?: OrderUncheckedUpdateManyWithoutUserNestedInput
+    BacketItems?: BacketItemsUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type OrderUpsertWithoutCommentInput = {
+    update: XOR<OrderUpdateWithoutCommentInput, OrderUncheckedUpdateWithoutCommentInput>
+    create: XOR<OrderCreateWithoutCommentInput, OrderUncheckedCreateWithoutCommentInput>
+    where?: OrderWhereInput
+  }
+
+  export type OrderUpdateToOneWithWhereWithoutCommentInput = {
+    where?: OrderWhereInput
+    data: XOR<OrderUpdateWithoutCommentInput, OrderUncheckedUpdateWithoutCommentInput>
+  }
+
+  export type OrderUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    total_sum?: FloatFieldUpdateOperationsInput | number
+    location?: JsonNullValueInput | InputJsonValue
+    address?: StringFieldUpdateOperationsInput | string
+    dete?: DateTimeFieldUpdateOperationsInput | Date | string
+    payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
+    with_delivery?: BoolFieldUpdateOperationsInput | boolean
+    comment_delivery?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    User?: UserUpdateOneRequiredWithoutOrderNestedInput
+    Masters?: MasterUpdateManyWithoutOrdersNestedInput
+    OrderItems?: OrderItemsUpdateManyWithoutOrderNestedInput
+  }
+
+  export type OrderUncheckedUpdateWithoutCommentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    user_id?: StringFieldUpdateOperationsInput | string
+    total_sum?: FloatFieldUpdateOperationsInput | number
+    location?: JsonNullValueInput | InputJsonValue
+    address?: StringFieldUpdateOperationsInput | string
+    dete?: DateTimeFieldUpdateOperationsInput | Date | string
+    payment_type?: EnumPaymentTypeFieldUpdateOperationsInput | $Enums.PaymentType
+    paid?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumStatusOrderFieldUpdateOperationsInput | $Enums.StatusOrder
+    with_delivery?: BoolFieldUpdateOperationsInput | boolean
+    comment_delivery?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Masters?: MasterUncheckedUpdateManyWithoutOrdersNestedInput
+    OrderItems?: OrderItemsUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type MasterRatingsUpsertWithWhereUniqueWithoutCommentInput = {
@@ -38785,11 +39424,15 @@ export namespace Prisma {
     text: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutCommentInput
+    order?: OrderCreateNestedOneWithoutCommentInput
   }
 
   export type CommentUncheckedCreateWithoutMasterRatingsInput = {
     id?: string
     text: string
+    user_id?: string | null
+    order_id?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -38856,11 +39499,15 @@ export namespace Prisma {
     text?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutCommentNestedInput
+    order?: OrderUpdateOneWithoutCommentNestedInput
   }
 
   export type CommentUncheckedUpdateWithoutMasterRatingsInput = {
     id?: StringFieldUpdateOperationsInput | string
     text?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    order_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -38889,6 +39536,7 @@ export namespace Prisma {
     Session?: SessionUpdateManyWithoutUserNestedInput
     Order?: OrderUpdateManyWithoutUserNestedInput
     BacketItems?: BacketItemsUpdateManyWithoutUserNestedInput
+    Comment?: CommentUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutRegionInput = {
@@ -38904,6 +39552,7 @@ export namespace Prisma {
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
     Order?: OrderUncheckedUpdateManyWithoutUserNestedInput
     BacketItems?: BacketItemsUncheckedUpdateManyWithoutUserNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateManyWithoutRegionInput = {
@@ -38949,6 +39598,14 @@ export namespace Prisma {
     time: number
   }
 
+  export type CommentCreateManyUserInput = {
+    id?: string
+    text: string
+    order_id?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type SessionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     ip_address?: StringFieldUpdateOperationsInput | string
@@ -38985,6 +39642,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Masters?: MasterUpdateManyWithoutOrdersNestedInput
     OrderItems?: OrderItemsUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutUserInput = {
@@ -39002,6 +39660,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     Masters?: MasterUncheckedUpdateManyWithoutOrdersNestedInput
     OrderItems?: OrderItemsUncheckedUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateManyWithoutUserInput = {
@@ -39024,7 +39683,7 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
-    Pofession?: ProfessionUpdateOneWithoutBacketItemsNestedInput
+    Profession?: ProfessionUpdateOneWithoutBacketItemsNestedInput
     Tool?: ToolUpdateOneWithoutBacketItemsNestedInput
     Level?: LevelUpdateOneWithoutBacketItemsNestedInput
   }
@@ -39047,6 +39706,32 @@ export namespace Prisma {
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CommentUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: OrderUpdateOneWithoutCommentNestedInput
+    MasterRatings?: MasterRatingsUpdateManyWithoutCommentNestedInput
+  }
+
+  export type CommentUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    order_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    MasterRatings?: MasterRatingsUncheckedUpdateManyWithoutCommentNestedInput
+  }
+
+  export type CommentUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    order_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ToolCreateManyBrandInput = {
@@ -39326,7 +40011,7 @@ export namespace Prisma {
     MasterSkills?: MasterSkillsUpdateManyWithoutProfessionNestedInput
     LevelsProfessions?: LevelsProfessionsUpdateManyWithoutProfessionNestedInput
     OrderItems?: OrderItemsUpdateManyWithoutProfessionNestedInput
-    BacketItems?: BacketItemsUpdateManyWithoutPofessionNestedInput
+    BacketItems?: BacketItemsUpdateManyWithoutProfessionNestedInput
   }
 
   export type ProfessionUncheckedUpdateWithoutToolsInput = {
@@ -39339,7 +40024,7 @@ export namespace Prisma {
     MasterSkills?: MasterSkillsUncheckedUpdateManyWithoutProfessionNestedInput
     LevelsProfessions?: LevelsProfessionsUncheckedUpdateManyWithoutProfessionNestedInput
     OrderItems?: OrderItemsUncheckedUpdateManyWithoutProfessionNestedInput
-    BacketItems?: BacketItemsUncheckedUpdateManyWithoutPofessionNestedInput
+    BacketItems?: BacketItemsUncheckedUpdateManyWithoutProfessionNestedInput
   }
 
   export type ProfessionUncheckedUpdateManyWithoutToolsInput = {
@@ -39390,7 +40075,7 @@ export namespace Prisma {
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
     User?: UserUpdateOneRequiredWithoutBacketItemsNestedInput
-    Pofession?: ProfessionUpdateOneWithoutBacketItemsNestedInput
+    Profession?: ProfessionUpdateOneWithoutBacketItemsNestedInput
     Level?: LevelUpdateOneWithoutBacketItemsNestedInput
   }
 
@@ -39546,7 +40231,7 @@ export namespace Prisma {
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
     User?: UserUpdateOneRequiredWithoutBacketItemsNestedInput
-    Pofession?: ProfessionUpdateOneWithoutBacketItemsNestedInput
+    Profession?: ProfessionUpdateOneWithoutBacketItemsNestedInput
     Tool?: ToolUpdateOneWithoutBacketItemsNestedInput
   }
 
@@ -39599,7 +40284,7 @@ export namespace Prisma {
     total_sum: number
   }
 
-  export type BacketItemsCreateManyPofessionInput = {
+  export type BacketItemsCreateManyProfessionInput = {
     id?: string
     user_id: string
     tool_id?: string | null
@@ -39760,7 +40445,7 @@ export namespace Prisma {
     total_sum?: FloatFieldUpdateOperationsInput | number
   }
 
-  export type BacketItemsUpdateWithoutPofessionInput = {
+  export type BacketItemsUpdateWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
     count?: IntFieldUpdateOperationsInput | number
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
@@ -39770,7 +40455,7 @@ export namespace Prisma {
     Level?: LevelUpdateOneWithoutBacketItemsNestedInput
   }
 
-  export type BacketItemsUncheckedUpdateWithoutPofessionInput = {
+  export type BacketItemsUncheckedUpdateWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
     tool_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39780,7 +40465,7 @@ export namespace Prisma {
     time?: IntFieldUpdateOperationsInput | number
   }
 
-  export type BacketItemsUncheckedUpdateManyWithoutPofessionInput = {
+  export type BacketItemsUncheckedUpdateManyWithoutProfessionInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_id?: StringFieldUpdateOperationsInput | string
     tool_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -39851,6 +40536,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     User?: UserUpdateOneRequiredWithoutOrderNestedInput
     OrderItems?: OrderItemsUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutMastersInput = {
@@ -39868,6 +40554,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OrderItems?: OrderItemsUncheckedUpdateManyWithoutOrderNestedInput
+    Comment?: CommentUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateManyWithoutMastersInput = {
@@ -39913,6 +40600,14 @@ export namespace Prisma {
     measure: $Enums.Measure
     time: number
     total_sum: number
+  }
+
+  export type CommentCreateManyOrderInput = {
+    id?: string
+    text: string
+    user_id?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type MasterUpdateWithoutOrdersInput = {
@@ -39989,6 +40684,32 @@ export namespace Prisma {
     measure?: EnumMeasureFieldUpdateOperationsInput | $Enums.Measure
     time?: IntFieldUpdateOperationsInput | number
     total_sum?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type CommentUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutCommentNestedInput
+    MasterRatings?: MasterRatingsUpdateManyWithoutCommentNestedInput
+  }
+
+  export type CommentUncheckedUpdateWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    MasterRatings?: MasterRatingsUncheckedUpdateManyWithoutCommentNestedInput
+  }
+
+  export type CommentUncheckedUpdateManyWithoutOrderInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    text?: StringFieldUpdateOperationsInput | string
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MasterRatingsCreateManyCommentInput = {

@@ -33,6 +33,8 @@ export class OrderService {
         include: { OrderItems: true },
       });
 
+      await this.prisma.backetItems.deleteMany({ where: { user_id: user.id } });
+
       return { data };
     } catch (error) {
       if (error instanceof HttpException) {
@@ -103,7 +105,10 @@ export class OrderService {
 
       const updated = await this.prisma.order.update({
         where: { id },
-        data: updateOrderDto,
+        data: {
+          status,
+          Masters: { connect: masters.map((master) => ({ id: master })) },
+        },
       });
 
       return { data: updated };

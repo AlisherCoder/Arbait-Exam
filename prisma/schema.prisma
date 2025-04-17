@@ -31,6 +31,7 @@ model User {
   Session     Session[]
   Order       Order[]
   BacketItems BacketItems[]
+  Comment     Comment[]
 }
 
 model Company {
@@ -190,6 +191,7 @@ model Order {
   updatedAt        DateTime     @updatedAt
   Masters          Master[]     @relation("OrderMasters")
   OrderItems       OrderItems[]
+  Comment          Comment[]
 }
 
 model OrderItems {
@@ -201,7 +203,7 @@ model OrderItems {
   profession_id String?
   Profession    Profession? @relation(fields: [profession_id], references: [id], onDelete: SetNull)
   Level         Level?      @relation(fields: [level_id], references: [id], onDelete: SetNull)
-  level_id       String?
+  level_id      String?
   count         Int
   measure       Measure
   time          Int
@@ -213,7 +215,7 @@ model BacketItems {
   user_id       String
   User          User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
   profession_id String?
-  Pofession     Profession? @relation(fields: [profession_id], references: [id], onDelete: SetNull)
+  Profession    Profession? @relation(fields: [profession_id], references: [id], onDelete: SetNull)
   tool_id       String?
   Tool          Tool?       @relation(fields: [tool_id], references: [id], onDelete: SetNull)
   level_id      String?
@@ -226,6 +228,10 @@ model BacketItems {
 model Comment {
   id            String          @id @default(uuid())
   text          String
+  user_id       String?
+  user          User?           @relation(fields: [user_id], references: [id], onDelete: SetNull)
+  order_id      String?
+  order         Order?          @relation(fields: [order_id], references: [id], onDelete: SetNull)
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   MasterRatings MasterRatings[]

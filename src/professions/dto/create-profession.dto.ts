@@ -6,7 +6,6 @@ import {
   IsNotEmpty,
   IsArray,
   ArrayNotEmpty,
-  IsObject,
   IsNumber,
   Min,
   Max,

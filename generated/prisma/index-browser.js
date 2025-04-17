@@ -290,6 +290,8 @@ exports.Prisma.BacketItemsScalarFieldEnum = {
 exports.Prisma.CommentScalarFieldEnum = {
   id: 'id',
   text: 'text',
+  user_id: 'user_id',
+  order_id: 'order_id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
