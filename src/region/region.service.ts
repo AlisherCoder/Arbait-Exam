@@ -74,13 +74,16 @@ export class RegionService {
   }
 
   async update(id: string, updateRegionDto: UpdateRegionDto) {
+    const { name_uz } = updateRegionDto;
     try {
-      const region = await this.prisma.region.findFirst({
-        where: { name_uz: updateRegionDto.name_uz },
-      });
+      if (name_uz) {
+        const region = await this.prisma.region.findFirst({
+          where: { name_uz: updateRegionDto.name_uz },
+        });
 
-      if (region) {
-        throw new ConflictException('Region already exists');
+        if (region) {
+          throw new ConflictException('Region already exists');
+        }
       }
 
       const data = await this.prisma.region.update({

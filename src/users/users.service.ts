@@ -15,10 +15,6 @@ export class UsersService {
     try {
       const users = await this.prisma.user.findMany();
 
-      if (!users.length) {
-        throw new NotFoundException('Users not found');
-      }
-
       return { data: users };
     } catch (error) {
       if (error instanceof HttpException) {
@@ -30,7 +26,18 @@ export class UsersService {
 
   async findOne(id: string) {
     try {
-      const user = await this.prisma.user.findUnique({ where: { id } });
+      const user = await this.prisma.user.findUnique({
+        where: { id },
+        include: {
+          Company: true,
+          Order: true,
+          Region: true,
+          Comment: true,
+          BacketItems: {
+            include: { Level: true, Profession: true, Tool: true },
+          },
+        },
+      });
 
       if (!user) {
         throw new NotFoundException('User not found');
@@ -46,6 +53,7 @@ export class UsersService {
   }
 
   async update(id: string, updateUserDto: UpdateAuthDto) {
+    const { company, ...data } = updateUserDto;
     try {
       const user = await this.prisma.user.findUnique({ where: { id } });
 
@@ -53,17 +61,27 @@ export class UsersService {
         throw new NotFoundException('User not found');
       }
 
-      const region = await this.prisma.region.findUnique({
-        where: { id: updateUserDto.region_id },
-      });
+      if (data.region_id) {
+        const region = await this.prisma.region.findUnique({
+          where: { id: data.region_id },
+        });
 
-      if (!region) {
-        throw new NotFoundException('Region not found');
+        if (!region) {
+          throw new NotFoundException('Region not found');
+        }
+      }
+
+      if (company) {
+        await this.prisma.company.update({
+          where: { user_id: user.id },
+          data: company,
+        });
       }
 
       const updatedUser = await this.prisma.user.update({
         where: { id },
-        data: updateUserDto,
+        data: data,
+        include: { Company: true },
       });
 
       return { data: updatedUser };

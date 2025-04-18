@@ -8,6 +8,7 @@ import {
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { QueryBrandDto } from './dto/query-brand.dto';
 
 @Injectable()
 export class BrandService {
@@ -34,14 +35,32 @@ export class BrandService {
     }
   }
 
-  async findAll() {
+  async findAll(query: QueryBrandDto) {
+    const {
+      page = 1,
+      limit = 10,
+      sortBy = 'name_uz',
+      orderBy = 'asc',
+      name_en,
+      name_ru,
+      name_uz,
+    } = query;
+
+    const filter: any = {};
+
+    if (name_uz) filter.name_uz = { mode: 'insensitive', contains: name_uz };
+    if (name_ru) filter.name_ru = { mode: 'insensitive', contains: name_ru };
+    if (name_en) filter.name_en = { mode: 'insensitive', contains: name_en };
+
     try {
-      const data = await this.prisma.brand.findMany();
-
-      if (!data.length) {
-        throw new NotFoundException('Not found brands');
-      }
-
+      const data = await this.prisma.brand.findMany({
+        where: filter,
+        skip: (page - 1) * limit,
+        take: limit,
+        orderBy: {
+          [sortBy]: orderBy,
+        },
+      });
       return { data };
     } catch (error) {
       if (error instanceof HttpException) {
@@ -53,7 +72,10 @@ export class BrandService {
 
   async findOne(id: string) {
     try {
-      const data = await this.prisma.brand.findUnique({ where: { id } });
+      const data = await this.prisma.brand.findUnique({
+        where: { id },
+        include: { Tool: true },
+      });
 
       if (!data) {
         throw new NotFoundException('Not found brand');

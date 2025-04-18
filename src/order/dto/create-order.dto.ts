@@ -44,7 +44,7 @@ export class CreateOrderDto {
   @ApiProperty({ example: '2025-04-20' })
   @IsDate()
   @Type(() => Date)
-  date: Date;
+  dete: Date;
 
   @ApiProperty({ example: 500000 })
   @IsNumber()

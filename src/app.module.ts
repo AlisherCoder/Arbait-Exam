@@ -7,7 +7,6 @@ import { EskizService } from './eskiz/eskiz.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { RegionModule } from './region/region.module';
 import { UsersModule } from './users/users.module';
-import { CompaniesModule } from './companies/companies.module';
 import { BrandModule } from './brand/brand.module';
 import { SizeModule } from './size/size.module';
 import { CapacityModule } from './capacity/capacity.module';
@@ -20,7 +19,12 @@ import { OrderModule } from './order/order.module';
 import { MasterModule } from './master/master.module';
 import { BacketitemsModule } from './backetitems/backetitems.module';
 import { CommentsModule } from './comments/comments.module';
-
+import { InfoModule } from './info/info.module';
+import { ContactModule } from './contact/contact.module';
+import { FaqModule } from './faq/faq.module';
+import { ShowcaseModule } from './showcase/showcase.module';
+import { PartnersModule } from './partners/partners.module';
+import { SessionModule } from './session/session.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -35,7 +39,6 @@ import { CommentsModule } from './comments/comments.module';
     PrismaModule,
     RegionModule,
     UsersModule,
-    CompaniesModule,
     BrandModule,
     SizeModule,
     CapacityModule,
@@ -47,6 +50,12 @@ import { CommentsModule } from './comments/comments.module';
     MasterModule,
     BacketitemsModule,
     CommentsModule,
+    InfoModule,
+    ContactModule,
+    FaqModule,
+    ShowcaseModule,
+    PartnersModule,
+    SessionModule
   ],
   controllers: [AppController],
   providers: [AppService, EskizService],

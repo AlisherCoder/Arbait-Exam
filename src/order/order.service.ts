@@ -16,6 +16,7 @@ export class OrderService {
   async create(createOrderDto: CreateOrderDto, req: Request) {
     const user = req['user'];
     const { order_items, location, ...body } = createOrderDto;
+
     try {
       const data = await this.prisma.order.create({
         data: {
@@ -43,6 +44,51 @@ export class OrderService {
       throw new BadRequestException(error.message);
     }
   }
+
+  // async create(createOrderDto: CreateOrderDto, req: Request) {
+  //   const user = req['user'];
+  //   const { order_items, location, ...body } = createOrderDto;
+
+  //   try {
+  //     const updates = []
+
+  //     for(const item of order_items){
+  //       if(item.profession_id){
+  //         await this.prisma.profession.update({
+  //           where: {id: item.profession_id},
+  //           data: {
+  //             cou
+  //           }
+  //         })
+  //       }
+  //     }
+
+  //     const data = this.prisma.order.create({
+  //       data: {
+  //         ...body,
+  //         location: {
+  //           ...location,
+  //         },
+  //         User: {
+  //           connect: { id: user.id },
+  //         },
+  //         OrderItems: {
+  //           create: order_items,
+  //         },
+  //       },
+  //       include: { OrderItems: true },
+  //     });
+
+  //     await this.prisma.backetItems.deleteMany({ where: { user_id: user.id } });
+
+  //     return { data: "" };
+  //   } catch (error) {
+  //     if (error instanceof HttpException) {
+  //       throw error;
+  //     }
+  //     throw new BadRequestException(error.message);
+  //   }
+  // }
 
   async findAll() {
     try {

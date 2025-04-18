@@ -67,10 +67,6 @@ export class ToolsService {
     try {
       const data = await this.prisma.tool.findMany();
 
-      if (!data.length) {
-        throw new NotFoundException('Not found tools');
-      }
-
       return { data };
     } catch (error) {
       if (error instanceof HttpException) {
@@ -82,7 +78,10 @@ export class ToolsService {
 
   async findOne(id: string) {
     try {
-      const data = await this.prisma.tool.findUnique({ where: { id } });
+      const data = await this.prisma.tool.findUnique({
+        where: { id },
+        include: { Professions: true },
+      });
 
       if (!data) {
         throw new NotFoundException('Not found tool');
@@ -111,7 +110,7 @@ export class ToolsService {
       });
 
       if (updateToolDto.image) {
-        this.uploadService.deleteFile(data.image);
+        await this.uploadService.deleteFile(data.image);
       }
 
       return { data: updated };
@@ -135,7 +134,7 @@ export class ToolsService {
         where: { id },
       });
 
-      this.uploadService.deleteFile('123231323');
+      await this.uploadService.deleteFile(deleted.image);
 
       return { data: deleted };
     } catch (error) {

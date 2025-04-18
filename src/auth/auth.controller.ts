@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Req, Get } from '@nestjs/common';
+import { Controller, Post, Body, Req, Get, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
   ActivateDto,
@@ -9,6 +9,11 @@ import {
   SendOtpDto,
 } from './dto/create-auth.dto';
 import { Request } from 'express';
+import { CreateAdminDto } from './dto/create-admin.dto';
+import { RefreshGuard } from 'src/guards/refresh.guard';
+import { AuthGuard } from 'src/guards/auth.guard';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { Role, Roles } from 'src/guards/roles.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -39,23 +44,46 @@ export class AuthController {
     return this.authService.resetPassword(resetPasswordDto);
   }
 
+  @UseGuards(RefreshGuard)
   @Post('refresh-token')
   refreshToken(@Body() refreshTokenDto: RefreshTokenDto, @Req() req: Request) {
     return this.authService.refreshToken(req);
   }
 
+  @UseGuards(AuthGuard)
   @Post('logout')
   logout(@Req() req: Request) {
     return this.authService.logout(req);
   }
 
-  @Get('me')
+  @Roles(Role.ADMIN)
+  @UseGuards(AuthGuard, RolesGuard)
+  @Post('createAdmin')
+  createAdmin(@Body() createAdminDto: CreateAdminDto) {
+    return this.authService.createAdmin(createAdminDto);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('myData')
   me(@Req() req: Request) {
     return this.authService.me(req);
   }
 
+  @UseGuards(AuthGuard)
   @Get('myBackets')
   myBacket(@Req() req: Request) {
     return this.authService.myBacket(req);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('mySessions')
+  mysession(@Req() req: Request) {
+    return this.authService.mysession(req);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('myOrders')
+  myorders(@Req() req: Request) {
+    return this.authService.myorders(req);
   }
 }

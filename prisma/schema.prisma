@@ -252,7 +252,7 @@ model Info {
   links Json
   phone String[]
 }
-
+  
 model Contact {
   id        String   @id @default(uuid())
   full_name String

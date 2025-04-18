@@ -21,6 +21,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { totp } from 'otplib';
+import { CreateAdminDto } from './dto/create-admin.dto';
 totp.options = { step: 600, digits: 5 };
 
 @Injectable()
@@ -37,27 +38,35 @@ export class AuthService {
   ) {}
 
   async register(createAuthDto: CreateAuthDto) {
-    const { phone, password, region_id } = createAuthDto;
+    const { company, ...data } = createAuthDto;
     try {
-      const user = await this.prisma.user.findUnique({ where: { phone } });
+      const user = await this.prisma.user.findUnique({
+        where: { phone: data.phone },
+      });
       if (user) {
         throw new ConflictException('User already exists');
       }
 
       const region = await this.prisma.region.findUnique({
-        where: { id: region_id },
+        where: { id: data.region_id },
       });
       if (!region) {
         throw new NotFoundException('Not found region');
       }
 
-      const hashedpassword = await bcrypt.hash(password, 10);
-      await this.prisma.user.create({
-        data: { ...createAuthDto, password: hashedpassword },
+      const hashedpassword = await bcrypt.hash(data.password, 10);
+      const newUser = await this.prisma.user.create({
+        data: { ...data, password: hashedpassword },
       });
 
-      const otp = totp.generate(this.OTPKEY + phone);
-      // await this.eskizService.sendSMS(otp, phone);
+      if (newUser.role == 'USER_YUR' && company) {
+        const newCompany = await this.prisma.company.create({
+          data: { ...company, user_id: newUser.id },
+        });
+      }
+
+      const otp = totp.generate(this.OTPKEY + data.phone);
+      // await this.eskizService.sendSMS(otp, data.phone);
 
       return {
         otp,
@@ -101,7 +110,7 @@ export class AuthService {
         const newSession: any = {
           ip_address: req.ip,
           user_id: user.id,
-          device: {},
+          device: { ...device },
         };
 
         await this.prisma.session.create({
@@ -200,6 +209,23 @@ export class AuthService {
     }
   }
 
+  async createAdmin(createAdmin: CreateAdminDto) {
+    try {
+      const hashedpassword = await bcrypt.hash(createAdmin.password, 10);
+      let data = await this.prisma.user.create({
+        data: { ...createAdmin, status: true, password: hashedpassword },
+        omit: { password: true },
+      });
+
+      return { data };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new BadRequestException(error.message);
+    }
+  }
+
   async me(req: Request) {
     const user = req['user'];
     try {
@@ -211,9 +237,18 @@ export class AuthService {
         throw new UnauthorizedException();
       }
 
-      const data = this.prisma.user.findUnique({
+      const data = await this.prisma.user.findUnique({
         where: { id: user.id },
         omit: { password: true },
+        include: {
+          Company: true,
+          Order: true,
+          BacketItems: true,
+          Region: true,
+          Comment: {
+            include: { MasterRatings: { include: { Master: true } } },
+          },
+        },
       });
 
       return { data };
@@ -227,14 +262,46 @@ export class AuthService {
     try {
       const backets = await this.prisma.backetItems.findMany({
         where: { user_id: user.id },
-        include: { Level: true, Profession: true, Tool: true },
+        include: {
+          Level: true,
+          Profession: true,
+          Tool: true,
+          User: { omit: { password: true } },
+        },
       });
 
-      if (!backets.length) {
-        throw new BadRequestException('Empty backet');
-      }
-
       return { data: backets };
+    } catch (error) {
+      throw new BadRequestException(error?.message || 'Something went wrong');
+    }
+  }
+
+  async mysession(req: Request) {
+    const user = req['user'];
+    try {
+      const sessions = await this.prisma.session.findMany({
+        where: { user_id: user.id },
+      });
+
+      return { data: sessions };
+    } catch (error) {
+      throw new BadRequestException(error?.message || 'Something went wrong');
+    }
+  }
+
+  async myorders(req: Request) {
+    const user = req['user'];
+    try {
+      const orders = await this.prisma.order.findMany({
+        where: { user_id: user.id },
+        include: {
+          OrderItems: {
+            include: { Level: true, Tool: true, Profession: true },
+          },
+        },
+      });
+
+      return { data: orders };
     } catch (error) {
       throw new BadRequestException(error?.message || 'Something went wrong');
     }

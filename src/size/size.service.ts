@@ -38,10 +38,6 @@ export class SizeService {
     try {
       const data = await this.prisma.size.findMany();
 
-      if (!data.length) {
-        throw new NotFoundException('Not found sizes');
-      }
-
       return { data };
     } catch (error) {
       if (error instanceof HttpException) {
@@ -53,7 +49,10 @@ export class SizeService {
 
   async findOne(id: string) {
     try {
-      const data = await this.prisma.size.findUnique({ where: { id } });
+      const data = await this.prisma.size.findUnique({
+        where: { id },
+        include: { Tool: true },
+      });
 
       if (!data) {
         throw new NotFoundException('Not found size');

@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ForbiddenException,
   HttpException,
   Injectable,
   NotFoundException,
@@ -39,7 +40,7 @@ export class CommentsService {
   }
 
   async remove(id: string, req: Request) {
-    const user = req['user']
+    const user = req['user'];
     try {
       const comment = await this.prisma.comment.findUnique({
         where: { id },
@@ -49,7 +50,9 @@ export class CommentsService {
         throw new NotFoundException(`Comment  not found`);
       }
 
-      if(comment.user_id !== user.id && ['ADMIN', "SUPER_ADMIN"].includes(user.role))
+      if (comment.user_id !== user.id && !['ADMIN'].includes(user.role)) {
+        throw new ForbiddenException('Not allowed');
+      }
 
       await this.prisma.comment.delete({
         where: { id },

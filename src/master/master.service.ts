@@ -8,6 +8,7 @@ import { CreateMasterDto } from './dto/create-master.dto';
 import { UpdateMasterDto } from './dto/update-master.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UploadService } from 'src/upload/upload.service';
+import { QueryMasterDto } from './dto/query-master.dto';
 
 @Injectable()
 export class MasterService {
@@ -55,13 +56,49 @@ export class MasterService {
     }
   }
 
-  async findAll() {
-    try {
-      const data = await this.prisma.master.findMany();
+  async findAll(query: QueryMasterDto) {
+    const {
+      page = 1,
+      limit = 10,
+      orderBy = 'asc',
+      sortBy = 'full_name',
+      full_name,
+      phone,
+      level_id,
+      profession_id,
+      isActive,
+      year,
+      min_work_hours,
+      price_daily,
+      price_hourly,
+      experience,
+    } = query;
 
-      if (!data.length) {
-        throw new NotFoundException('Not found masters');
-      }
+    let filter: any = {};
+    let skillsfilter: any = {};
+
+    if (full_name)
+      filter.full_name = { mode: 'insensitive', contains: full_name };
+    if (phone) filter.phone = { mode: 'insensitive', contains: phone };
+    if (isActive) filter.isActive = isActive;
+    if (year) filter.year = year;
+
+    if (level_id) skillsfilter.level_id = level_id;
+    if (profession_id) skillsfilter.profession_id = profession_id;
+    if (min_work_hours) skillsfilter.min_work_hours = min_work_hours;
+    if (price_daily) skillsfilter.price_daily = price_daily;
+    if (price_hourly) skillsfilter.price_hourly = price_hourly;
+    if (experience) skillsfilter.experience = experience;
+
+    try {
+      const data = await this.prisma.master.findMany({
+        where: {
+          ...filter,
+          MasterSkills: {
+            some: skillsfilter,
+          },
+        },
+      });
 
       return { data };
     } catch (error) {
@@ -153,8 +190,8 @@ export class MasterService {
         });
       }
 
-      this.uploadService.deleteFile(updated.image);
-      this.uploadService.deleteFile(updated.passport_image);
+      await this.uploadService.deleteFile(updated.image);
+      await this.uploadService.deleteFile(updated.passport_image);
 
       return { data: updated };
     } catch (error) {

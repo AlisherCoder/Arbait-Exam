@@ -8,7 +8,6 @@ import {
 import { CreateProfessionDto } from './dto/create-profession.dto';
 import { UpdateProfessionDto } from './dto/update-profession.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { error } from 'console';
 import { UploadService } from 'src/upload/upload.service';
 
 @Injectable()
@@ -84,10 +83,6 @@ export class ProfessionsService {
     try {
       const data = await this.prisma.profession.findMany();
 
-      if (!data.length) {
-        throw new NotFoundException('Not found professions');
-      }
-
       return { data };
     } catch (error) {
       if (error instanceof HttpException) {
@@ -101,7 +96,10 @@ export class ProfessionsService {
     try {
       const data = await this.prisma.profession.findUnique({
         where: { id },
-        include: { LevelsProfessions: true, Tools: true },
+        include: {
+          LevelsProfessions: { include: { Profession: true, Level: true } },
+          Tools: true,
+        },
       });
 
       if (!data) {

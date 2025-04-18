@@ -8,6 +8,7 @@ import {
 import { CreateLevelDto } from './dto/create-level.dto';
 import { UpdateLevelDto } from './dto/update-level.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { QueryBrandDto } from 'src/brand/dto/query-brand.dto';
 
 @Injectable()
 export class LevelsService {
@@ -36,13 +37,32 @@ export class LevelsService {
     }
   }
 
-  async findAll() {
-    try {
-      const data = await this.prisma.level.findMany();
+  async findAll(query: QueryBrandDto) {
+    const {
+      page = 1,
+      limit = 10,
+      sortBy = 'name_uz',
+      orderBy = 'asc',
+      name_en,
+      name_ru,
+      name_uz,
+    } = query;
 
-      if (!data.length) {
-        throw new NotFoundException('No levels found');
-      }
+    const filter: any = {};
+
+    if (name_uz) filter.name_uz = { mode: 'insensitive', contains: name_uz };
+    if (name_ru) filter.name_ru = { mode: 'insensitive', contains: name_ru };
+    if (name_en) filter.name_en = { mode: 'insensitive', contains: name_en };
+    
+    try {
+      const data = await this.prisma.level.findMany({
+        where: filter,
+        skip: (page - 1) * limit,
+        take: limit,
+        orderBy: {
+          [sortBy]: orderBy,
+        },
+      });
 
       return { data };
     } catch (error) {
@@ -57,6 +77,7 @@ export class LevelsService {
     try {
       const data = await this.prisma.level.findUnique({
         where: { id },
+        include: { LevelsProfessions: { include: { Profession: true } } },
       });
 
       if (!data) {
@@ -73,13 +94,16 @@ export class LevelsService {
   }
 
   async update(id: string, updateLevelDto: UpdateLevelDto) {
+    const { name_uz } = updateLevelDto;
     try {
-      const level = await this.prisma.level.findFirst({
-        where: { name_uz: updateLevelDto.name_uz },
-      });
+      if (name_uz) {
+        const level = await this.prisma.level.findFirst({
+          where: { name_uz: updateLevelDto.name_uz },
+        });
 
-      if (level) {
-        throw new ConflictException('Level already exists');
+        if (level) {
+          throw new ConflictException('Level already exists');
+        }
       }
 
       const data = await this.prisma.level.update({
